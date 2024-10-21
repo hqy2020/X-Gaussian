@@ -17,7 +17,14 @@ import yaml
 
 from pdb import set_trace as stx
 
-
+# import debugpy
+# try:
+#     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
+#     debugpy.listen(("localhost", 9501))
+#     print("Waiting for debugger attach")
+#     debugpy.wait_for_client()
+# except Exception as e:
+#     pass
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from):
     first_iter = 0
     exp_logger = prepare_output_and_logger(dataset)
@@ -183,14 +190,16 @@ if __name__ == "__main__":
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])
     parser.add_argument("--start_checkpoint", type=str, default = None)
-    parser.add_argument("--gpu_id", default="0", help="gpu to use")
+    parser.add_argument("--gpu_id", default="1", help="gpu to use")
     args = parser.parse_args(sys.argv[1:])
     args.save_iterations.append(args.iterations)
 
     os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
-
+    # 输出parser的配置
+    print(args)
     print("Optimizing " + args.model_path)
+    
 
     safe_state(args.quiet)
 

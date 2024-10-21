@@ -315,7 +315,7 @@ def readNerfSyntheticInfo(path, white_background, eval, extension=".png"):
 
 
 
-def angle2pose(DSO, angle):
+def angle2pose(DSO, angle): # TODO: 论文里的内参矩阵
     phi1 = -np.pi / 2
     R1 = np.array([[1.0, 0.0, 0.0],
                 [0.0, np.cos(phi1), -np.sin(phi1)],
@@ -409,7 +409,7 @@ def Xray_readCamerasFromTransforms_addtional(path, add_num = 50):
 
 
 
-def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, add_num = 50, train_num = 50):
+def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, add_num = 50, train_num = 50): # TODO: ACUI
     print("Reading Training Transforms")
     train_cam_infos = Xray_readCamerasFromTransforms(path, type = "train")
     print("Reading Test Transforms")

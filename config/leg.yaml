@@ -1,5 +1,5 @@
 scene: leg
-source_path: data/leg_50_4dz.pickle
+source_path: data/leg_50.pickle
 iterations: 20000
 position_lr_init: 0.000179
 position_lr_final: 0.00000179

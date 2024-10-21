@@ -10,8 +10,9 @@ from PIL import Image
 scene = 'foot'
 method = 'XGaussian'
 
-save_path = f'/home/ycai51/XGaussian_sinc_nodirec_norm/point_cloud_visualization/{scene}_no_norm/'
-# save_path = f'point_cloud_visualization/{scene}/'
+# save_path = f'/home/ycai51/XGaussian_sinc_nodirec_norm/point_cloud_visualization/{scene}_no_norm/'
+save_path = f'point_cloud_visualization/{scene}/'
+# save_path = f'point_cloud/{scene}/'
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
@@ -19,7 +20,8 @@ def sigmoid(x):
 os.makedirs(save_path, exist_ok=True)
 
 # path = 'output/foot/2024_01_10_23_04_44/point_cloud/iteration_30000/point_cloud.ply'
-path = 'output/foot/2024_01_31_10_00_42/point_cloud/iteration_30000/point_cloud.ply'
+# path = 'output/foot/2024_01_31_10_00_42/point_cloud/iteration_30000/point_cloud.ply'
+path = '/home/qyhu/Documents/X-Gaussian/output/foot/2024_10_12_19_33_40/point_cloud/iteration_20000/point_cloud.ply'
 
 plydata = PlyData.read(path)
 
