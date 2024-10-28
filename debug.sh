@@ -1,1 +1,1 @@
-python3 train.py --config config/chest.yaml --eval 
+python3 train.py --config config/chest.yaml --eval --train_num 10

@@ -70,7 +70,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         
         image, viewspace_point_tensor, visibility_filter, radii = render_pkg["render"], render_pkg["viewspace_points"], render_pkg["visibility_filter"], render_pkg["radii"]
 
-        gt_image = viewpoint_cam.normalized_image.cuda()
+        gt_image = viewpoint_cam.normalized_image.cuda() # 1 * 256 * 256
 
         
 
@@ -94,15 +94,15 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
             if iteration in saving_iterations:
                 exp_logger.info("\n[ITER {}] Saving Gaussians".format(iteration))
                 scene.save(iteration)
-
+            # 密集化处理 8000轮前
             if iteration < opt.densify_until_iter:
                 gaussians.max_radii2D[visibility_filter] = torch.max(gaussians.max_radii2D[visibility_filter], radii[visibility_filter])
                 gaussians.add_densification_stats(viewspace_point_tensor, visibility_filter)
-
+                # 500轮后 密集化和裁剪
                 if iteration > opt.densify_from_iter and iteration % opt.densification_interval == 0:
                     size_threshold = 20 if iteration > opt.opacity_reset_interval else None
                     gaussians.densify_and_prune(opt.densify_grad_threshold, 0.005, scene.cameras_extent, size_threshold)
-                
+                # 重置透明度
                 if iteration % opt.opacity_reset_interval == 0 or (dataset.white_background and iteration == opt.densify_from_iter):
                     gaussians.reset_opacity()
 
@@ -133,7 +133,7 @@ def prepare_output_and_logger(args):
 
 
 
-def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_iterations, scene : Scene, renderFunc, renderArgs, args):
+def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_iterations, scene : Scene, renderFunc, renderArgs, args): # elapsed 耗费时间
     if exp_logger and (iteration == 0 or (iteration+1) % 100 == 0):
         exp_logger.info(f"Iter:{iteration}, L1 loss={Ll1.item():.4g}, Total loss={loss.item():.4g}, Time:{int(elapsed)}")
 
@@ -185,7 +185,8 @@ if __name__ == "__main__":
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
     parser.add_argument('--config', type=str, default='config/chest.yaml', help='Path to the configuration file')
-    parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 20_000])
+    parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 4_000, 6_000, 8_000, 10_000, 12_000, 14_000, 16_000, 18_000, 20_000])
+    # parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 20_000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[20_000,])
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])

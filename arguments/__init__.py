@@ -38,7 +38,7 @@ class ParamGroup:
 
 
 
-class ModelParams(ParamGroup): 
+class ModelParams(ParamGroup): # TODO: 调节视角
     def __init__(self, parser, sentinel=False):
         self.sh_degree = 3
         self.scene = ""
@@ -70,7 +70,7 @@ class PipelineParams(ParamGroup):
 
 
 
-class OptimizationParams(ParamGroup):
+class OptimizationParams(ParamGroup): # TODO: 设置超参数
     def __init__(self, parser):
         self.iterations = 30_000
         self.position_lr_init = 0.00016
