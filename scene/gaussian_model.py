@@ -15,25 +15,25 @@ from pdb import set_trace as stx
 class GaussianModel_Xray:
 
     def setup_functions(self):
-        def build_covariance_from_scaling_rotation(scaling, scaling_modifier, rotation):
+        def build_covariance_from_scaling_rotation(scaling, scaling_modifier, rotation): # 从缩放和旋转矩阵构建协方差矩阵
             L = build_scaling_rotation(scaling_modifier * scaling, rotation)
-            actual_covariance = L @ L.transpose(1, 2)
-            symm = strip_symmetric(actual_covariance)
+            actual_covariance = L @ L.transpose(1, 2) # 跳过0，是高斯核个数
+            symm = strip_symmetric(actual_covariance) # 节约内存，只保留一部分
             return symm
-        
+        # 定义缩放的激活函数
         self.scaling_activation = torch.exp
         self.scaling_inverse_activation = torch.log
 
         self.covariance_activation = build_covariance_from_scaling_rotation
-
+        # 定义透明度激活函数
         self.opacity_activation = torch.sigmoid
         self.inverse_opacity_activation = inverse_sigmoid
-
+        # 定义旋转的激活函数
         self.rotation_activation = torch.nn.functional.normalize
 
 
     def __init__(self, sh_degree : int):
-        self.active_sh_degree = 0
+        self.active_sh_degree = 0 # 阶数
         self.max_sh_degree = sh_degree  
         self._xyz = torch.empty(0)
         self._features_dc = torch.empty(0)
@@ -89,7 +89,7 @@ class GaussianModel_Xray:
     
     @property
     def get_scaling(self):
-        return self.scaling_activation(self._scaling)
+        return self.scaling_activation(self._scaling) # 获取激活函数 @property视为只读属性
     
     @property
     def get_rotation(self):
@@ -118,29 +118,30 @@ class GaussianModel_Xray:
             self.active_sh_degree += 1
 
    
-    def create_from_pcd(self, pcd : BasicPointCloud, spatial_lr_scale : float):
+    def create_from_pcd(self, pcd : BasicPointCloud, spatial_lr_scale : float): # 从点云创建模型
+        self.active_sh_degree = 0
         self.spatial_lr_scale = spatial_lr_scale
         fused_point_cloud = torch.tensor(np.asarray(pcd.points)).float().cuda()     
         fused_color = RGB2SH(torch.tensor(np.asarray(pcd.colors)).float().cuda())   
 
         
-        features = torch.zeros((fused_color.shape[0], 3, (self.max_sh_degree + 1) ** 2)).float().cuda()
-        features[:, :3, 0 ] = fused_color
-        features[:, 3:, 1:] = 0.0
+        features = torch.zeros((fused_color.shape[0], 3, (self.max_sh_degree + 1) ** 2)).float().cuda() # 三通道
+        features[:, :3, 0 ] = fused_color # 直流分量
+        features[:, 3:, 1:] = 0.0 # 高阶先是0
 
         print("Number of points at initialisation : ", fused_point_cloud.shape[0])
 
-        dist2 = torch.clamp_min(distCUDA2(torch.from_numpy(np.asarray(pcd.points)).float().cuda()), 0.0000001)
-        scales = torch.log(torch.sqrt(dist2))[...,None].repeat(1, 3)
+        dist2 = torch.clamp_min(distCUDA2(torch.from_numpy(np.asarray(pcd.points)).float().cuda()), 0.0000001) # 最小距离0.0000001，distCUDA2在simple_knn/spatial.cu
+        scales = torch.log(torch.sqrt(dist2))[...,None].repeat(1, 3) # 算knn的平均距离作为缩放因子
         rots = torch.zeros((fused_point_cloud.shape[0], 4), device="cuda")
-        rots[:, 0] = 1
+        rots[:, 0] = 1 # 旋转四元数都是0
 
         opacities = inverse_sigmoid(0.1 * torch.ones((fused_point_cloud.shape[0], 1), dtype=torch.float, device="cuda"))
 
         self._xyz = nn.Parameter(fused_point_cloud.requires_grad_(True))    # [num_points, 3]
 
-        self._features_dc = nn.Parameter(features[:,:,0:1].transpose(1, 2).contiguous().requires_grad_(True))   # [num_points, 1, 3]
-        self._features_rest = nn.Parameter(features[:,:,1:].transpose(1, 2).contiguous().requires_grad_(True))  # [num_points, 15, 3]
+        self._features_dc = nn.Parameter(features[:,:,0:1].transpose(1, 2).contiguous().requires_grad_(True))   # [num_points, 1, 3] 直流分量
+        self._features_rest = nn.Parameter(features[:,:,1:].transpose(1, 2).contiguous().requires_grad_(True))  # [num_points, 15, 3] 高阶分量
         self._scaling = nn.Parameter(scales.requires_grad_(True))               # [num_points, 3]
         self._rotation = nn.Parameter(rots.requires_grad_(True))                # [num_points, 4]
         self._opacity = nn.Parameter(opacities.requires_grad_(True))            # [num_points, 1]
@@ -162,7 +163,7 @@ class GaussianModel_Xray:
             {'params': [self._opacity], 'lr': training_args.opacity_lr, "name": "opacity"},
             {'params': [self._scaling], 'lr': training_args.scaling_lr, "name": "scaling"},
             {'params': [self._rotation], 'lr': training_args.rotation_lr, "name": "rotation"}
-        ]
+        ] # 每个参数学习率不同
 
         self.optimizer = torch.optim.Adam(l, lr=0.0, eps=1e-15)
 
@@ -182,7 +183,7 @@ class GaussianModel_Xray:
 
 
     def construct_list_of_attributes(self):
-        l = ['x', 'y', 'z', 'nx', 'ny', 'nz']
+        l = ['x', 'y', 'z', 'nx', 'ny', 'nz'] # nx, ny, nz是法向量 3 + 45 = 16 * 3
         for i in range(self._features_dc.shape[1]*self._features_dc.shape[2]):
             l.append('f_dc_{}'.format(i))
         for i in range(self._features_rest.shape[1]*self._features_rest.shape[2]):
@@ -195,7 +196,7 @@ class GaussianModel_Xray:
         return l
 
 
-    def save_ply(self, path):
+    def save_ply(self, path): # 保存为ply文件
         mkdir_p(os.path.dirname(path))
 
         xyz = self._xyz.detach().cpu().numpy()
@@ -215,7 +216,7 @@ class GaussianModel_Xray:
         PlyData([el]).write(path)
 
 
-    def reset_opacity(self):
+    def reset_opacity(self): # 重置透明度为0.1,一定时期内，重置不透明度
         opacities_new = inverse_sigmoid(torch.min(self.get_opacity, torch.ones_like(self.get_opacity)*0.01))
         optimizable_tensors = self.replace_tensor_to_optimizer(opacities_new, "opacity")
         self._opacity = optimizable_tensors["opacity"]
@@ -268,7 +269,7 @@ class GaussianModel_Xray:
 
 
 
-    def replace_tensor_to_optimizer(self, tensor, name):
+    def replace_tensor_to_optimizer(self, tensor, name): # 保证平滑优化
         optimizable_tensors = {}                            
         for group in self.optimizer.param_groups:           
             if group["name"] == name:                       
@@ -290,7 +291,7 @@ class GaussianModel_Xray:
         optimizable_tensors = {}
         for group in self.optimizer.param_groups:
             stored_state = self.optimizer.state.get(group['params'][0], None)
-            if stored_state is not None:
+            if stored_state is not None: # 保留掩码
                 stored_state["exp_avg"] = stored_state["exp_avg"][mask]
                 stored_state["exp_avg_sq"] = stored_state["exp_avg_sq"][mask]
 
@@ -325,7 +326,7 @@ class GaussianModel_Xray:
 
 
 
-    def cat_tensors_to_optimizer(self, tensors_dict):
+    def cat_tensors_to_optimizer(self, tensors_dict): # 创建新参数并加入优化器
         optimizable_tensors = {}
         for group in self.optimizer.param_groups:
             assert len(group["params"]) == 1
@@ -349,7 +350,7 @@ class GaussianModel_Xray:
 
 
 
-    def densification_postfix(self, new_xyz, new_features_dc, new_features_rest, new_opacities, new_scaling, new_rotation):
+    def densification_postfix(self, new_xyz, new_features_dc, new_features_rest, new_opacities, new_scaling, new_rotation): # 创建新高斯
         d = {"xyz": new_xyz,
         "f_dc": new_features_dc,
         "f_rest": new_features_rest,
@@ -371,7 +372,7 @@ class GaussianModel_Xray:
 
 
 
-    def densify_and_split(self, grads, grad_threshold, scene_extent, N=2):
+    def densify_and_split(self, grads, grad_threshold, scene_extent, N=2): # 自适应密度控制分裂
         n_init_points = self.get_xyz.shape[0]
         padded_grad = torch.zeros((n_init_points), device="cuda")
         padded_grad[:grads.shape[0]] = grads.squeeze()
@@ -419,12 +420,12 @@ class GaussianModel_Xray:
         self.densify_and_clone(grads, max_grad, extent)
         self.densify_and_split(grads, max_grad, extent)
 
-        prune_mask = (self.get_opacity < min_opacity).squeeze()
+        prune_mask = (self.get_opacity < min_opacity).squeeze() # 密度小
         if max_screen_size:
-            big_points_vs = self.max_radii2D > max_screen_size
+            big_points_vs = self.max_radii2D > max_screen_size # 椭球巨大
             big_points_ws = self.get_scaling.max(dim=1).values > 0.1 * extent
             prune_mask = torch.logical_or(torch.logical_or(prune_mask, big_points_vs), big_points_ws)
-        self.prune_points(prune_mask)
+        self.prune_points(prune_mask) # 剔除
 
         torch.cuda.empty_cache()
 

@@ -33,7 +33,7 @@ C4 = [
 
 
 def eval_sh(deg, sh, dirs):
-    assert deg <= 4 and deg >= 0
+    assert deg <= 4 and deg >= 0 # 四阶以内
     coeff = (deg + 1) ** 2
     assert sh.shape[-1] >= coeff
 
@@ -77,7 +77,7 @@ def eval_sh(deg, sh, dirs):
                             C4[8] * (xx * (xx - 3 * yy) - yy * (3 * xx - yy)) * sh[..., 24])
     return result
 
-def RGB2SH(rgb):
+def RGB2SH(rgb): # 0-1变成-0.5到0.5
     return (rgb - 0.5) / C0
 
 def SH2RGB(sh):

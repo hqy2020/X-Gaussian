@@ -61,17 +61,17 @@ def strip_symmetric(sym):
     return strip_lowerdiag(sym)
 
 def build_rotation(r):
-    norm = torch.sqrt(r[:,0]*r[:,0] + r[:,1]*r[:,1] + r[:,2]*r[:,2] + r[:,3]*r[:,3])
+    norm = torch.sqrt(r[:,0]*r[:,0] + r[:,1]*r[:,1] + r[:,2]*r[:,2] + r[:,3]*r[:,3]) # 取模
 
-    q = r / norm[:, None]
+    q = r / norm[:, None] # 归一化
 
-    R = torch.zeros((q.size(0), 3, 3), device='cuda')
-
-    r = q[:, 0]
+    R = torch.zeros((q.size(0), 3, 3), device='cuda') # N x 3 x 3，N是高斯分布的个数
+    # 第一列就是元素个数
+    r = q[:, 0] 
     x = q[:, 1]
     y = q[:, 2]
     z = q[:, 3]
-
+    # 把四元数转换成旋转矩阵
     R[:, 0, 0] = 1 - 2 * (y*y + z*z)
     R[:, 0, 1] = 2 * (x*y - r*z)
     R[:, 0, 2] = 2 * (x*z + r*y)
@@ -84,7 +84,7 @@ def build_rotation(r):
     return R
 
 def build_scaling_rotation(s, r):
-    L = torch.zeros((s.shape[0], 3, 3), dtype=torch.float, device="cuda")
+    L = torch.zeros((s.shape[0], 3, 3), dtype=torch.float, device="cuda") # N x 3 x 3
     R = build_rotation(r)
 
     L[:,0,0] = s[:,0]

@@ -18,7 +18,7 @@ class Camera(nn.Module):
         self.FoVx = FoVx                
         self.FoVy = FoVy                
         self.image_name = image_name    
-        self.angle = angle              
+        self.angle = angle    # x-gaussion 新添加的
 
         try:
             self.data_device = torch.device(data_device)
@@ -35,7 +35,7 @@ class Camera(nn.Module):
             self.original_image *= gt_alpha_mask.to(self.data_device)
         else:
             self.original_image *= torch.ones((1, self.image_height, self.image_width), device=self.data_device)
-
+        # x-gaussian 新添加的
         self.max_value = self.original_image.max()
         self.min_value = self.original_image.min()
         self.normalized_image = min_max_norm(self.original_image)  
