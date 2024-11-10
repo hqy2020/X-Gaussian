@@ -119,7 +119,7 @@ class GaussianModel_Xray:
 
    
     def create_from_pcd(self, pcd : BasicPointCloud, spatial_lr_scale : float): # 从点云创建模型
-        self.active_sh_degree = 0
+        self.active_sh_degree = 0 # TODO: 这里的active_sh_degree是否应该初始化为0呢？
         self.spatial_lr_scale = spatial_lr_scale
         fused_point_cloud = torch.tensor(np.asarray(pcd.points)).float().cuda()     
         fused_color = RGB2SH(torch.tensor(np.asarray(pcd.colors)).float().cuda())   
@@ -172,7 +172,7 @@ class GaussianModel_Xray:
                                                     lr_delay_mult=training_args.position_lr_delay_mult,
                                                     max_steps=training_args.position_lr_max_steps)
 
-
+        # 删除exposure_scheduler_args
 
     def update_learning_rate(self, iteration):
         for param_group in self.optimizer.param_groups:
@@ -323,7 +323,7 @@ class GaussianModel_Xray:
 
         self.denom = self.denom[valid_points_mask]
         self.max_radii2D = self.max_radii2D[valid_points_mask]
-
+        # self.tmp_radii = self.tmp_radii[valid_points_mask] # 原3dgs
 
 
     def cat_tensors_to_optimizer(self, tensors_dict): # 创建新参数并加入优化器

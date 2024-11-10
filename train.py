@@ -43,7 +43,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     iter_start = torch.cuda.Event(enable_timing = True)
     iter_end = torch.cuda.Event(enable_timing = True)
 
-    viewpoint_stack = None
+    viewpoint_stack = None # 改成None
     ema_loss_for_log = 0.0
     progress_bar = tqdm(range(first_iter, opt.iterations), desc="Training progress")
     first_iter += 1
@@ -150,8 +150,9 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
                 start = time.time()
                 for idx, viewpoint in enumerate(config['cameras']):
                     image = torch.clamp(renderFunc(viewpoint, scene.gaussians, *renderArgs)["render"], 0.0, 1.0)
-                    image_backnorm = (viewpoint.max_value - viewpoint.min_value) * image + viewpoint.min_value
+                    image_backnorm = (viewpoint.max_value - viewpoint.min_value) * image + viewpoint.min_value # 反归一化
 
+                    # 通道平均
                     image = image.mean(dim=0, keepdim=True)
                     image_backnorm = image_backnorm.mean(dim=0, keepdim=True)
 

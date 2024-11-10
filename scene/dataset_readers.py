@@ -70,7 +70,7 @@ class CameraInfo(NamedTuple):
     height: int         
 
 
-class CameraInfo_Xray(NamedTuple):
+class CameraInfo_Xray(NamedTuple): # 多了一个
     uid: int            
     R: np.array         
     T: np.array         
@@ -313,7 +313,7 @@ def readNerfSyntheticInfo(path, white_background, eval, extension=".png"):
     return scene_info
 
 
-
+# 添加的內容
 
 def angle2pose(DSO, angle): # TODO: 论文里的内参矩阵
     phi1 = -np.pi / 2
@@ -339,7 +339,7 @@ def angle2pose(DSO, angle): # TODO: 论文里的内参矩阵
 
 
 
-def Xray_readCamerasFromTransforms(path, type = 'train'):
+def Xray_readCamerasFromTransforms(path, type = 'train'): # 论文新添加
 
     cam_infos = []
     with open(path, "rb") as handle:
@@ -374,7 +374,7 @@ def Xray_readCamerasFromTransforms(path, type = 'train'):
 
 
 
-def Xray_readCamerasFromTransforms_addtional(path, add_num = 50):
+def Xray_readCamerasFromTransforms_addtional(path, add_num = 50): # 论文新添加
 
     cam_infos = []
     with open(path, "rb") as handle:
