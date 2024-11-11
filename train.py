@@ -25,7 +25,7 @@ from pdb import set_trace as stx
 #     debugpy.wait_for_client()
 # except Exception as e:
 #     pass
-def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from):
+def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold):
     first_iter = 0
     exp_logger = prepare_output_and_logger(dataset)
     exp_logger.info("Training parameters: {}".format(vars(opt)))
@@ -193,6 +193,10 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])
     parser.add_argument("--start_checkpoint", type=str, default = None)
     parser.add_argument("--gpu_id", default="1", help="gpu to use")
+    parser.add_argument('--gaussiansN', type=int, default=2)
+    parser.add_argument("--coreg", action='store_true', default=False)
+    parser.add_argument("--coprune", action='store_true', default=False)
+    parser.add_argument('--coprune_threshold', type=int, default=5)
     args = parser.parse_args(sys.argv[1:])
     args.save_iterations.append(args.iterations)
 
@@ -214,6 +218,6 @@ if __name__ == "__main__":
     for key, value in config.items():
         setattr(args, key, value)
 
-    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from)
+    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
 
     print("\nTraining complete.")
