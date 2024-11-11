@@ -48,7 +48,7 @@ class ModelParams(ParamGroup): # TODO: 调节视角
         self._resolution = -1
         self._white_background = False
         self.data_device = "cuda"
-        self.eval = False
+        self.eval = True # 默认计算
         # 加了一系列参数
         self.dump_pickle = False
         self.interval = 8
