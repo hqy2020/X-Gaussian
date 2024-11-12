@@ -13,7 +13,12 @@ class Scene:
     gaussians : GaussianModel_Xray
 
     def __init__(self, args : ModelParams, gaussians : GaussianModel_Xray, load_iteration=None, shuffle=True, resolution_scales=[1.0]):
+        """
+        :param path: Path to colmap scene main folder.
+        """
         self.model_path = args.model_path
+        self.source_path = args.source_path
+        print(f"args.source_path is {args.source_path}")
         self.loaded_iter = None
         self.volume_positions = None
         self.image_3d = None
@@ -29,7 +34,6 @@ class Scene:
         self.train_cameras = {}
         self.test_cameras = {}
         self.add_cameras = {}
-
 
         print(args.source_path)
         if os.path.exists(os.path.join(args.source_path, "sparse")):
@@ -58,8 +62,8 @@ class Scene:
                 json.dump(json_cams, file)
 
         if shuffle:
-            random.shuffle(scene_info.train_cameras)  
-            random.shuffle(scene_info.test_cameras)  
+            random.shuffle(scene_info.train_cameras)
+            random.shuffle(scene_info.test_cameras)
 
         self.cameras_extent = scene_info.nerf_normalization["radius"]
 
@@ -78,6 +82,7 @@ class Scene:
                                                            "point_cloud.ply"))
         else:
             self.gaussians.create_from_pcd(scene_info.point_cloud, self.cameras_extent)
+            self.init_point_cloud = scene_info.point_cloud
 
     def save(self, iteration):
         point_cloud_path = os.path.join(self.model_path, "point_cloud/iteration_{}".format(iteration))

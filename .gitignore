@@ -10,3 +10,4 @@ data
 logs
 point_clouds
 point_cloud_visualization
+cal_disk.sh

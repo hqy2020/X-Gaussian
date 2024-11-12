@@ -433,3 +433,36 @@ class GaussianModel_Xray:
     def add_densification_stats(self, viewspace_point_tensor, update_filter):
         self.xyz_gradient_accum[update_filter] += torch.norm(viewspace_point_tensor.grad[update_filter,:2], dim=-1, keepdim=True)
         self.denom[update_filter] += 1
+
+    def prune_from_mask(self, mask, iter=None):
+        """根据掩码剪枝高斯点
+        Args:
+            mask: 布尔类型的掩码，True表示要剪枝的点
+            iter: 当前迭代次数（可选）
+        """
+        valid_points_mask = ~mask  # 取反，因为mask表示要剪枝的点
+        
+        if iter is not None:
+            print(f"Pruning {mask.sum().item()} points at iteration {iter}")
+
+        # 使用现有的 _prune_optimizer 方法
+        optimizable_tensors = self._prune_optimizer(valid_points_mask)
+
+        # 更新所有参数
+        self._xyz = optimizable_tensors["xyz"]
+        self._features_dc = optimizable_tensors["f_dc"]
+        self._features_rest = optimizable_tensors["f_rest"]
+        self._opacity = optimizable_tensors["opacity"]
+        self._scaling = optimizable_tensors["scaling"]
+        self._rotation = optimizable_tensors["rotation"]
+
+        # 更新统计信息
+        self.xyz_gradient_accum = self.xyz_gradient_accum[valid_points_mask]
+        self.denom = self.denom[valid_points_mask]
+        self.max_radii2D = self.max_radii2D[valid_points_mask]
+
+        # 清除优化器状态并重置
+        self.optimizer.state.clear()
+        self.xyz_gradient_accum = torch.zeros((self.get_xyz.shape[0], 1), device="cuda")
+        self.denom = torch.zeros((self.get_xyz.shape[0], 1), device="cuda")
+        self.max_radii2D = torch.zeros((self.get_xyz.shape[0]), device="cuda")

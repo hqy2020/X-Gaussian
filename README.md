@@ -39,6 +39,7 @@ This is the official implementation of our ECCV 2024 paper "Radiative Gaussian S
 
 
 ### News
+- **2024.11.12 :** Added support for multiple (up to 2) Gaussian fields with co-registration and co-pruning mechanisms. 🎯
 - **2024.09.01 :** Code, models, and training logs have been released. Welcome to have a try 😆
 - **2024.07.01 :** Our X-Gaussian has been accepted by ECCV 2024! Code will be released before the start date of the conference (2024.09.29). Stay tuned. 🚀
 - **2024.06.03 :** Code for traditional methods has been released at [SAX-NeRF](https://github.com/caiyuanhao1998/SAX-NeRF). ✨
@@ -139,9 +140,21 @@ python pickle_redump.py
 
 ## 3. Training and Testing
 
-You can download our trained Gaussian point clouds from [Google Drive](https://drive.google.com/drive/folders/1-JqRXiwl1zjVKuBRL3F01cWHcyAe8f2F?usp=sharing) or [Baidu Disk](https://pan.baidu.com/s/1GWE5By6u03n2l6nnFhOE0g?pwd=cyh2) (code: `cyh2`) as
+You can train with multiple Gaussian fields using the following parameters:
 
-![pc_shape](/fig/point_cloud_shape.png)
+```shell
+# Train with two Gaussian fields
+python3 train.py --config config/chest.yaml --eval --gaussiansN 2
+
+# Enable co-registration and co-pruning
+python3 train.py --config config/chest.yaml --eval --gaussiansN 2 --coreg --coprune --coprune_threshold 5
+```
+
+Key parameters for multiple Gaussian fields:
+- `--gaussiansN`: Number of Gaussian fields (1 or 2)
+- `--coreg`: Enable co-registration between Gaussian fields
+- `--coprune`: Enable co-pruning between Gaussian fields
+- `--coprune_threshold`: Threshold for co-pruning (default: 5)
 
 We share the training log for your convienience to debug. Please download them from [Google Drive](https://drive.google.com/drive/folders/1HKcy-luYLXTSH7vviu_djVtpbSdz_v6J?usp=sharing) or [Baidu Disk](https://pan.baidu.com/s/1amk0tnpH3hN9I-Qgjb_cEQ?pwd=cyh2) (code: `cyh2`). To make the training and evaluation easier, your can directly run the `train.sh` file by
 
