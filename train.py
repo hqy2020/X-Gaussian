@@ -31,8 +31,13 @@ from pdb import set_trace as stx
 
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold):
+    # 检查 gaussiansN 为 1 时的设置
+    if gaussiansN == 1:
+        if coreg or coprune:
+            print("Note: Setting coreg and coprune to False as gaussiansN = 1")
+            coreg = False
+            coprune = False
     
-
     training_start_time = time.time()
     assert gaussiansN >= 1 and gaussiansN <= 2
     
@@ -343,7 +348,7 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Training script parameters") 
-    parser.add_argument("--train_num", type=int, default=3)
+    parser.add_argument("--train_num", type=int, default=9)
     lp = ModelParams(parser)           
     op = OptimizationParams(parser)
     pp = PipelineParams(parser)
@@ -362,7 +367,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpu_id", default="1", help="gpu to use")
     
     # 多高斯场相关参数
-    parser.add_argument('--gaussiansN', type=int, default=2)
+    parser.add_argument('--gaussiansN', type=int, default=1)
     parser.add_argument("--coreg", action='store_true', default=True)
     parser.add_argument("--coprune", action='store_true', default=True)
     parser.add_argument('--coprune_threshold', type=int, default=5)
