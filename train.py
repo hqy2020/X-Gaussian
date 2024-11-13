@@ -162,15 +162,15 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                         change_str = f"{GREEN}↓{abs(change_percent):.2f}%{RESET}"
                     
                     print(f"[Iter {iteration}/{opt.iterations}] "
-                          f"Loss: {ema_loss_for_log:.6f} "
-                          f"(Best: {min_loss:.6f} @iter{min_loss_iteration}) "
+                          f"Loss: {ema_loss_for_log:.7f} "
+                          f"(Best: {min_loss:.7f} @iter{min_loss_iteration}) "
                           f"({change_str}) "
-                          f"[{relative_to_initial:.1f}% of initial]")
+                          f"[{relative_to_initial:.2f}% of initial]")
                 else:
                     print(f"[Iter {iteration}/{opt.iterations}] "
-                          f"Loss: {ema_loss_for_log:.6f} "
-                          f"(Best: {min_loss:.6f} @iter{min_loss_iteration}) "
-                          f"[100% of initial]")
+                          f"Loss: {ema_loss_for_log:.7f} "
+                          f"(Best: {min_loss:.7f} @iter{min_loss_iteration}) "
+                          f"[100.00% of initial]")
                 previous_loss = ema_loss_for_log
 
             # 评估和保存
@@ -241,22 +241,23 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     print("\nTraining completed!")
     print("="*50)
     print(f"Body part: {dataset.scene}")
+    print(f"Testing Speed: {int(test_fps)} fps") # 改成int
     print(f"Total time: {(time.time() - training_start_time)/60:.2f} minutes")
-    print(f"Testing Speed: {test_fps:.2f} fps")
-    print(f"Initial loss: {initial_loss:.6f}")
-    print(f"Final loss: {ema_loss_for_log:.6f} ({(ema_loss_for_log/initial_loss*100):.1f}% of initial)")
-    print(f"Best loss: {min_loss:.6f} @iteration {min_loss_iteration} ({(min_loss/initial_loss*100):.1f}% of initial)")
-    
+    print(f"Test SSIM: {final_ssim_test:.4f}")
+    print(f"Test PSNR: {final_psnr_test:.3f}")
     # 输出每个高斯场的最终点数
     for i in range(gaussiansN):
         points_count = GsDict[f"gs{i}"].get_xyz.shape[0]
         print(f"Gaussian{i} final points count: {points_count}")
-    
-    print(f"Test SSIM: {final_ssim_test:.4f}")
-    print(f"Test PSNR: {final_psnr_test:.2f}")
+    print(f"Final loss: {ema_loss_for_log:.7f} ({(ema_loss_for_log/initial_loss*100):.2f}% of initial)")
+    print(f"Save path: {dataset.model_path.split('/')[-1]}")
+
+    # 其他信息
+    print(f"Initial loss: {initial_loss:.7f}")
+    print(f"Best loss: {min_loss:.7f} @iteration {min_loss_iteration} ({(min_loss/initial_loss*100):.2f}% of initial)")
     print(f"Train SSIM: {final_ssim_train:.4f}")
-    print(f"Train PSNR: {final_psnr_train:.2f}")
-    print(f"Save path: {dataset.model_path}")
+    print(f"Train PSNR: {final_psnr_train:.3f}")
+    
     print("="*50)
 
 
