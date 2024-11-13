@@ -52,9 +52,9 @@ class ModelParams(ParamGroup): # TODO: 调节视角
         # 加了一系列参数
         self.dump_pickle = False
         self.interval = 8
-        self.train_num = 50
+        # self.train_num = 3
         self.add_num = 50
-        self.nview = 5
+        self.nview = 5 # 没有写CT restruction的代码，这里没用到
         super().__init__(parser, "Loading Parameters", sentinel)
 
     def extract(self, args):

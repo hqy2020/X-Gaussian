@@ -65,11 +65,32 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
     iter_start = torch.cuda.Event(enable_timing = True)
     iter_end = torch.cuda.Event(enable_timing = True)
-    progress_bar = tqdm(range(first_iter, opt.iterations), desc="Training progress")
-    viewpoint_stack = None
     ema_loss_for_log = 0.0
     first_iter += 1
+    viewpoint_stack = None
 
+    print("\nStarting training...")
+    print(f"Total iterations: {opt.iterations}")
+    print("="*50)
+
+    # 初始化评估指标
+    final_ssim_test = 0.0
+    final_psnr_test = 0.0
+    final_ssim_train = 0.0
+    final_psnr_train = 0.0
+    test_fps = 0.0
+
+    # 添加最低损失值和对应的迭代次数的跟踪
+    min_loss = float('inf')
+    min_loss_iteration = 0
+    previous_loss = None
+    initial_loss = None
+    
+    # 定义颜色代码
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+    
     for iteration in range(first_iter, opt.iterations + 1):
         iter_start.record()
 
@@ -112,18 +133,45 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         iter_end.record()
 
         with torch.no_grad():
-            # 更新进度条
+            # 更新进度条和损失统计
             loss = LossDict["loss_gs0"]
-            ema_loss_for_log = 0.4 * loss.item() + 0.6 * ema_loss_for_log
+            current_loss = loss.item()
+            ema_loss_for_log = 0.4 * current_loss + 0.6 * ema_loss_for_log
+            
+            # 更新最低损失值和对应的迭代次数
+            if current_loss < min_loss:
+                min_loss = current_loss
+                min_loss_iteration = iteration
+            
+            if initial_loss is None:
+                initial_loss = current_loss
+            
+            relative_to_initial = (ema_loss_for_log / initial_loss) * 100
+            
             if iteration % 10 == 0:
-                progress_bar.set_postfix({"Loss": f"{ema_loss_for_log:.{7}f}"})
-                progress_bar.update(10)
-            if iteration == opt.iterations:
-                progress_bar.close()
+                if previous_loss is not None:
+                    change_percent = (ema_loss_for_log - previous_loss) / previous_loss * 100
+                    if change_percent > 0:
+                        change_str = f"{RED}↑{abs(change_percent):.2f}%{RESET}"
+                    else:
+                        change_str = f"{GREEN}↓{abs(change_percent):.2f}%{RESET}"
+                    
+                    print(f"[Iter {iteration}/{opt.iterations}] "
+                          f"Loss: {ema_loss_for_log:.6f} "
+                          f"(Best: {min_loss:.6f} @iter{min_loss_iteration}) "
+                          f"({change_str}) "
+                          f"[{relative_to_initial:.1f}% of initial]")
+                else:
+                    print(f"[Iter {iteration}/{opt.iterations}] "
+                          f"Loss: {ema_loss_for_log:.6f} "
+                          f"(Best: {min_loss:.6f} @iter{min_loss_iteration}) "
+                          f"[100% of initial]")
+                previous_loss = ema_loss_for_log
 
             # 评估和保存
-            training_report(exp_logger, iteration, Ll1, loss, l1_loss, iter_start.elapsed_time(iter_end), 
-                          testing_iterations, scene, render, (pipe, background))
+            final_ssim_test, final_psnr_test, final_ssim_train, final_psnr_train, test_fps = training_report(
+                exp_logger, iteration, Ll1, loss, l1_loss, iter_start.elapsed_time(iter_end), 
+                testing_iterations, scene, render, (pipe, background))
 
             # 保存模型
             if iteration in saving_iterations:
@@ -178,7 +226,33 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                             GsDict[f"mask_inconsistent_gs{i}"] = ~(mask_consistent.bool())
                 
                 for i in range(gaussiansN):
+                    total_points = GsDict[f"gs{i}"].get_xyz.shape[0]
+                    pruned_points = GsDict[f"mask_inconsistent_gs{i}"].squeeze().sum().item()
+                    prune_ratio = (pruned_points / total_points) * 100
+                    print(f"Pruning {pruned_points} points ({prune_ratio:.1f}%) from gaussian{i} at iteration {iteration}")
                     GsDict[f"gs{i}"].prune_from_mask(GsDict[f"mask_inconsistent_gs{i}"].squeeze(), iter=iteration)
+
+    # 训练结束后打印统计信息
+    print("\nTraining completed!")
+    print("="*50)
+    print(f"Body part: {dataset.scene}")
+    print(f"Total time: {(time.time() - training_start_time)/60:.2f} minutes")
+    print(f"Testing Speed: {test_fps:.2f} fps")
+    print(f"Initial loss: {initial_loss:.6f}")
+    print(f"Final loss: {ema_loss_for_log:.6f} ({(ema_loss_for_log/initial_loss*100):.1f}% of initial)")
+    print(f"Best loss: {min_loss:.6f} @iteration {min_loss_iteration} ({(min_loss/initial_loss*100):.1f}% of initial)")
+    
+    # 输出每个高斯场的最终点数
+    for i in range(gaussiansN):
+        points_count = GsDict[f"gs{i}"].get_xyz.shape[0]
+        print(f"Gaussian{i} final points count: {points_count}")
+    
+    print(f"Test SSIM: {final_ssim_test:.4f}")
+    print(f"Test PSNR: {final_psnr_test:.2f}")
+    print(f"Train SSIM: {final_ssim_train:.4f}")
+    print(f"Train PSNR: {final_psnr_train:.2f}")
+    print(f"Save path: {dataset.model_path}")
+    print("="*50)
 
 
 
@@ -202,6 +276,12 @@ def prepare_output_and_logger(args):
 def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_iterations, scene, renderFunc, renderArgs, GsDict=None):
     if exp_logger and (iteration == 0 or (iteration+1) % 100 == 0):
         exp_logger.info(f"Iter:{iteration}, L1 loss={Ll1.item():.4g}, Total loss={loss.item():.4g}, Time:{int(elapsed)}")
+
+    final_ssim_test = 0.0
+    final_psnr_test = 0.0
+    final_ssim_train = 0.0
+    final_psnr_train = 0.0
+    test_fps = 0.0
 
     if iteration in testing_iterations:
         torch.cuda.empty_cache()
@@ -239,7 +319,17 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
                 ssim_test /= len(config['cameras'])
 
                 end = time.time()
-                exp_logger.info(f"Testing Speed: {len(config['cameras'])/(end-start)} fps")
+                fps = len(config['cameras'])/(end-start)
+                
+                if config['name'] == 'test':
+                    final_ssim_test = ssim_test
+                    final_psnr_test = psnr_test
+                    test_fps = fps  # 保存测试集的 FPS
+                else:
+                    final_ssim_train = ssim_test
+                    final_psnr_train = psnr_test
+
+                exp_logger.info(f"Testing Speed: {fps} fps")
                 exp_logger.info(f"Testing Time: {end-start} s")
                 exp_logger.info("\n[ITER {}] Evaluating {}: SSIM = {}, PSNR = {}".format(iteration, config['name'], ssim_test, psnr_test))
 
@@ -247,36 +337,46 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
             exp_logger.info(f'Iter:{iteration}, total_points:{scene.gaussians.get_xyz.shape[0]}')
         torch.cuda.empty_cache()
 
+    return final_ssim_test, final_psnr_test, final_ssim_train, final_psnr_train, test_fps
+
 
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Training script parameters") 
-    lp = ModelParams(parser)                      # 
+    parser.add_argument("--train_num", type=int, default=3)
+    lp = ModelParams(parser)           
     op = OptimizationParams(parser)
     pp = PipelineParams(parser)
+    
+    # 基本参数
     parser.add_argument('--ip', type=str, default="127.0.0.1")
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
     parser.add_argument('--config', type=str, default='config/chest.yaml', help='Path to the configuration file')
-    # parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 4_000, 6_000, 8_000, 10_000, 12_000, 14_000, 16_000, 18_000, 20_000])
-    parser.add_argument("--test_iterations", nargs="+", type=int, default=[20_000])
+    parser.add_argument("--test_iterations", nargs="+", type=int, default=[2000,20000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[20_000,])
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])
     parser.add_argument("--start_checkpoint", type=str, default = None)
     parser.add_argument("--gpu_id", default="1", help="gpu to use")
+    
+    # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
     parser.add_argument("--coreg", action='store_true', default=True)
     parser.add_argument("--coprune", action='store_true', default=True)
     parser.add_argument('--coprune_threshold', type=int, default=5)
+    
     args = parser.parse_args(sys.argv[1:])
+    
+    lp.train_num = args.train_num
     args.save_iterations.append(args.iterations)
-
+    
     os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     # 输出parser的配置
-    print(args)
+    
+    
     print("Optimizing " + args.model_path)
     
 
@@ -289,8 +389,9 @@ if __name__ == "__main__":
         config = yaml.safe_load(f)
     
     for key, value in config.items():
-        setattr(args, key, value)
-
+        setattr(args, key, value) # 最后按照config设置
+    
+    print("args is ", args)
     training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
 
     print("\nTraining complete.")
