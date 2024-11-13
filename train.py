@@ -15,6 +15,8 @@ import datetime
 import time
 import yaml
 import shutil
+import numpy as np
+import open3d as o3d
 
 from pdb import set_trace as stx
 
@@ -258,7 +260,7 @@ if __name__ == "__main__":
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
     parser.add_argument('--config', type=str, default='config/chest.yaml', help='Path to the configuration file')
     # parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 4_000, 6_000, 8_000, 10_000, 12_000, 14_000, 16_000, 18_000, 20_000])
-    parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 2_000, 20_000])
+    parser.add_argument("--test_iterations", nargs="+", type=int, default=[20_000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[20_000,])
     parser.add_argument("--quiet", action="store_true")
     parser.add_argument("--checkpoint_iterations", nargs="+", type=int, default=[])
