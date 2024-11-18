@@ -1,7 +1,7 @@
 import os
 import torch
 from random import randint
-from utils.loss_utils import l1_loss, ssim
+from utils.loss_utils import l1_loss, ssim, loss_photometric
 # from pytorch_msssim import ssim
 from gaussian_renderer import render
 import sys
@@ -31,7 +31,7 @@ from pdb import set_trace as stx
 
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold):
-    # 检查 gaussiansN 为 1 时的设置
+    # 检�� gaussiansN 为 1 时的设置
     if gaussiansN == 1:
         if coreg or coprune:
             print("Note: Setting coreg and coprune to False as gaussiansN = 1")
@@ -72,8 +72,9 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     iter_end = torch.cuda.Event(enable_timing = True)
     ema_loss_for_log = 0.0
     first_iter += 1
-    viewpoint_stack = None
-
+    viewpoint_stack, pseudo_stack = None, None
+    pseudo_stack_co = None
+    
     print("\nStarting training...")
     print(f"Total iterations: {opt.iterations}")
     print("="*50)
@@ -95,6 +96,9 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     GREEN = '\033[92m'
     RED = '\033[91m'
     RESET = '\033[0m'
+    
+    # 添加伪视角损失的跟踪变量
+    ema_pseudo_loss_for_log = 0.0
     
     for iteration in range(first_iter, opt.iterations + 1):
         iter_start.record()
@@ -122,11 +126,11 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         RenderDict = {}
         LossDict = {}
         for i in range(gaussiansN):
-            render_pkg = render(viewpoint_cam, GsDict[f"gs{i}"], pipe, bg)
-            RenderDict[f"image_gs{i}"] = render_pkg["render"]
-            RenderDict[f"viewspace_point_tensor_gs{i}"] = render_pkg["viewspace_points"]
-            RenderDict[f"visibility_filter_gs{i}"] = render_pkg["visibility_filter"]
-            RenderDict[f"radii_gs{i}"] = render_pkg["radii"]
+            RenderDict[f"render_pkg_gs{i}"] = render(viewpoint_cam, GsDict[f'gs{i}'], pipe, bg)
+            RenderDict[f"image_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["render"]
+            RenderDict[f"viewspace_point_tensor_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["viewspace_points"]
+            RenderDict[f"visibility_filter_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["visibility_filter"]
+            RenderDict[f"radii_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["radii"]
 
         # 计算每个高斯场的损失
         gt_image = viewpoint_cam.normalized_image.cuda()
@@ -237,6 +241,41 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     print(f"Pruning {pruned_points} points ({prune_ratio:.1f}%) from gaussian{i} at iteration {iteration}")
                     GsDict[f"gs{i}"].prune_from_mask(GsDict[f"mask_inconsistent_gs{i}"].squeeze(), iter=iteration)
 
+            # 添加伪视角损失的计算
+            if iteration % opt.sample_pseudo_interval == 0 and iteration <= opt.end_sample_pseudo:
+                loss_scale = min((iteration - opt.start_sample_pseudo) / 500., 1)
+                if not pseudo_stack_co:
+                    pseudo_stack_co = scene.getPseudoCameras().copy()
+                pseudo_cam_co = pseudo_stack_co.pop(randint(0, len(pseudo_stack_co) - 1))
+
+                pseudo_loss_total = 0.0  # 用于累积当前迭代的伪视角损失
+                
+                for i in range(gaussiansN):
+                    RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
+                    RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
+                    
+                if iteration >= opt.start_sample_pseudo:
+                    # co-reg 协同注册损失
+                    if coreg:
+                        for i in range(gaussiansN):
+                            for j in range(gaussiansN):
+                                if i != j:
+                                    pseudo_loss = loss_photometric(
+                                        RenderDict[f"image_pseudo_co_gs{i}"], 
+                                        RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), 
+                                        opt=opt
+                                    ) / (gaussiansN - 1)
+                                    LossDict[f"loss_gs{i}"] += pseudo_loss
+                                    pseudo_loss_total += pseudo_loss.item()
+                                    
+                # 更新伪视角损失的指数移动平均
+                if pseudo_loss_total > 0:
+                    ema_pseudo_loss_for_log = 0.4 * pseudo_loss_total + 0.6 * ema_pseudo_loss_for_log
+                    
+                    # 每10次迭代输出一次伪视角损失
+                    if iteration % 10 == 0:
+                        print(f"[Iter {iteration}] Pseudo Loss: {ema_pseudo_loss_for_log:.7f}")
+
     # 训练结束后打印统计信息
     print("\nTraining completed!")
     print("="*50)
@@ -258,6 +297,10 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     print(f"Train SSIM: {final_ssim_train:.4f}")
     print(f"Train PSNR: {final_psnr_train:.3f}")
     
+    print("="*50)
+
+    # 在训练结束时也输出最终的伪视角损失
+    print(f"Final pseudo view loss: {ema_pseudo_loss_for_log:.7f}")
     print("="*50)
 
 
@@ -349,7 +392,7 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Training script parameters") 
-    parser.add_argument("--train_num", type=int, default=9)
+    parser.add_argument("--train_num", type=int, default=3)
     lp = ModelParams(parser)           
     op = OptimizationParams(parser)
     pp = PipelineParams(parser)
@@ -373,10 +416,12 @@ if __name__ == "__main__":
     parser.add_argument("--coprune", action='store_true', default=True)
     parser.add_argument('--coprune_threshold', type=int, default=5)
     
+    # 添加伪视角相关参数
+    parser.add_argument("--onlyrgb", action='store_true', default=False)
     args = parser.parse_args(sys.argv[1:])
     
     lp.train_num = args.train_num
-    args.save_iterations.append(args.iterations)
+    args.save_iterations.append(op.iterations)
     
     os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
@@ -398,6 +443,6 @@ if __name__ == "__main__":
         setattr(args, key, value) # 最后按照config设置
     
     print("args is ", args)
-    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint, args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
+    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint,  args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
 
     print("\nTraining complete.")

@@ -21,17 +21,29 @@ def create_window(window_size, channel):
 
 
 
-def ssim(img1, img2, window_size=11, size_average=True):
+# def ssim(img1, img2, window_size=11, size_average=True):
+#     channel = img1.size(-3)
+#     window = create_window(window_size, channel)
+
+#     if img1.is_cuda:
+#         window = window.cuda(img1.get_device())
+#     window = window.type_as(img1)
+
+#     return _ssim(img1, img2, window, window_size, channel, size_average)
+
+def ssim(img1, img2, mask=None, window_size=11, size_average=True): # 带有mask
     channel = img1.size(-3)
     window = create_window(window_size, channel)
+
+    if mask is not None:
+        img1 = img1 * mask + (1 - mask)
+        img2 = img2 * mask + (1 - mask)
 
     if img1.is_cuda:
         window = window.cuda(img1.get_device())
     window = window.type_as(img1)
 
     return _ssim(img1, img2, window, window_size, channel, size_average)
-
-
 
 def _ssim(img1, img2, window, window_size, channel, size_average=True):
     mu1 = F.conv2d(img1, window, padding=window_size // 2, groups=channel)
@@ -55,3 +67,16 @@ def _ssim(img1, img2, window, window_size, channel, size_average=True):
     else:
         return ssim_map.mean(1).mean(1).mean(1)
 
+def loss_photometric(image, gt_image, opt, valid=None):
+    Ll1 =  l1_loss_mask(image, gt_image, mask=valid)
+    loss = ((1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(image, gt_image, mask=valid)))
+    return loss
+
+
+
+
+def l1_loss_mask(network_output, gt, mask = None):
+    if mask is None:
+        return l1_loss(network_output, gt)
+    else:
+        return torch.abs((network_output - gt) * mask).sum() / mask.sum()
