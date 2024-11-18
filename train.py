@@ -368,7 +368,7 @@ if __name__ == "__main__":
     parser.add_argument("--gpu_id", default="1", help="gpu to use")
     
     # 多高斯场相关参数
-    parser.add_argument('--gaussiansN', type=int, default=1)
+    parser.add_argument('--gaussiansN', type=int, default=2)
     parser.add_argument("--coreg", action='store_true', default=True)
     parser.add_argument("--coprune", action='store_true', default=True)
     parser.add_argument('--coprune_threshold', type=int, default=5)
