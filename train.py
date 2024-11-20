@@ -17,6 +17,7 @@ import yaml
 import shutil
 import numpy as np
 import open3d as o3d
+import logging
 
 from pdb import set_trace as stx
 
@@ -29,21 +30,50 @@ from pdb import set_trace as stx
 # except Exception as e:
 #     pass
 
+def setup_logger(log_path):
+    """设置logger将输出同时写入文件和终端"""
+    # 移除现有的handlers
+    logger = logging.getLogger()
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
+    
+    logger.setLevel(logging.INFO)
+    
+    # 创建文件处理器
+    fh = logging.FileHandler(log_path)
+    fh.setLevel(logging.INFO)
+    
+    # 创建终端处理器
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setLevel(logging.INFO)
+    
+    # 创建格式器
+    formatter = logging.Formatter('%(message)s')
+    fh.setFormatter(formatter)
+    ch.setFormatter(formatter)
+    
+    # 添加处理器
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+    
+    return logger
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold):
-    # 检�� gaussiansN 为 1 时的设置
-    if gaussiansN == 1:
-        if coreg or coprune:
-            print("Note: Setting coreg and coprune to False as gaussiansN = 1")
-            coreg = False
-            coprune = False
+    # 使用全局logger
+    global logger
     
     training_start_time = time.time()
+    if gaussiansN == 1:
+        if coreg or coprune:
+            logger.info("Note: Setting coreg and coprune to False as gaussiansN = 1")
+            coreg = False
+            coprune = False
+            
     assert gaussiansN >= 1 and gaussiansN <= 2
     
     first_iter = 0
     exp_logger = prepare_output_and_logger(dataset)
-    exp_logger.info("Training parameters: {}".format(vars(opt)))
+    logger.info("Training parameters: {}".format(vars(opt)))
 
     # 初始化第一个高斯场
     gaussians = GaussianModel_Xray(dataset.sh_degree)
@@ -62,8 +92,8 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
             GsDict[f"gs{i}"] = GaussianModel_Xray(dataset.sh_degree)
             GsDict[f"gs{i}"].create_from_pcd(scene.init_point_cloud, scene.cameras_extent)
             GsDict[f"gs{i}"].training_setup(opt)
-            print(f"Create gaussians{i}")
-    print(f"GsDict.keys() is {GsDict.keys()}")
+            logger.info(f"Create gaussians{i}")
+    logger.info(f"GsDict.keys() is {GsDict.keys()}")
 
     bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
@@ -75,9 +105,9 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     viewpoint_stack, pseudo_stack = None, None
     pseudo_stack_co = None
     
-    print("\nStarting training...")
-    print(f"Total iterations: {opt.iterations}")
-    print("="*50)
+    logger.info("\nStarting training...")
+    logger.info(f"Total iterations: {opt.iterations}")
+    logger.info("="*50)
 
     # 初始化评估指标
     final_ssim_test = 0.0
@@ -158,6 +188,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
             relative_to_initial = (ema_loss_for_log / initial_loss) * 100
             
             if iteration % 10 == 0:
+                change_str = ""
                 if previous_loss is not None:
                     change_percent = (ema_loss_for_log - previous_loss) / previous_loss * 100
                     if change_percent > 0:
@@ -165,13 +196,13 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     else:
                         change_str = f"{GREEN}↓{abs(change_percent):.2f}%{RESET}"
                     
-                    print(f"[Iter {iteration}/{opt.iterations}] "
+                    logger.info(f"[Iter {iteration}/{opt.iterations}] "
                           f"Loss: {ema_loss_for_log:.7f} "
                           f"(Best: {min_loss:.7f} @iter{min_loss_iteration}) "
                           f"({change_str}) "
                           f"[{relative_to_initial:.2f}% of initial]")
                 else:
-                    print(f"[Iter {iteration}/{opt.iterations}] "
+                    logger.info(f"[Iter {iteration}/{opt.iterations}] "
                           f"Loss: {ema_loss_for_log:.7f} "
                           f"(Best: {min_loss:.7f} @iter{min_loss_iteration}) "
                           f"[100.00% of initial]")
@@ -238,7 +269,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     total_points = GsDict[f"gs{i}"].get_xyz.shape[0]
                     pruned_points = GsDict[f"mask_inconsistent_gs{i}"].squeeze().sum().item()
                     prune_ratio = (pruned_points / total_points) * 100
-                    print(f"Pruning {pruned_points} points ({prune_ratio:.1f}%) from gaussian{i} at iteration {iteration}")
+                    logger.info(f"Pruning {pruned_points} points ({prune_ratio:.1f}%) from gaussian{i} at iteration {iteration}")
                     GsDict[f"gs{i}"].prune_from_mask(GsDict[f"mask_inconsistent_gs{i}"].squeeze(), iter=iteration)
 
             # 添加伪视角损失的计算
@@ -274,34 +305,34 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     
                     # 每10次迭代输出一次伪视角损失
                     if iteration % 10 == 0:
-                        print(f"[Iter {iteration}] Pseudo Loss: {ema_pseudo_loss_for_log:.7f}")
+                        logger.info(f"[Iter {iteration}] Pseudo Loss: {ema_pseudo_loss_for_log:.7f}")
 
     # 训练结束后打印统计信息
-    print("\nTraining completed!")
-    print("="*50)
-    print(f"Body part: {dataset.scene}")
-    print(f"Testing Speed: {int(test_fps)} fps") # 改成int
-    print(f"Total time: {(time.time() - training_start_time)/60:.2f} minutes")
-    print(f"Test SSIM: {final_ssim_test:.4f}")
-    print(f"Test PSNR: {final_psnr_test:.3f}")
+    logger.info("\nTraining completed!")
+    logger.info("="*50)
+    logger.info(f"Body part: {dataset.scene}")
+    logger.info(f"Testing Speed: {int(test_fps)} fps") # 改成int
+    logger.info(f"Total time: {(time.time() - training_start_time)/60:.2f} minutes")
+    logger.info(f"Test SSIM: {final_ssim_test:.4f}")
+    logger.info(f"Test PSNR: {final_psnr_test:.3f}")
     # 输出每个高斯场的最终点数
     for i in range(gaussiansN):
         points_count = GsDict[f"gs{i}"].get_xyz.shape[0]
-        print(f"Gaussian{i} final points count: {points_count}")
-    print(f"Final loss: {ema_loss_for_log:.7f} ({(ema_loss_for_log/initial_loss*100):.2f}% of initial)")
-    print(f"Save path: {dataset.model_path.split('/')[-1]}")
+        logger.info(f"Gaussian{i} final points count: {points_count}")
+    logger.info(f"Final loss: {ema_loss_for_log:.7f} ({(ema_loss_for_log/initial_loss*100):.2f}% of initial)")
+    logger.info(f"Save path: {dataset.model_path.split('/')[-1]}")
 
     # 其他信息
-    print(f"Initial loss: {initial_loss:.7f}")
-    print(f"Best loss: {min_loss:.7f} @iteration {min_loss_iteration} ({(min_loss/initial_loss*100):.2f}% of initial)")
-    print(f"Train SSIM: {final_ssim_train:.4f}")
-    print(f"Train PSNR: {final_psnr_train:.3f}")
+    logger.info(f"Initial loss: {initial_loss:.7f}")
+    logger.info(f"Best loss: {min_loss:.7f} @iteration {min_loss_iteration} ({(min_loss/initial_loss*100):.2f}% of initial)")
+    logger.info(f"Train SSIM: {final_ssim_train:.4f}")
+    logger.info(f"Train PSNR: {final_psnr_train:.3f}")
     
-    print("="*50)
+    logger.info("="*50)
 
     # 在训练结束时也输出最终的伪视角损失
-    print(f"Final pseudo view loss: {ema_pseudo_loss_for_log:.7f}")
-    print("="*50)
+    logger.info(f"Final pseudo view loss: {ema_pseudo_loss_for_log:.7f}")
+    logger.info("="*50)
 
 
 
@@ -412,8 +443,8 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=True)
-    parser.add_argument("--coprune", action='store_true', default=True)
+    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
+    parser.add_argument("--coprune", action='store_true', default=False) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     
     # 添加伪视角相关参数
@@ -428,12 +459,14 @@ if __name__ == "__main__":
     # 输出parser的配置
     
     
-    print("Optimizing " + args.model_path)
+    # 设置全局logger
+    global logger
+    log_path = os.path.join(args.model_path, "log.txt")
+    logger = setup_logger(log_path)
     
-
+    logger.info("Optimizing " + args.model_path)
     safe_state(args.quiet)
-
-
+    
     torch.autograd.set_detect_anomaly(args.detect_anomaly)
 
     with open(args.config, 'r') as f:
@@ -442,7 +475,7 @@ if __name__ == "__main__":
     for key, value in config.items():
         setattr(args, key, value) # 最后按照config设置
     
-    print("args is ", args)
+    logger.info("args is ", args)
     training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint,  args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
 
-    print("\nTraining complete.")
+    logger.info("\nTraining complete.")

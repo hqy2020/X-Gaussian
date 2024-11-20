@@ -1,0 +1,1068 @@
+Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 0, 'end_sample_pseudo': 30000}
+Iter:99, L1 loss=0.05724, Total loss=0.07876, Time:14
+Iter:199, L1 loss=0.0344, Total loss=0.04979, Time:13
+Iter:299, L1 loss=0.02211, Total loss=0.03344, Time:13
+Iter:399, L1 loss=0.01344, Total loss=0.02137, Time:8
+Iter:499, L1 loss=0.008442, Total loss=0.01517, Time:13
+Iter:599, L1 loss=0.006814, Total loss=0.0118, Time:9
+Iter:699, L1 loss=0.005665, Total loss=0.009678, Time:9
+Iter:799, L1 loss=0.005006, Total loss=0.008088, Time:13
+Iter:899, L1 loss=0.003726, Total loss=0.005711, Time:13
+Iter:999, L1 loss=0.00447, Total loss=0.006746, Time:12
+Iter:1099, L1 loss=0.003391, Total loss=0.005109, Time:11
+Iter:1199, L1 loss=0.003447, Total loss=0.004956, Time:13
+Iter:1299, L1 loss=0.002725, Total loss=0.003588, Time:11
+Iter:1399, L1 loss=0.002296, Total loss=0.002899, Time:13
+Iter:1499, L1 loss=0.002552, Total loss=0.003298, Time:14
+Iter:1599, L1 loss=0.002679, Total loss=0.003367, Time:11
+Iter:1699, L1 loss=0.002572, Total loss=0.003219, Time:11
+Iter:1799, L1 loss=0.001685, Total loss=0.001878, Time:15
+Iter:1899, L1 loss=0.001719, Total loss=0.001961, Time:15
+Iter:1999, L1 loss=0.001495, Total loss=0.001825, Time:14
+Testing Speed: 232.60337178349602 fps
+Testing Time: 0.21495819091796875 s
+
+[ITER 2000] Evaluating test: SSIM = 0.8523035597801208, PSNR = 17.89594018936157
+Testing Speed: 264.4691243852201 fps
+Testing Time: 0.01134347915649414 s
+
+[ITER 2000] Evaluating train: SSIM = 0.9999495546023051, PSNR = 48.407441457112625
+Iter:2000, total_points:42307
+Iter:2099, L1 loss=0.001586, Total loss=0.00167, Time:13
+Iter:2199, L1 loss=0.001425, Total loss=0.001538, Time:15
+Iter:2299, L1 loss=0.001361, Total loss=0.001513, Time:16
+Iter:2399, L1 loss=0.00122, Total loss=0.001268, Time:13
+Iter:2499, L1 loss=0.001178, Total loss=0.001229, Time:16
+Iter:2599, L1 loss=0.001003, Total loss=0.00103, Time:15
+Iter:2699, L1 loss=0.001149, Total loss=0.001179, Time:14
+Iter:2799, L1 loss=0.001243, Total loss=0.001256, Time:16
+Iter:2899, L1 loss=0.0008724, Total loss=0.0008436, Time:16
+Iter:2999, L1 loss=0.0007018, Total loss=0.0006691, Time:17
+Iter:3099, L1 loss=0.0008893, Total loss=0.0008751, Time:15
+Iter:3199, L1 loss=0.0007627, Total loss=0.0007432, Time:15
+Iter:3299, L1 loss=0.001269, Total loss=0.001258, Time:18
+Iter:3399, L1 loss=0.00118, Total loss=0.001247, Time:18
+Iter:3499, L1 loss=0.0006467, Total loss=0.00062, Time:19
+Iter:3599, L1 loss=0.0006355, Total loss=0.0005817, Time:19
+Iter:3699, L1 loss=0.001023, Total loss=0.000943, Time:18
+Iter:3799, L1 loss=0.0007808, Total loss=0.0007401, Time:19
+Iter:3899, L1 loss=0.0007424, Total loss=0.0006813, Time:20
+Iter:3999, L1 loss=0.0008476, Total loss=0.0007745, Time:20
+Iter:4099, L1 loss=0.000955, Total loss=0.0009384, Time:25
+Iter:4199, L1 loss=0.0007765, Total loss=0.0007352, Time:22
+Iter:4299, L1 loss=0.0008438, Total loss=0.0007938, Time:26
+Iter:4399, L1 loss=0.0005786, Total loss=0.0005268, Time:26
+Iter:4499, L1 loss=0.0007967, Total loss=0.0007482, Time:26
+Iter:4599, L1 loss=0.0006712, Total loss=0.0006169, Time:26
+Iter:4699, L1 loss=0.000607, Total loss=0.0005596, Time:25
+Iter:4799, L1 loss=0.0005986, Total loss=0.0005477, Time:26
+Iter:4899, L1 loss=0.000659, Total loss=0.0005755, Time:25
+Iter:4999, L1 loss=0.0005059, Total loss=0.0004477, Time:27
+Iter:5099, L1 loss=0.0005907, Total loss=0.0005129, Time:27
+Iter:5199, L1 loss=0.0005408, Total loss=0.0004812, Time:27
+Iter:5299, L1 loss=0.0006348, Total loss=0.0005375, Time:27
+Iter:5399, L1 loss=0.0005166, Total loss=0.000426, Time:28
+Iter:5499, L1 loss=0.0005198, Total loss=0.0004835, Time:28
+Iter:5599, L1 loss=0.0004713, Total loss=0.0004164, Time:27
+Iter:5699, L1 loss=0.0004889, Total loss=0.0004444, Time:27
+Iter:5799, L1 loss=0.0004453, Total loss=0.000397, Time:28
+Iter:5899, L1 loss=0.0004812, Total loss=0.0004241, Time:25
+Iter:5999, L1 loss=0.0004717, Total loss=0.0004155, Time:25
+Iter:6099, L1 loss=0.0004513, Total loss=0.0003996, Time:23
+Iter:6199, L1 loss=0.0003857, Total loss=0.0003308, Time:24
+Iter:6299, L1 loss=0.0005063, Total loss=0.0004601, Time:25
+Iter:6399, L1 loss=0.0004382, Total loss=0.0003889, Time:25
+Iter:6499, L1 loss=0.0005152, Total loss=0.0004645, Time:24
+Iter:6599, L1 loss=0.0004187, Total loss=0.0003702, Time:24
+Iter:6699, L1 loss=0.0004783, Total loss=0.0004212, Time:25
+Iter:6799, L1 loss=0.0003596, Total loss=0.0003069, Time:26
+Iter:6899, L1 loss=0.0004742, Total loss=0.0004197, Time:25
+Iter:6999, L1 loss=0.0004685, Total loss=0.0004293, Time:24
+Iter:7099, L1 loss=0.0004339, Total loss=0.0003744, Time:29
+Iter:7199, L1 loss=0.000374, Total loss=0.0003278, Time:29
+Iter:7299, L1 loss=0.0004398, Total loss=0.0003914, Time:26
+Iter:7399, L1 loss=0.0005606, Total loss=0.0004383, Time:29
+Iter:7499, L1 loss=0.0003999, Total loss=0.0003504, Time:29
+Iter:7599, L1 loss=0.0003626, Total loss=0.0003137, Time:30
+Iter:7699, L1 loss=0.000337, Total loss=0.0002931, Time:25
+Iter:7799, L1 loss=0.0003467, Total loss=0.0003055, Time:26
+Iter:7899, L1 loss=0.0004065, Total loss=0.0003607, Time:25
+Iter:7999, L1 loss=0.0003744, Total loss=0.0003238, Time:28
+Iter:8099, L1 loss=0.0005297, Total loss=0.0004776, Time:32
+Iter:8199, L1 loss=0.000487, Total loss=0.0004319, Time:31
+Iter:8299, L1 loss=0.0003785, Total loss=0.0003302, Time:30
+Iter:8399, L1 loss=0.0003566, Total loss=0.0003064, Time:33
+Iter:8499, L1 loss=0.000439, Total loss=0.0003848, Time:31
+Iter:8599, L1 loss=0.0003104, Total loss=0.0002635, Time:30
+Iter:8699, L1 loss=0.0003606, Total loss=0.0003182, Time:32
+Iter:8799, L1 loss=0.0004147, Total loss=0.0003635, Time:31
+Iter:8899, L1 loss=0.0003271, Total loss=0.0002886, Time:30
+Iter:8999, L1 loss=0.0003149, Total loss=0.0002709, Time:28
+Iter:9099, L1 loss=0.0004465, Total loss=0.0003815, Time:31
+Iter:9199, L1 loss=0.0003206, Total loss=0.0002911, Time:31
+Iter:9299, L1 loss=0.0003016, Total loss=0.0002498, Time:28
+Iter:9399, L1 loss=0.0004391, Total loss=0.0003671, Time:31
+Iter:9499, L1 loss=0.0003331, Total loss=0.0002792, Time:30
+Iter:9599, L1 loss=0.0003941, Total loss=0.0003497, Time:30
+Iter:9699, L1 loss=0.0004889, Total loss=0.000414, Time:27
+Iter:9799, L1 loss=0.0003028, Total loss=0.0002585, Time:31
+Iter:9899, L1 loss=0.0004588, Total loss=0.0003546, Time:30
+Iter:9999, L1 loss=0.0004926, Total loss=0.0004419, Time:31
+Iter:10099, L1 loss=0.0002988, Total loss=0.0002563, Time:30
+Iter:10199, L1 loss=0.0003408, Total loss=0.0002862, Time:31
+Iter:10299, L1 loss=0.0002803, Total loss=0.0002477, Time:31
+Iter:10399, L1 loss=0.0002891, Total loss=0.0002442, Time:31
+Iter:10499, L1 loss=0.000288, Total loss=0.0002404, Time:28
+Iter:10599, L1 loss=0.0002687, Total loss=0.000233, Time:30
+Iter:10699, L1 loss=0.0003083, Total loss=0.0002678, Time:30
+Iter:10799, L1 loss=0.0002668, Total loss=0.000231, Time:27
+Iter:10899, L1 loss=0.0003279, Total loss=0.0002914, Time:31
+Iter:10999, L1 loss=0.0002984, Total loss=0.0002487, Time:30
+Iter:11099, L1 loss=0.0002956, Total loss=0.000249, Time:31
+Iter:11199, L1 loss=0.0002896, Total loss=0.0002436, Time:32
+Iter:11299, L1 loss=0.0002445, Total loss=0.0002143, Time:26
+Iter:11399, L1 loss=0.0003176, Total loss=0.0002663, Time:30
+Iter:11499, L1 loss=0.000385, Total loss=0.0003163, Time:29
+Iter:11599, L1 loss=0.000273, Total loss=0.0002251, Time:30
+Iter:11699, L1 loss=0.0002393, Total loss=0.0002088, Time:27
+Iter:11799, L1 loss=0.000269, Total loss=0.0002254, Time:26
+Iter:11899, L1 loss=0.0002931, Total loss=0.0002349, Time:31
+Iter:11999, L1 loss=0.000243, Total loss=0.0002085, Time:30
+Iter:12099, L1 loss=0.0005629, Total loss=0.0004567, Time:29
+Iter:12199, L1 loss=0.000337, Total loss=0.000299, Time:32
+Iter:12299, L1 loss=0.0003609, Total loss=0.0003142, Time:32
+Iter:12399, L1 loss=0.0002521, Total loss=0.0002191, Time:31
+Iter:12499, L1 loss=0.0003061, Total loss=0.0002393, Time:29
+Iter:12599, L1 loss=0.0003578, Total loss=0.0003086, Time:32
+Iter:12699, L1 loss=0.0002996, Total loss=0.0002664, Time:33
+Iter:12799, L1 loss=0.000275, Total loss=0.0002156, Time:33
+Iter:12899, L1 loss=0.0002581, Total loss=0.000206, Time:33
+Iter:12999, L1 loss=0.000228, Total loss=0.0002017, Time:33
+Iter:13099, L1 loss=0.0002748, Total loss=0.0002217, Time:33
+Iter:13199, L1 loss=0.0002671, Total loss=0.0002291, Time:33
+Iter:13299, L1 loss=0.000227, Total loss=0.0001865, Time:29
+Iter:13399, L1 loss=0.000228, Total loss=0.0001908, Time:33
+Iter:13499, L1 loss=0.0002637, Total loss=0.000222, Time:32
+Iter:13599, L1 loss=0.0002417, Total loss=0.0002005, Time:31
+Iter:13699, L1 loss=0.0002844, Total loss=0.0002404, Time:28
+Iter:13799, L1 loss=0.0002688, Total loss=0.0002288, Time:31
+Iter:13899, L1 loss=0.000293, Total loss=0.0002526, Time:32
+Iter:13999, L1 loss=0.0002232, Total loss=0.0001879, Time:31
+Iter:14099, L1 loss=0.000254, Total loss=0.0002058, Time:28
+Iter:14199, L1 loss=0.0002246, Total loss=0.000194, Time:31
+Iter:14299, L1 loss=0.000231, Total loss=0.0001917, Time:31
+Iter:14399, L1 loss=0.0002118, Total loss=0.0001747, Time:28
+Iter:14499, L1 loss=0.0002318, Total loss=0.0002032, Time:31
+Iter:14599, L1 loss=0.00026, Total loss=0.000217, Time:31
+Iter:14699, L1 loss=0.0002375, Total loss=0.0002036, Time:30
+Iter:14799, L1 loss=0.0003409, Total loss=0.0002763, Time:27
+Iter:14899, L1 loss=0.0002126, Total loss=0.0001797, Time:31
+Iter:14999, L1 loss=0.000319, Total loss=0.0002575, Time:31
+Iter:15099, L1 loss=0.0001921, Total loss=0.000165, Time:29
+Iter:15199, L1 loss=0.0002116, Total loss=0.0001759, Time:29
+Iter:15299, L1 loss=0.000229, Total loss=0.0002036, Time:33
+Iter:15399, L1 loss=0.0001839, Total loss=0.0001618, Time:32
+Iter:15499, L1 loss=0.0002376, Total loss=0.0001883, Time:30
+Iter:15599, L1 loss=0.0002028, Total loss=0.0001715, Time:30
+Iter:15699, L1 loss=0.0002148, Total loss=0.0001744, Time:31
+Iter:15799, L1 loss=0.0001905, Total loss=0.0001572, Time:28
+Iter:15899, L1 loss=0.0001778, Total loss=0.000149, Time:26
+Iter:15999, L1 loss=0.0002109, Total loss=0.0001738, Time:27
+Iter:16099, L1 loss=0.0003108, Total loss=0.0002674, Time:28
+Iter:16199, L1 loss=0.0002941, Total loss=0.0002509, Time:28
+Iter:16299, L1 loss=0.000316, Total loss=0.0002486, Time:32
+Iter:16399, L1 loss=0.0002187, Total loss=0.0001815, Time:31
+Iter:16499, L1 loss=0.0002516, Total loss=0.0002389, Time:32
+Iter:16599, L1 loss=0.0002315, Total loss=0.0001875, Time:28
+Iter:16699, L1 loss=0.0002251, Total loss=0.0001938, Time:31
+Iter:16799, L1 loss=0.0002606, Total loss=0.0002125, Time:27
+Iter:16899, L1 loss=0.0002623, Total loss=0.0002115, Time:32
+Iter:16999, L1 loss=0.0002153, Total loss=0.0001864, Time:28
+Iter:17099, L1 loss=0.0002045, Total loss=0.000161, Time:33
+Iter:17199, L1 loss=0.0001946, Total loss=0.0001674, Time:31
+Iter:17299, L1 loss=0.0002156, Total loss=0.0001791, Time:31
+Iter:17399, L1 loss=0.0002059, Total loss=0.0001654, Time:32
+Iter:17499, L1 loss=0.0001963, Total loss=0.0001686, Time:31
+Iter:17599, L1 loss=0.0002088, Total loss=0.000181, Time:31
+Iter:17699, L1 loss=0.0001843, Total loss=0.0001522, Time:28
+Iter:17799, L1 loss=0.0003292, Total loss=0.0002682, Time:33
+Iter:17899, L1 loss=0.0001841, Total loss=0.0001594, Time:31
+Iter:17999, L1 loss=0.000183, Total loss=0.0001482, Time:28
+Iter:18099, L1 loss=0.0002902, Total loss=0.0002518, Time:31
+Iter:18199, L1 loss=0.0001956, Total loss=0.0001692, Time:32
+Iter:18299, L1 loss=0.0002808, Total loss=0.0002251, Time:32
+Iter:18399, L1 loss=0.000193, Total loss=0.0001622, Time:29
+Iter:18499, L1 loss=0.0002007, Total loss=0.0001688, Time:27
+Iter:18599, L1 loss=0.0002509, Total loss=0.0001885, Time:28
+Iter:18699, L1 loss=0.0001812, Total loss=0.0001489, Time:31
+Iter:18799, L1 loss=0.0001766, Total loss=0.0001397, Time:31
+Iter:18899, L1 loss=0.0001907, Total loss=0.0001682, Time:27
+Iter:18999, L1 loss=0.0001702, Total loss=0.0001408, Time:31
+Iter:19099, L1 loss=0.0001982, Total loss=0.0001628, Time:31
+Iter:19199, L1 loss=0.0002636, Total loss=0.0001944, Time:30
+Iter:19299, L1 loss=0.0001783, Total loss=0.000148, Time:30
+Iter:19399, L1 loss=0.0001872, Total loss=0.0001552, Time:30
+Iter:19499, L1 loss=0.0002107, Total loss=0.000179, Time:27
+Iter:19599, L1 loss=0.000198, Total loss=0.0001662, Time:28
+Iter:19699, L1 loss=0.0001898, Total loss=0.0001645, Time:30
+Iter:19799, L1 loss=0.0001923, Total loss=0.0001608, Time:31
+Iter:19899, L1 loss=0.0002077, Total loss=0.0001764, Time:30
+Iter:19999, L1 loss=0.0001657, Total loss=0.0001416, Time:30
+Testing Speed: 136.2222216448372 fps
+Testing Time: 0.3670473098754883 s
+
+[ITER 20000] Evaluating test: SSIM = 0.8506614017486572, PSNR = 18.51963394165039
+Testing Speed: 149.42123950552778 fps
+Testing Time: 0.02007746696472168 s
+
+[ITER 20000] Evaluating train: SSIM = 0.9999996622403462, PSNR = 69.42729949951172
+Iter:20000, total_points:199287
+
+[ITER 20000] Saving Gaussians
+Optimizing 
+Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 0, 'end_sample_pseudo': 30000}
+Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 0, 'end_sample_pseudo': 30000}
+Create gaussians1
+Create gaussians1
+GsDict.keys() is dict_keys(['gs0', 'gs1'])
+GsDict.keys() is dict_keys(['gs0', 'gs1'])
+
+Starting training...
+
+Starting training...
+Total iterations: 20000
+Total iterations: 20000
+==================================================
+==================================================
+[Iter 10/20000] Loss: 0.2179127 (Best: 0.2126908 @iter10) [100.00% of initial]
+[Iter 10/20000] Loss: 0.2179127 (Best: 0.2126908 @iter10) [100.00% of initial]
+[Iter 20/20000] Loss: 0.1746702 (Best: 0.1693031 @iter20) ([92m↓19.84%[0m) [69.39% of initial]
+[Iter 20/20000] Loss: 0.1746702 (Best: 0.1693031 @iter20) ([92m↓19.84%[0m) [69.39% of initial]
+[Iter 30/20000] Loss: 0.1374906 (Best: 0.1327880 @iter30) ([92m↓21.29%[0m) [54.62% of initial]
+[Iter 30/20000] Loss: 0.1374906 (Best: 0.1327880 @iter30) ([92m↓21.29%[0m) [54.62% of initial]
+[Iter 40/20000] Loss: 0.1123930 (Best: 0.1098392 @iter40) ([92m↓18.25%[0m) [44.65% of initial]
+[Iter 40/20000] Loss: 0.1123930 (Best: 0.1098392 @iter40) ([92m↓18.25%[0m) [44.65% of initial]
+[Iter 50/20000] Loss: 0.0993453 (Best: 0.0965435 @iter49) ([92m↓11.61%[0m) [39.47% of initial]
+[Iter 50/20000] Loss: 0.0993453 (Best: 0.0965435 @iter49) ([92m↓11.61%[0m) [39.47% of initial]
+[Iter 60/20000] Loss: 0.0936766 (Best: 0.0908527 @iter59) ([92m↓5.71%[0m) [37.22% of initial]
+[Iter 60/20000] Loss: 0.0936766 (Best: 0.0908527 @iter59) ([92m↓5.71%[0m) [37.22% of initial]
+[Iter 70/20000] Loss: 0.0884504 (Best: 0.0869384 @iter70) ([92m↓5.58%[0m) [35.14% of initial]
+[Iter 70/20000] Loss: 0.0884504 (Best: 0.0869384 @iter70) ([92m↓5.58%[0m) [35.14% of initial]
+[Iter 80/20000] Loss: 0.0851861 (Best: 0.0831026 @iter80) ([92m↓3.69%[0m) [33.84% of initial]
+[Iter 80/20000] Loss: 0.0851861 (Best: 0.0831026 @iter80) ([92m↓3.69%[0m) [33.84% of initial]
+[Iter 90/20000] Loss: 0.0824127 (Best: 0.0801649 @iter88) ([92m↓3.26%[0m) [32.74% of initial]
+[Iter 90/20000] Loss: 0.0824127 (Best: 0.0801649 @iter88) ([92m↓3.26%[0m) [32.74% of initial]
+Iter:99, L1 loss=0.05723, Total loss=0.07878, Time:14
+Iter:99, L1 loss=0.05723, Total loss=0.07878, Time:14
+[Iter 100/20000] Loss: 0.0786700 (Best: 0.0766176 @iter97) ([92m↓4.54%[0m) [31.25% of initial]
+[Iter 100/20000] Loss: 0.0786700 (Best: 0.0766176 @iter97) ([92m↓4.54%[0m) [31.25% of initial]
+[Iter 110/20000] Loss: 0.0753264 (Best: 0.0731388 @iter106) ([92m↓4.25%[0m) [29.93% of initial]
+[Iter 110/20000] Loss: 0.0753264 (Best: 0.0731388 @iter106) ([92m↓4.25%[0m) [29.93% of initial]
+[Iter 120/20000] Loss: 0.0714306 (Best: 0.0685537 @iter118) ([92m↓5.17%[0m) [28.38% of initial]
+[Iter 120/20000] Loss: 0.0714306 (Best: 0.0685537 @iter118) ([92m↓5.17%[0m) [28.38% of initial]
+[Iter 130/20000] Loss: 0.0666951 (Best: 0.0641874 @iter130) ([92m↓6.63%[0m) [26.50% of initial]
+[Iter 130/20000] Loss: 0.0666951 (Best: 0.0641874 @iter130) ([92m↓6.63%[0m) [26.50% of initial]
+[Iter 140/20000] Loss: 0.0635276 (Best: 0.0612695 @iter140) ([92m↓4.75%[0m) [25.24% of initial]
+[Iter 140/20000] Loss: 0.0635276 (Best: 0.0612695 @iter140) ([92m↓4.75%[0m) [25.24% of initial]
+[Iter 150/20000] Loss: 0.0612530 (Best: 0.0583437 @iter148) ([92m↓3.58%[0m) [24.34% of initial]
+[Iter 150/20000] Loss: 0.0612530 (Best: 0.0583437 @iter148) ([92m↓3.58%[0m) [24.34% of initial]
+[Iter 160/20000] Loss: 0.0590401 (Best: 0.0559317 @iter157) ([92m↓3.61%[0m) [23.46% of initial]
+[Iter 160/20000] Loss: 0.0590401 (Best: 0.0559317 @iter157) ([92m↓3.61%[0m) [23.46% of initial]
+[Iter 170/20000] Loss: 0.0563388 (Best: 0.0534640 @iter167) ([92m↓4.58%[0m) [22.38% of initial]
+[Iter 170/20000] Loss: 0.0563388 (Best: 0.0534640 @iter167) ([92m↓4.58%[0m) [22.38% of initial]
+[Iter 180/20000] Loss: 0.0523150 (Best: 0.0500024 @iter179) ([92m↓7.14%[0m) [20.78% of initial]
+[Iter 180/20000] Loss: 0.0523150 (Best: 0.0500024 @iter179) ([92m↓7.14%[0m) [20.78% of initial]
+[Iter 190/20000] Loss: 0.0495360 (Best: 0.0478174 @iter188) ([92m↓5.31%[0m) [19.68% of initial]
+[Iter 190/20000] Loss: 0.0495360 (Best: 0.0478174 @iter188) ([92m↓5.31%[0m) [19.68% of initial]
+Iter:199, L1 loss=0.0344, Total loss=0.04975, Time:15
+Iter:199, L1 loss=0.0344, Total loss=0.04975, Time:15
+[Iter 200/20000] Loss: 0.0477899 (Best: 0.0456806 @iter198) ([92m↓3.52%[0m) [18.99% of initial]
+[Iter 200/20000] Loss: 0.0477899 (Best: 0.0456806 @iter198) ([92m↓3.52%[0m) [18.99% of initial]
+[Iter 210/20000] Loss: 0.0451126 (Best: 0.0429467 @iter209) ([92m↓5.60%[0m) [17.92% of initial]
+[Iter 210/20000] Loss: 0.0451126 (Best: 0.0429467 @iter209) ([92m↓5.60%[0m) [17.92% of initial]
+[Iter 220/20000] Loss: 0.0440793 (Best: 0.0411946 @iter219) ([92m↓2.29%[0m) [17.51% of initial]
+[Iter 220/20000] Loss: 0.0440793 (Best: 0.0411946 @iter219) ([92m↓2.29%[0m) [17.51% of initial]
+[Iter 230/20000] Loss: 0.0423805 (Best: 0.0399105 @iter227) ([92m↓3.85%[0m) [16.84% of initial]
+[Iter 230/20000] Loss: 0.0423805 (Best: 0.0399105 @iter227) ([92m↓3.85%[0m) [16.84% of initial]
+[Iter 240/20000] Loss: 0.0402768 (Best: 0.0377957 @iter238) ([92m↓4.96%[0m) [16.00% of initial]
+[Iter 240/20000] Loss: 0.0402768 (Best: 0.0377957 @iter238) ([92m↓4.96%[0m) [16.00% of initial]
+[Iter 250/20000] Loss: 0.0379678 (Best: 0.0362037 @iter248) ([92m↓5.73%[0m) [15.08% of initial]
+[Iter 250/20000] Loss: 0.0379678 (Best: 0.0362037 @iter248) ([92m↓5.73%[0m) [15.08% of initial]
+[Iter 260/20000] Loss: 0.0358894 (Best: 0.0343046 @iter260) ([92m↓5.47%[0m) [14.26% of initial]
+[Iter 260/20000] Loss: 0.0358894 (Best: 0.0343046 @iter260) ([92m↓5.47%[0m) [14.26% of initial]
+[Iter 270/20000] Loss: 0.0350643 (Best: 0.0329351 @iter269) ([92m↓2.30%[0m) [13.93% of initial]
+[Iter 270/20000] Loss: 0.0350643 (Best: 0.0329351 @iter269) ([92m↓2.30%[0m) [13.93% of initial]
+[Iter 280/20000] Loss: 0.0346071 (Best: 0.0318444 @iter277) ([92m↓1.30%[0m) [13.75% of initial]
+[Iter 280/20000] Loss: 0.0346071 (Best: 0.0318444 @iter277) ([92m↓1.30%[0m) [13.75% of initial]
+[Iter 290/20000] Loss: 0.0330132 (Best: 0.0304691 @iter287) ([92m↓4.61%[0m) [13.12% of initial]
+[Iter 290/20000] Loss: 0.0330132 (Best: 0.0304691 @iter287) ([92m↓4.61%[0m) [13.12% of initial]
+Iter:299, L1 loss=0.02227, Total loss=0.03323, Time:14
+Iter:299, L1 loss=0.02227, Total loss=0.03323, Time:14
+[Iter 300/20000] Loss: 0.0307210 (Best: 0.0289390 @iter300) ([92m↓6.94%[0m) [12.21% of initial]
+[Iter 300/20000] Loss: 0.0307210 (Best: 0.0289390 @iter300) ([92m↓6.94%[0m) [12.21% of initial]
+[Iter 310/20000] Loss: 0.0291664 (Best: 0.0271414 @iter310) ([92m↓5.06%[0m) [11.59% of initial]
+[Iter 310/20000] Loss: 0.0291664 (Best: 0.0271414 @iter310) ([92m↓5.06%[0m) [11.59% of initial]
+[Iter 320/20000] Loss: 0.0278591 (Best: 0.0263752 @iter320) ([92m↓4.48%[0m) [11.07% of initial]
+[Iter 320/20000] Loss: 0.0278591 (Best: 0.0263752 @iter320) ([92m↓4.48%[0m) [11.07% of initial]
+[Iter 330/20000] Loss: 0.0274840 (Best: 0.0255639 @iter330) ([92m↓1.35%[0m) [10.92% of initial]
+[Iter 330/20000] Loss: 0.0274840 (Best: 0.0255639 @iter330) ([92m↓1.35%[0m) [10.92% of initial]
+[Iter 340/20000] Loss: 0.0251910 (Best: 0.0240706 @iter340) ([92m↓8.34%[0m) [10.01% of initial]
+[Iter 340/20000] Loss: 0.0251910 (Best: 0.0240706 @iter340) ([92m↓8.34%[0m) [10.01% of initial]
+[Iter 350/20000] Loss: 0.0257059 (Best: 0.0233537 @iter349) ([91m↑2.04%[0m) [10.21% of initial]
+[Iter 350/20000] Loss: 0.0257059 (Best: 0.0233537 @iter349) ([91m↑2.04%[0m) [10.21% of initial]
+[Iter 360/20000] Loss: 0.0243030 (Best: 0.0223619 @iter358) ([92m↓5.46%[0m) [9.66% of initial]
+[Iter 360/20000] Loss: 0.0243030 (Best: 0.0223619 @iter358) ([92m↓5.46%[0m) [9.66% of initial]
+[Iter 370/20000] Loss: 0.0238550 (Best: 0.0216121 @iter368) ([92m↓1.84%[0m) [9.48% of initial]
+[Iter 370/20000] Loss: 0.0238550 (Best: 0.0216121 @iter368) ([92m↓1.84%[0m) [9.48% of initial]
+[Iter 380/20000] Loss: 0.0217723 (Best: 0.0206253 @iter379) ([92m↓8.73%[0m) [8.65% of initial]
+[Iter 380/20000] Loss: 0.0217723 (Best: 0.0206253 @iter379) ([92m↓8.73%[0m) [8.65% of initial]
+[Iter 390/20000] Loss: 0.0212732 (Best: 0.0198484 @iter385) ([92m↓2.29%[0m) [8.45% of initial]
+[Iter 390/20000] Loss: 0.0212732 (Best: 0.0198484 @iter385) ([92m↓2.29%[0m) [8.45% of initial]
+Iter:399, L1 loss=0.01368, Total loss=0.02116, Time:15
+Iter:399, L1 loss=0.01368, Total loss=0.02116, Time:15
+[Iter 400/20000] Loss: 0.0203142 (Best: 0.0188691 @iter400) ([92m↓4.51%[0m) [8.07% of initial]
+[Iter 400/20000] Loss: 0.0203142 (Best: 0.0188691 @iter400) ([92m↓4.51%[0m) [8.07% of initial]
+[Iter 410/20000] Loss: 0.0192205 (Best: 0.0182095 @iter410) ([92m↓5.38%[0m) [7.64% of initial]
+[Iter 410/20000] Loss: 0.0192205 (Best: 0.0182095 @iter410) ([92m↓5.38%[0m) [7.64% of initial]
+[Iter 420/20000] Loss: 0.0200487 (Best: 0.0179178 @iter413) ([91m↑4.31%[0m) [7.97% of initial]
+[Iter 420/20000] Loss: 0.0200487 (Best: 0.0179178 @iter413) ([91m↑4.31%[0m) [7.97% of initial]
+[Iter 430/20000] Loss: 0.0178783 (Best: 0.0169955 @iter430) ([92m↓10.83%[0m) [7.10% of initial]
+[Iter 430/20000] Loss: 0.0178783 (Best: 0.0169955 @iter430) ([92m↓10.83%[0m) [7.10% of initial]
+[Iter 440/20000] Loss: 0.0181216 (Best: 0.0163775 @iter438) ([91m↑1.36%[0m) [7.20% of initial]
+[Iter 440/20000] Loss: 0.0181216 (Best: 0.0163775 @iter438) ([91m↑1.36%[0m) [7.20% of initial]
+[Iter 450/20000] Loss: 0.0171034 (Best: 0.0152643 @iter449) ([92m↓5.62%[0m) [6.80% of initial]
+[Iter 450/20000] Loss: 0.0171034 (Best: 0.0152643 @iter449) ([92m↓5.62%[0m) [6.80% of initial]
+[Iter 460/20000] Loss: 0.0163657 (Best: 0.0146089 @iter458) ([92m↓4.31%[0m) [6.50% of initial]
+[Iter 460/20000] Loss: 0.0163657 (Best: 0.0146089 @iter458) ([92m↓4.31%[0m) [6.50% of initial]
+[Iter 470/20000] Loss: 0.0149304 (Best: 0.0138979 @iter470) ([92m↓8.77%[0m) [5.93% of initial]
+[Iter 470/20000] Loss: 0.0149304 (Best: 0.0138979 @iter470) ([92m↓8.77%[0m) [5.93% of initial]
+[Iter 480/20000] Loss: 0.0155361 (Best: 0.0134709 @iter475) ([91m↑4.06%[0m) [6.17% of initial]
+[Iter 480/20000] Loss: 0.0155361 (Best: 0.0134709 @iter475) ([91m↑4.06%[0m) [6.17% of initial]
+[Iter 490/20000] Loss: 0.0138112 (Best: 0.0125381 @iter490) ([92m↓11.10%[0m) [5.49% of initial]
+[Iter 490/20000] Loss: 0.0138112 (Best: 0.0125381 @iter490) ([92m↓11.10%[0m) [5.49% of initial]
+Iter:499, L1 loss=0.008315, Total loss=0.01456, Time:13
+Iter:499, L1 loss=0.008315, Total loss=0.01456, Time:13
+[Iter 500/20000] Loss: 0.0138060 (Best: 0.0124244 @iter493) ([92m↓0.04%[0m) [5.48% of initial]
+[Iter 500/20000] Loss: 0.0138060 (Best: 0.0124244 @iter493) ([92m↓0.04%[0m) [5.48% of initial]
+[Iter 510/20000] Loss: 0.0134649 (Best: 0.0120804 @iter507) ([92m↓2.47%[0m) [5.35% of initial]
+[Iter 510/20000] Loss: 0.0134649 (Best: 0.0120804 @iter507) ([92m↓2.47%[0m) [5.35% of initial]
+[Iter 520/20000] Loss: 0.0128722 (Best: 0.0115923 @iter514) ([92m↓4.40%[0m) [5.11% of initial]
+[Iter 520/20000] Loss: 0.0128722 (Best: 0.0115923 @iter514) ([92m↓4.40%[0m) [5.11% of initial]
+[Iter 530/20000] Loss: 0.0129946 (Best: 0.0115923 @iter514) ([91m↑0.95%[0m) [5.16% of initial]
+[Iter 530/20000] Loss: 0.0129946 (Best: 0.0115923 @iter514) ([91m↑0.95%[0m) [5.16% of initial]
+[Iter 540/20000] Loss: 0.0126180 (Best: 0.0112063 @iter538) ([92m↓2.90%[0m) [5.01% of initial]
+[Iter 540/20000] Loss: 0.0126180 (Best: 0.0112063 @iter538) ([92m↓2.90%[0m) [5.01% of initial]
+[Iter 550/20000] Loss: 0.0120649 (Best: 0.0108897 @iter548) ([92m↓4.38%[0m) [4.79% of initial]
+[Iter 550/20000] Loss: 0.0120649 (Best: 0.0108897 @iter548) ([92m↓4.38%[0m) [4.79% of initial]
+[Iter 560/20000] Loss: 0.0127218 (Best: 0.0108897 @iter548) ([91m↑5.44%[0m) [5.05% of initial]
+[Iter 560/20000] Loss: 0.0127218 (Best: 0.0108897 @iter548) ([91m↑5.44%[0m) [5.05% of initial]
+[Iter 570/20000] Loss: 0.0119315 (Best: 0.0105568 @iter569) ([92m↓6.21%[0m) [4.74% of initial]
+[Iter 570/20000] Loss: 0.0119315 (Best: 0.0105568 @iter569) ([92m↓6.21%[0m) [4.74% of initial]
+[Iter 580/20000] Loss: 0.0117174 (Best: 0.0103750 @iter572) ([92m↓1.79%[0m) [4.66% of initial]
+[Iter 580/20000] Loss: 0.0117174 (Best: 0.0103750 @iter572) ([92m↓1.79%[0m) [4.66% of initial]
+[Iter 590/20000] Loss: 0.0116257 (Best: 0.0103601 @iter583) ([92m↓0.78%[0m) [4.62% of initial]
+[Iter 590/20000] Loss: 0.0116257 (Best: 0.0103601 @iter583) ([92m↓0.78%[0m) [4.62% of initial]
+Iter:599, L1 loss=0.006954, Total loss=0.01233, Time:11
+Iter:599, L1 loss=0.006954, Total loss=0.01233, Time:11
+[Iter 600/20000] Loss: 0.0113687 (Best: 0.0101016 @iter598) ([92m↓2.21%[0m) [4.52% of initial]
+[Iter 600/20000] Loss: 0.0113687 (Best: 0.0101016 @iter598) ([92m↓2.21%[0m) [4.52% of initial]
+[Iter 610/20000] Loss: 0.0218150 (Best: 0.0101016 @iter598) ([91m↑91.89%[0m) [8.67% of initial]
+[Iter 610/20000] Loss: 0.0218150 (Best: 0.0101016 @iter598) ([91m↑91.89%[0m) [8.67% of initial]
+[Iter 620/20000] Loss: 0.0147221 (Best: 0.0101016 @iter598) ([92m↓32.51%[0m) [5.85% of initial]
+[Iter 620/20000] Loss: 0.0147221 (Best: 0.0101016 @iter598) ([92m↓32.51%[0m) [5.85% of initial]
+[Iter 630/20000] Loss: 0.0124683 (Best: 0.0101016 @iter598) ([92m↓15.31%[0m) [4.95% of initial]
+[Iter 630/20000] Loss: 0.0124683 (Best: 0.0101016 @iter598) ([92m↓15.31%[0m) [4.95% of initial]
+[Iter 640/20000] Loss: 0.0106826 (Best: 0.0097433 @iter640) ([92m↓14.32%[0m) [4.24% of initial]
+[Iter 640/20000] Loss: 0.0106826 (Best: 0.0097433 @iter640) ([92m↓14.32%[0m) [4.24% of initial]
+[Iter 650/20000] Loss: 0.0108664 (Best: 0.0094847 @iter646) ([91m↑1.72%[0m) [4.32% of initial]
+[Iter 650/20000] Loss: 0.0108664 (Best: 0.0094847 @iter646) ([91m↑1.72%[0m) [4.32% of initial]
+[Iter 660/20000] Loss: 0.0104396 (Best: 0.0090039 @iter655) ([92m↓3.93%[0m) [4.15% of initial]
+[Iter 660/20000] Loss: 0.0104396 (Best: 0.0090039 @iter655) ([92m↓3.93%[0m) [4.15% of initial]
+[Iter 670/20000] Loss: 0.0096440 (Best: 0.0086746 @iter667) ([92m↓7.62%[0m) [3.83% of initial]
+[Iter 670/20000] Loss: 0.0096440 (Best: 0.0086746 @iter667) ([92m↓7.62%[0m) [3.83% of initial]
+[Iter 680/20000] Loss: 0.0092896 (Best: 0.0085333 @iter680) ([92m↓3.67%[0m) [3.69% of initial]
+[Iter 680/20000] Loss: 0.0092896 (Best: 0.0085333 @iter680) ([92m↓3.67%[0m) [3.69% of initial]
+[Iter 690/20000] Loss: 0.0093479 (Best: 0.0080952 @iter682) ([91m↑0.63%[0m) [3.71% of initial]
+[Iter 690/20000] Loss: 0.0093479 (Best: 0.0080952 @iter682) ([91m↑0.63%[0m) [3.71% of initial]
+Iter:699, L1 loss=0.005645, Total loss=0.009931, Time:13
+Iter:699, L1 loss=0.005645, Total loss=0.009931, Time:13
+[Iter 700/20000] Loss: 0.0090446 (Best: 0.0080371 @iter695) ([92m↓3.25%[0m) [3.59% of initial]
+[Iter 700/20000] Loss: 0.0090446 (Best: 0.0080371 @iter695) ([92m↓3.25%[0m) [3.59% of initial]
+[Iter 710/20000] Loss: 0.0084209 (Best: 0.0078206 @iter710) ([92m↓6.90%[0m) [3.35% of initial]
+[Iter 710/20000] Loss: 0.0084209 (Best: 0.0078206 @iter710) ([92m↓6.90%[0m) [3.35% of initial]
+[Iter 720/20000] Loss: 0.0084288 (Best: 0.0076561 @iter715) ([91m↑0.09%[0m) [3.35% of initial]
+[Iter 720/20000] Loss: 0.0084288 (Best: 0.0076561 @iter715) ([91m↑0.09%[0m) [3.35% of initial]
+[Iter 730/20000] Loss: 0.0085844 (Best: 0.0072767 @iter727) ([91m↑1.85%[0m) [3.41% of initial]
+[Iter 730/20000] Loss: 0.0085844 (Best: 0.0072767 @iter727) ([91m↑1.85%[0m) [3.41% of initial]
+[Iter 740/20000] Loss: 0.0086158 (Best: 0.0072767 @iter727) ([91m↑0.37%[0m) [3.42% of initial]
+[Iter 740/20000] Loss: 0.0086158 (Best: 0.0072767 @iter727) ([91m↑0.37%[0m) [3.42% of initial]
+[Iter 750/20000] Loss: 0.0082090 (Best: 0.0070241 @iter748) ([92m↓4.72%[0m) [3.26% of initial]
+[Iter 750/20000] Loss: 0.0082090 (Best: 0.0070241 @iter748) ([92m↓4.72%[0m) [3.26% of initial]
+[Iter 760/20000] Loss: 0.0074935 (Best: 0.0070044 @iter754) ([92m↓8.72%[0m) [2.98% of initial]
+[Iter 760/20000] Loss: 0.0074935 (Best: 0.0070044 @iter754) ([92m↓8.72%[0m) [2.98% of initial]
+[Iter 770/20000] Loss: 0.0076322 (Best: 0.0069560 @iter764) ([91m↑1.85%[0m) [3.03% of initial]
+[Iter 770/20000] Loss: 0.0076322 (Best: 0.0069560 @iter764) ([91m↑1.85%[0m) [3.03% of initial]
+[Iter 780/20000] Loss: 0.0078663 (Best: 0.0067595 @iter778) ([91m↑3.07%[0m) [3.13% of initial]
+[Iter 780/20000] Loss: 0.0078663 (Best: 0.0067595 @iter778) ([91m↑3.07%[0m) [3.13% of initial]
+[Iter 790/20000] Loss: 0.0075725 (Best: 0.0066825 @iter787) ([92m↓3.74%[0m) [3.01% of initial]
+[Iter 790/20000] Loss: 0.0075725 (Best: 0.0066825 @iter787) ([92m↓3.74%[0m) [3.01% of initial]
+Iter:799, L1 loss=0.005003, Total loss=0.008577, Time:13
+Iter:799, L1 loss=0.005003, Total loss=0.008577, Time:13
+[Iter 800/20000] Loss: 0.0077045 (Best: 0.0066825 @iter787) ([91m↑1.74%[0m) [3.06% of initial]
+[Iter 800/20000] Loss: 0.0077045 (Best: 0.0066825 @iter787) ([91m↑1.74%[0m) [3.06% of initial]
+[Iter 810/20000] Loss: 0.0157766 (Best: 0.0066825 @iter787) ([91m↑104.77%[0m) [6.27% of initial]
+[Iter 810/20000] Loss: 0.0157766 (Best: 0.0066825 @iter787) ([91m↑104.77%[0m) [6.27% of initial]
+[Iter 820/20000] Loss: 0.0106748 (Best: 0.0066825 @iter787) ([92m↓32.34%[0m) [4.24% of initial]
+[Iter 820/20000] Loss: 0.0106748 (Best: 0.0066825 @iter787) ([92m↓32.34%[0m) [4.24% of initial]
+[Iter 830/20000] Loss: 0.0089570 (Best: 0.0066825 @iter787) ([92m↓16.09%[0m) [3.56% of initial]
+[Iter 830/20000] Loss: 0.0089570 (Best: 0.0066825 @iter787) ([92m↓16.09%[0m) [3.56% of initial]
+[Iter 840/20000] Loss: 0.0080939 (Best: 0.0066825 @iter787) ([92m↓9.64%[0m) [3.22% of initial]
+[Iter 840/20000] Loss: 0.0080939 (Best: 0.0066825 @iter787) ([92m↓9.64%[0m) [3.22% of initial]
+[Iter 850/20000] Loss: 0.0075539 (Best: 0.0066441 @iter847) ([92m↓6.67%[0m) [3.00% of initial]
+[Iter 850/20000] Loss: 0.0075539 (Best: 0.0066441 @iter847) ([92m↓6.67%[0m) [3.00% of initial]
+[Iter 860/20000] Loss: 0.0070855 (Best: 0.0061816 @iter856) ([92m↓6.20%[0m) [2.81% of initial]
+[Iter 860/20000] Loss: 0.0070855 (Best: 0.0061816 @iter856) ([92m↓6.20%[0m) [2.81% of initial]
+[Iter 870/20000] Loss: 0.0067098 (Best: 0.0060721 @iter862) ([92m↓5.30%[0m) [2.67% of initial]
+[Iter 870/20000] Loss: 0.0067098 (Best: 0.0060721 @iter862) ([92m↓5.30%[0m) [2.67% of initial]
+[Iter 880/20000] Loss: 0.0067138 (Best: 0.0060175 @iter872) ([91m↑0.06%[0m) [2.67% of initial]
+[Iter 880/20000] Loss: 0.0067138 (Best: 0.0060175 @iter872) ([91m↑0.06%[0m) [2.67% of initial]
+[Iter 890/20000] Loss: 0.0063600 (Best: 0.0057006 @iter887) ([92m↓5.27%[0m) [2.53% of initial]
+[Iter 890/20000] Loss: 0.0063600 (Best: 0.0057006 @iter887) ([92m↓5.27%[0m) [2.53% of initial]
+Iter:899, L1 loss=0.003705, Total loss=0.005563, Time:14
+Iter:899, L1 loss=0.003705, Total loss=0.005563, Time:14
+[Iter 900/20000] Loss: 0.0064237 (Best: 0.0055635 @iter899) ([91m↑1.00%[0m) [2.55% of initial]
+[Iter 900/20000] Loss: 0.0064237 (Best: 0.0055635 @iter899) ([91m↑1.00%[0m) [2.55% of initial]
+[Iter 910/20000] Loss: 0.0065461 (Best: 0.0054166 @iter907) ([91m↑1.91%[0m) [2.60% of initial]
+[Iter 910/20000] Loss: 0.0065461 (Best: 0.0054166 @iter907) ([91m↑1.91%[0m) [2.60% of initial]
+[Iter 920/20000] Loss: 0.0058887 (Best: 0.0052917 @iter916) ([92m↓10.04%[0m) [2.34% of initial]
+[Iter 920/20000] Loss: 0.0058887 (Best: 0.0052917 @iter916) ([92m↓10.04%[0m) [2.34% of initial]
+[Iter 930/20000] Loss: 0.0061841 (Best: 0.0052397 @iter928) ([91m↑5.02%[0m) [2.46% of initial]
+[Iter 930/20000] Loss: 0.0061841 (Best: 0.0052397 @iter928) ([91m↑5.02%[0m) [2.46% of initial]
+[Iter 940/20000] Loss: 0.0062588 (Best: 0.0050953 @iter938) ([91m↑1.21%[0m) [2.49% of initial]
+[Iter 940/20000] Loss: 0.0062588 (Best: 0.0050953 @iter938) ([91m↑1.21%[0m) [2.49% of initial]
+[Iter 950/20000] Loss: 0.0057767 (Best: 0.0050953 @iter938) ([92m↓7.70%[0m) [2.30% of initial]
+[Iter 950/20000] Loss: 0.0057767 (Best: 0.0050953 @iter938) ([92m↓7.70%[0m) [2.30% of initial]
+[Iter 960/20000] Loss: 0.0059417 (Best: 0.0050953 @iter938) ([91m↑2.86%[0m) [2.36% of initial]
+[Iter 960/20000] Loss: 0.0059417 (Best: 0.0050953 @iter938) ([91m↑2.86%[0m) [2.36% of initial]
+[Iter 970/20000] Loss: 0.0058643 (Best: 0.0049995 @iter964) ([92m↓1.30%[0m) [2.33% of initial]
+[Iter 970/20000] Loss: 0.0058643 (Best: 0.0049995 @iter964) ([92m↓1.30%[0m) [2.33% of initial]
+[Iter 980/20000] Loss: 0.0059217 (Best: 0.0049995 @iter964) ([91m↑0.98%[0m) [2.35% of initial]
+[Iter 980/20000] Loss: 0.0059217 (Best: 0.0049995 @iter964) ([91m↑0.98%[0m) [2.35% of initial]
+[Iter 990/20000] Loss: 0.0059092 (Best: 0.0049785 @iter988) ([92m↓0.21%[0m) [2.35% of initial]
+[Iter 990/20000] Loss: 0.0059092 (Best: 0.0049785 @iter988) ([92m↓0.21%[0m) [2.35% of initial]
+Iter:999, L1 loss=0.004417, Total loss=0.006591, Time:13
+Iter:999, L1 loss=0.004417, Total loss=0.006591, Time:13
+[Iter 1000/20000] Loss: 0.0061891 (Best: 0.0049785 @iter988) ([91m↑4.74%[0m) [2.46% of initial]
+[Iter 1000/20000] Loss: 0.0061891 (Best: 0.0049785 @iter988) ([91m↑4.74%[0m) [2.46% of initial]
+[Iter 1010/20000] Loss: 0.0119219 (Best: 0.0049785 @iter988) ([91m↑92.63%[0m) [4.74% of initial]
+[Iter 1010/20000] Loss: 0.0119219 (Best: 0.0049785 @iter988) ([91m↑92.63%[0m) [4.74% of initial]
+[Iter 1020/20000] Loss: 0.0084147 (Best: 0.0049785 @iter988) ([92m↓29.42%[0m) [3.34% of initial]
+[Iter 1020/20000] Loss: 0.0084147 (Best: 0.0049785 @iter988) ([92m↓29.42%[0m) [3.34% of initial]
+[Iter 1030/20000] Loss: 0.0067732 (Best: 0.0049785 @iter988) ([92m↓19.51%[0m) [2.69% of initial]
+[Iter 1030/20000] Loss: 0.0067732 (Best: 0.0049785 @iter988) ([92m↓19.51%[0m) [2.69% of initial]
+[Iter 1040/20000] Loss: 0.0059919 (Best: 0.0049785 @iter988) ([92m↓11.53%[0m) [2.38% of initial]
+[Iter 1040/20000] Loss: 0.0059919 (Best: 0.0049785 @iter988) ([92m↓11.53%[0m) [2.38% of initial]
+[Iter 1050/20000] Loss: 0.0058304 (Best: 0.0049785 @iter988) ([92m↓2.70%[0m) [2.32% of initial]
+[Iter 1050/20000] Loss: 0.0058304 (Best: 0.0049785 @iter988) ([92m↓2.70%[0m) [2.32% of initial]
+[Iter 1060/20000] Loss: 0.0057052 (Best: 0.0048423 @iter1051) ([92m↓2.15%[0m) [2.27% of initial]
+[Iter 1060/20000] Loss: 0.0057052 (Best: 0.0048423 @iter1051) ([92m↓2.15%[0m) [2.27% of initial]
+[Iter 1070/20000] Loss: 0.0054270 (Best: 0.0044673 @iter1066) ([92m↓4.88%[0m) [2.16% of initial]
+[Iter 1070/20000] Loss: 0.0054270 (Best: 0.0044673 @iter1066) ([92m↓4.88%[0m) [2.16% of initial]
+[Iter 1080/20000] Loss: 0.0052490 (Best: 0.0044624 @iter1075) ([92m↓3.28%[0m) [2.09% of initial]
+[Iter 1080/20000] Loss: 0.0052490 (Best: 0.0044624 @iter1075) ([92m↓3.28%[0m) [2.09% of initial]
+[Iter 1090/20000] Loss: 0.0050781 (Best: 0.0044526 @iter1082) ([92m↓3.26%[0m) [2.02% of initial]
+[Iter 1090/20000] Loss: 0.0050781 (Best: 0.0044526 @iter1082) ([92m↓3.26%[0m) [2.02% of initial]
+Iter:1099, L1 loss=0.003366, Total loss=0.005153, Time:13
+Iter:1099, L1 loss=0.003366, Total loss=0.005153, Time:13
+[Iter 1100/20000] Loss: 0.0050017 (Best: 0.0042022 @iter1093) ([92m↓1.51%[0m) [1.99% of initial]
+[Iter 1100/20000] Loss: 0.0050017 (Best: 0.0042022 @iter1093) ([92m↓1.51%[0m) [1.99% of initial]
+[Iter 1110/20000] Loss: 0.0050290 (Best: 0.0042022 @iter1093) ([91m↑0.55%[0m) [2.00% of initial]
+[Iter 1110/20000] Loss: 0.0050290 (Best: 0.0042022 @iter1093) ([91m↑0.55%[0m) [2.00% of initial]
+[Iter 1120/20000] Loss: 0.0049670 (Best: 0.0041100 @iter1117) ([92m↓1.23%[0m) [1.97% of initial]
+[Iter 1120/20000] Loss: 0.0049670 (Best: 0.0041100 @iter1117) ([92m↓1.23%[0m) [1.97% of initial]
+[Iter 1130/20000] Loss: 0.0052191 (Best: 0.0041100 @iter1117) ([91m↑5.07%[0m) [2.07% of initial]
+[Iter 1130/20000] Loss: 0.0052191 (Best: 0.0041100 @iter1117) ([91m↑5.07%[0m) [2.07% of initial]
+[Iter 1140/20000] Loss: 0.0048011 (Best: 0.0040585 @iter1135) ([92m↓8.01%[0m) [1.91% of initial]
+[Iter 1140/20000] Loss: 0.0048011 (Best: 0.0040585 @iter1135) ([92m↓8.01%[0m) [1.91% of initial]
+[Iter 1150/20000] Loss: 0.0044463 (Best: 0.0039652 @iter1145) ([92m↓7.39%[0m) [1.77% of initial]
+[Iter 1150/20000] Loss: 0.0044463 (Best: 0.0039652 @iter1145) ([92m↓7.39%[0m) [1.77% of initial]
+[Iter 1160/20000] Loss: 0.0049878 (Best: 0.0039652 @iter1145) ([91m↑12.18%[0m) [1.98% of initial]
+[Iter 1160/20000] Loss: 0.0049878 (Best: 0.0039652 @iter1145) ([91m↑12.18%[0m) [1.98% of initial]
+[Iter 1170/20000] Loss: 0.0046104 (Best: 0.0039652 @iter1145) ([92m↓7.57%[0m) [1.83% of initial]
+[Iter 1170/20000] Loss: 0.0046104 (Best: 0.0039652 @iter1145) ([92m↓7.57%[0m) [1.83% of initial]
+[Iter 1180/20000] Loss: 0.0042875 (Best: 0.0039009 @iter1180) ([92m↓7.01%[0m) [1.70% of initial]
+[Iter 1180/20000] Loss: 0.0042875 (Best: 0.0039009 @iter1180) ([92m↓7.01%[0m) [1.70% of initial]
+[Iter 1190/20000] Loss: 0.0045635 (Best: 0.0038843 @iter1186) ([91m↑6.44%[0m) [1.81% of initial]
+[Iter 1190/20000] Loss: 0.0045635 (Best: 0.0038843 @iter1186) ([91m↑6.44%[0m) [1.81% of initial]
+Iter:1199, L1 loss=0.003426, Total loss=0.004866, Time:10
+Iter:1199, L1 loss=0.003426, Total loss=0.004866, Time:10
+[Iter 1200/20000] Loss: 0.0045477 (Best: 0.0037491 @iter1195) ([92m↓0.35%[0m) [1.81% of initial]
+[Iter 1200/20000] Loss: 0.0045477 (Best: 0.0037491 @iter1195) ([92m↓0.35%[0m) [1.81% of initial]
+[Iter 1210/20000] Loss: 0.0109541 (Best: 0.0037491 @iter1195) ([91m↑140.87%[0m) [4.35% of initial]
+[Iter 1210/20000] Loss: 0.0109541 (Best: 0.0037491 @iter1195) ([91m↑140.87%[0m) [4.35% of initial]
+[Iter 1220/20000] Loss: 0.0070703 (Best: 0.0037491 @iter1195) ([92m↓35.46%[0m) [2.81% of initial]
+[Iter 1220/20000] Loss: 0.0070703 (Best: 0.0037491 @iter1195) ([92m↓35.46%[0m) [2.81% of initial]
+[Iter 1230/20000] Loss: 0.0059922 (Best: 0.0037491 @iter1195) ([92m↓15.25%[0m) [2.38% of initial]
+[Iter 1230/20000] Loss: 0.0059922 (Best: 0.0037491 @iter1195) ([92m↓15.25%[0m) [2.38% of initial]
+[Iter 1240/20000] Loss: 0.0054752 (Best: 0.0037491 @iter1195) ([92m↓8.63%[0m) [2.18% of initial]
+[Iter 1240/20000] Loss: 0.0054752 (Best: 0.0037491 @iter1195) ([92m↓8.63%[0m) [2.18% of initial]
+[Iter 1250/20000] Loss: 0.0048716 (Best: 0.0037491 @iter1195) ([92m↓11.02%[0m) [1.94% of initial]
+[Iter 1250/20000] Loss: 0.0048716 (Best: 0.0037491 @iter1195) ([92m↓11.02%[0m) [1.94% of initial]
+[Iter 1260/20000] Loss: 0.0045982 (Best: 0.0037491 @iter1195) ([92m↓5.61%[0m) [1.83% of initial]
+[Iter 1260/20000] Loss: 0.0045982 (Best: 0.0037491 @iter1195) ([92m↓5.61%[0m) [1.83% of initial]
+[Iter 1270/20000] Loss: 0.0041154 (Best: 0.0037491 @iter1195) ([92m↓10.50%[0m) [1.64% of initial]
+[Iter 1270/20000] Loss: 0.0041154 (Best: 0.0037491 @iter1195) ([92m↓10.50%[0m) [1.64% of initial]
+[Iter 1280/20000] Loss: 0.0043320 (Best: 0.0034406 @iter1273) ([91m↑5.26%[0m) [1.72% of initial]
+[Iter 1280/20000] Loss: 0.0043320 (Best: 0.0034406 @iter1273) ([91m↑5.26%[0m) [1.72% of initial]
+[Iter 1290/20000] Loss: 0.0043017 (Best: 0.0034406 @iter1273) ([92m↓0.70%[0m) [1.71% of initial]
+[Iter 1290/20000] Loss: 0.0043017 (Best: 0.0034406 @iter1273) ([92m↓0.70%[0m) [1.71% of initial]
+Iter:1299, L1 loss=0.002798, Total loss=0.00382, Time:13
+Iter:1299, L1 loss=0.002798, Total loss=0.00382, Time:13
+[Iter 1300/20000] Loss: 0.0040387 (Best: 0.0034406 @iter1273) ([92m↓6.11%[0m) [1.60% of initial]
+[Iter 1300/20000] Loss: 0.0040387 (Best: 0.0034406 @iter1273) ([92m↓6.11%[0m) [1.60% of initial]
+[Iter 1310/20000] Loss: 0.0040355 (Best: 0.0034337 @iter1301) ([92m↓0.08%[0m) [1.60% of initial]
+[Iter 1310/20000] Loss: 0.0040355 (Best: 0.0034337 @iter1301) ([92m↓0.08%[0m) [1.60% of initial]
+[Iter 1320/20000] Loss: 0.0039112 (Best: 0.0031813 @iter1319) ([92m↓3.08%[0m) [1.55% of initial]
+[Iter 1320/20000] Loss: 0.0039112 (Best: 0.0031813 @iter1319) ([92m↓3.08%[0m) [1.55% of initial]
+[Iter 1330/20000] Loss: 0.0039328 (Best: 0.0031390 @iter1321) ([91m↑0.55%[0m) [1.56% of initial]
+[Iter 1330/20000] Loss: 0.0039328 (Best: 0.0031390 @iter1321) ([91m↑0.55%[0m) [1.56% of initial]
+[Iter 1340/20000] Loss: 0.0037215 (Best: 0.0031390 @iter1321) ([92m↓5.37%[0m) [1.48% of initial]
+[Iter 1340/20000] Loss: 0.0037215 (Best: 0.0031390 @iter1321) ([92m↓5.37%[0m) [1.48% of initial]
+[Iter 1350/20000] Loss: 0.0037146 (Best: 0.0031390 @iter1321) ([92m↓0.19%[0m) [1.48% of initial]
+[Iter 1350/20000] Loss: 0.0037146 (Best: 0.0031390 @iter1321) ([92m↓0.19%[0m) [1.48% of initial]
+[Iter 1360/20000] Loss: 0.0038512 (Best: 0.0031390 @iter1321) ([91m↑3.68%[0m) [1.53% of initial]
+[Iter 1360/20000] Loss: 0.0038512 (Best: 0.0031390 @iter1321) ([91m↑3.68%[0m) [1.53% of initial]
+[Iter 1370/20000] Loss: 0.0036475 (Best: 0.0031390 @iter1321) ([92m↓5.29%[0m) [1.45% of initial]
+[Iter 1370/20000] Loss: 0.0036475 (Best: 0.0031390 @iter1321) ([92m↓5.29%[0m) [1.45% of initial]
+[Iter 1380/20000] Loss: 0.0039128 (Best: 0.0031082 @iter1375) ([91m↑7.27%[0m) [1.55% of initial]
+[Iter 1380/20000] Loss: 0.0039128 (Best: 0.0031082 @iter1375) ([91m↑7.27%[0m) [1.55% of initial]
+[Iter 1390/20000] Loss: 0.0037640 (Best: 0.0031082 @iter1375) ([92m↓3.80%[0m) [1.50% of initial]
+[Iter 1390/20000] Loss: 0.0037640 (Best: 0.0031082 @iter1375) ([92m↓3.80%[0m) [1.50% of initial]
+Iter:1399, L1 loss=0.002275, Total loss=0.003007, Time:11
+Iter:1399, L1 loss=0.002275, Total loss=0.003007, Time:11
+[Iter 1400/20000] Loss: 0.0034410 (Best: 0.0030020 @iter1394) ([92m↓8.58%[0m) [1.37% of initial]
+[Iter 1400/20000] Loss: 0.0034410 (Best: 0.0030020 @iter1394) ([92m↓8.58%[0m) [1.37% of initial]
+[Iter 1410/20000] Loss: 0.0088258 (Best: 0.0030020 @iter1394) ([91m↑156.49%[0m) [3.51% of initial]
+[Iter 1410/20000] Loss: 0.0088258 (Best: 0.0030020 @iter1394) ([91m↑156.49%[0m) [3.51% of initial]
+[Iter 1420/20000] Loss: 0.0057154 (Best: 0.0030020 @iter1394) ([92m↓35.24%[0m) [2.27% of initial]
+[Iter 1420/20000] Loss: 0.0057154 (Best: 0.0030020 @iter1394) ([92m↓35.24%[0m) [2.27% of initial]
+[Iter 1430/20000] Loss: 0.0048303 (Best: 0.0030020 @iter1394) ([92m↓15.49%[0m) [1.92% of initial]
+[Iter 1430/20000] Loss: 0.0048303 (Best: 0.0030020 @iter1394) ([92m↓15.49%[0m) [1.92% of initial]
+[Iter 1440/20000] Loss: 0.0043855 (Best: 0.0030020 @iter1394) ([92m↓9.21%[0m) [1.74% of initial]
+[Iter 1440/20000] Loss: 0.0043855 (Best: 0.0030020 @iter1394) ([92m↓9.21%[0m) [1.74% of initial]
+[Iter 1450/20000] Loss: 0.0035099 (Best: 0.0030020 @iter1394) ([92m↓19.96%[0m) [1.39% of initial]
+[Iter 1450/20000] Loss: 0.0035099 (Best: 0.0030020 @iter1394) ([92m↓19.96%[0m) [1.39% of initial]
+[Iter 1460/20000] Loss: 0.0035351 (Best: 0.0029076 @iter1459) ([91m↑0.72%[0m) [1.40% of initial]
+[Iter 1460/20000] Loss: 0.0035351 (Best: 0.0029076 @iter1459) ([91m↑0.72%[0m) [1.40% of initial]
+[Iter 1470/20000] Loss: 0.0034121 (Best: 0.0029076 @iter1459) ([92m↓3.48%[0m) [1.36% of initial]
+[Iter 1470/20000] Loss: 0.0034121 (Best: 0.0029076 @iter1459) ([92m↓3.48%[0m) [1.36% of initial]
+[Iter 1480/20000] Loss: 0.0032993 (Best: 0.0027681 @iter1480) ([92m↓3.31%[0m) [1.31% of initial]
+[Iter 1480/20000] Loss: 0.0032993 (Best: 0.0027681 @iter1480) ([92m↓3.31%[0m) [1.31% of initial]
+[Iter 1490/20000] Loss: 0.0032108 (Best: 0.0027681 @iter1480) ([92m↓2.68%[0m) [1.28% of initial]
+[Iter 1490/20000] Loss: 0.0032108 (Best: 0.0027681 @iter1480) ([92m↓2.68%[0m) [1.28% of initial]
+Iter:1499, L1 loss=0.002628, Total loss=0.003301, Time:13
+Iter:1499, L1 loss=0.002628, Total loss=0.003301, Time:13
+[Iter 1500/20000] Loss: 0.0031942 (Best: 0.0027681 @iter1480) ([92m↓0.52%[0m) [1.27% of initial]
+[Iter 1500/20000] Loss: 0.0031942 (Best: 0.0027681 @iter1480) ([92m↓0.52%[0m) [1.27% of initial]
+[Iter 1510/20000] Loss: 0.0030330 (Best: 0.0025855 @iter1504) ([92m↓5.05%[0m) [1.20% of initial]
+[Iter 1510/20000] Loss: 0.0030330 (Best: 0.0025855 @iter1504) ([92m↓5.05%[0m) [1.20% of initial]
+[Iter 1520/20000] Loss: 0.0030070 (Best: 0.0025770 @iter1520) ([92m↓0.86%[0m) [1.19% of initial]
+[Iter 1520/20000] Loss: 0.0030070 (Best: 0.0025770 @iter1520) ([92m↓0.86%[0m) [1.19% of initial]
+[Iter 1530/20000] Loss: 0.0031093 (Best: 0.0025667 @iter1526) ([91m↑3.40%[0m) [1.24% of initial]
+[Iter 1530/20000] Loss: 0.0031093 (Best: 0.0025667 @iter1526) ([91m↑3.40%[0m) [1.24% of initial]
+[Iter 1540/20000] Loss: 0.0030313 (Best: 0.0025667 @iter1526) ([92m↓2.51%[0m) [1.20% of initial]
+[Iter 1540/20000] Loss: 0.0030313 (Best: 0.0025667 @iter1526) ([92m↓2.51%[0m) [1.20% of initial]
+[Iter 1550/20000] Loss: 0.0030381 (Best: 0.0025667 @iter1526) ([91m↑0.22%[0m) [1.21% of initial]
+[Iter 1550/20000] Loss: 0.0030381 (Best: 0.0025667 @iter1526) ([91m↑0.22%[0m) [1.21% of initial]
+[Iter 1560/20000] Loss: 0.0032427 (Best: 0.0025116 @iter1558) ([91m↑6.73%[0m) [1.29% of initial]
+[Iter 1560/20000] Loss: 0.0032427 (Best: 0.0025116 @iter1558) ([91m↑6.73%[0m) [1.29% of initial]
+[Iter 1570/20000] Loss: 0.0028689 (Best: 0.0025116 @iter1558) ([92m↓11.53%[0m) [1.14% of initial]
+[Iter 1570/20000] Loss: 0.0028689 (Best: 0.0025116 @iter1558) ([92m↓11.53%[0m) [1.14% of initial]
+[Iter 1580/20000] Loss: 0.0028212 (Best: 0.0023468 @iter1573) ([92m↓1.67%[0m) [1.12% of initial]
+[Iter 1580/20000] Loss: 0.0028212 (Best: 0.0023468 @iter1573) ([92m↓1.67%[0m) [1.12% of initial]
+[Iter 1590/20000] Loss: 0.0027021 (Best: 0.0023468 @iter1573) ([92m↓4.22%[0m) [1.07% of initial]
+[Iter 1590/20000] Loss: 0.0027021 (Best: 0.0023468 @iter1573) ([92m↓4.22%[0m) [1.07% of initial]
+Iter:1599, L1 loss=0.00271, Total loss=0.003367, Time:13
+Iter:1599, L1 loss=0.00271, Total loss=0.003367, Time:13
+[Iter 1600/20000] Loss: 0.0030720 (Best: 0.0022941 @iter1591) ([91m↑13.69%[0m) [1.22% of initial]
+[Iter 1600/20000] Loss: 0.0030720 (Best: 0.0022941 @iter1591) ([91m↑13.69%[0m) [1.22% of initial]
+[Iter 1610/20000] Loss: 0.0083737 (Best: 0.0022941 @iter1591) ([91m↑172.58%[0m) [3.33% of initial]
+[Iter 1610/20000] Loss: 0.0083737 (Best: 0.0022941 @iter1591) ([91m↑172.58%[0m) [3.33% of initial]
+[Iter 1620/20000] Loss: 0.0053207 (Best: 0.0022941 @iter1591) ([92m↓36.46%[0m) [2.11% of initial]
+[Iter 1620/20000] Loss: 0.0053207 (Best: 0.0022941 @iter1591) ([92m↓36.46%[0m) [2.11% of initial]
+[Iter 1630/20000] Loss: 0.0040729 (Best: 0.0022941 @iter1591) ([92m↓23.45%[0m) [1.62% of initial]
+[Iter 1630/20000] Loss: 0.0040729 (Best: 0.0022941 @iter1591) ([92m↓23.45%[0m) [1.62% of initial]
+[Iter 1640/20000] Loss: 0.0038738 (Best: 0.0022941 @iter1591) ([92m↓4.89%[0m) [1.54% of initial]
+[Iter 1640/20000] Loss: 0.0038738 (Best: 0.0022941 @iter1591) ([92m↓4.89%[0m) [1.54% of initial]
+[Iter 1650/20000] Loss: 0.0033793 (Best: 0.0022941 @iter1591) ([92m↓12.77%[0m) [1.34% of initial]
+[Iter 1650/20000] Loss: 0.0033793 (Best: 0.0022941 @iter1591) ([92m↓12.77%[0m) [1.34% of initial]
+[Iter 1660/20000] Loss: 0.0029043 (Best: 0.0022941 @iter1591) ([92m↓14.06%[0m) [1.15% of initial]
+[Iter 1660/20000] Loss: 0.0029043 (Best: 0.0022941 @iter1591) ([92m↓14.06%[0m) [1.15% of initial]
+[Iter 1670/20000] Loss: 0.0026979 (Best: 0.0022461 @iter1669) ([92m↓7.11%[0m) [1.07% of initial]
+[Iter 1670/20000] Loss: 0.0026979 (Best: 0.0022461 @iter1669) ([92m↓7.11%[0m) [1.07% of initial]
+[Iter 1680/20000] Loss: 0.0028724 (Best: 0.0022461 @iter1669) ([91m↑6.47%[0m) [1.14% of initial]
+[Iter 1680/20000] Loss: 0.0028724 (Best: 0.0022461 @iter1669) ([91m↑6.47%[0m) [1.14% of initial]
+[Iter 1690/20000] Loss: 0.0030466 (Best: 0.0022461 @iter1669) ([91m↑6.06%[0m) [1.21% of initial]
+[Iter 1690/20000] Loss: 0.0030466 (Best: 0.0022461 @iter1669) ([91m↑6.06%[0m) [1.21% of initial]
+Iter:1699, L1 loss=0.002568, Total loss=0.003164, Time:14
+Iter:1699, L1 loss=0.002568, Total loss=0.003164, Time:14
+[Iter 1700/20000] Loss: 0.0027774 (Best: 0.0022461 @iter1669) ([92m↓8.83%[0m) [1.10% of initial]
+[Iter 1700/20000] Loss: 0.0027774 (Best: 0.0022461 @iter1669) ([92m↓8.83%[0m) [1.10% of initial]
+[Iter 1710/20000] Loss: 0.0029364 (Best: 0.0022461 @iter1669) ([91m↑5.73%[0m) [1.17% of initial]
+[Iter 1710/20000] Loss: 0.0029364 (Best: 0.0022461 @iter1669) ([91m↑5.73%[0m) [1.17% of initial]
+[Iter 1720/20000] Loss: 0.0025260 (Best: 0.0022289 @iter1715) ([92m↓13.98%[0m) [1.00% of initial]
+[Iter 1720/20000] Loss: 0.0025260 (Best: 0.0022289 @iter1715) ([92m↓13.98%[0m) [1.00% of initial]
+[Iter 1730/20000] Loss: 0.0026393 (Best: 0.0022289 @iter1715) ([91m↑4.49%[0m) [1.05% of initial]
+[Iter 1730/20000] Loss: 0.0026393 (Best: 0.0022289 @iter1715) ([91m↑4.49%[0m) [1.05% of initial]
+[Iter 1740/20000] Loss: 0.0026273 (Best: 0.0022271 @iter1738) ([92m↓0.46%[0m) [1.04% of initial]
+[Iter 1740/20000] Loss: 0.0026273 (Best: 0.0022271 @iter1738) ([92m↓0.46%[0m) [1.04% of initial]
+[Iter 1750/20000] Loss: 0.0023780 (Best: 0.0021381 @iter1742) ([92m↓9.49%[0m) [0.94% of initial]
+[Iter 1750/20000] Loss: 0.0023780 (Best: 0.0021381 @iter1742) ([92m↓9.49%[0m) [0.94% of initial]
+[Iter 1760/20000] Loss: 0.0026346 (Best: 0.0021381 @iter1742) ([91m↑10.79%[0m) [1.05% of initial]
+[Iter 1760/20000] Loss: 0.0026346 (Best: 0.0021381 @iter1742) ([91m↑10.79%[0m) [1.05% of initial]
+[Iter 1770/20000] Loss: 0.0024193 (Best: 0.0020959 @iter1762) ([92m↓8.17%[0m) [0.96% of initial]
+[Iter 1770/20000] Loss: 0.0024193 (Best: 0.0020959 @iter1762) ([92m↓8.17%[0m) [0.96% of initial]
+[Iter 1780/20000] Loss: 0.0024524 (Best: 0.0020845 @iter1771) ([91m↑1.37%[0m) [0.97% of initial]
+[Iter 1780/20000] Loss: 0.0024524 (Best: 0.0020845 @iter1771) ([91m↑1.37%[0m) [0.97% of initial]
+[Iter 1790/20000] Loss: 0.0021747 (Best: 0.0018077 @iter1789) ([92m↓11.32%[0m) [0.86% of initial]
+[Iter 1790/20000] Loss: 0.0021747 (Best: 0.0018077 @iter1789) ([92m↓11.32%[0m) [0.86% of initial]
+Iter:1799, L1 loss=0.001693, Total loss=0.001925, Time:14
+Iter:1799, L1 loss=0.001693, Total loss=0.001925, Time:14
+[Iter 1800/20000] Loss: 0.0021650 (Best: 0.0018077 @iter1789) ([92m↓0.44%[0m) [0.86% of initial]
+[Iter 1800/20000] Loss: 0.0021650 (Best: 0.0018077 @iter1789) ([92m↓0.44%[0m) [0.86% of initial]
+[Iter 1810/20000] Loss: 0.0076185 (Best: 0.0018077 @iter1789) ([91m↑251.89%[0m) [3.03% of initial]
+[Iter 1810/20000] Loss: 0.0076185 (Best: 0.0018077 @iter1789) ([91m↑251.89%[0m) [3.03% of initial]
+[Iter 1820/20000] Loss: 0.0044429 (Best: 0.0018077 @iter1789) ([92m↓41.68%[0m) [1.77% of initial]
+[Iter 1820/20000] Loss: 0.0044429 (Best: 0.0018077 @iter1789) ([92m↓41.68%[0m) [1.77% of initial]
+[Iter 1830/20000] Loss: 0.0039384 (Best: 0.0018077 @iter1789) ([92m↓11.36%[0m) [1.56% of initial]
+[Iter 1830/20000] Loss: 0.0039384 (Best: 0.0018077 @iter1789) ([92m↓11.36%[0m) [1.56% of initial]
+[Iter 1840/20000] Loss: 0.0027575 (Best: 0.0018077 @iter1789) ([92m↓29.98%[0m) [1.10% of initial]
+[Iter 1840/20000] Loss: 0.0027575 (Best: 0.0018077 @iter1789) ([92m↓29.98%[0m) [1.10% of initial]
+[Iter 1850/20000] Loss: 0.0026272 (Best: 0.0018077 @iter1789) ([92m↓4.73%[0m) [1.04% of initial]
+[Iter 1850/20000] Loss: 0.0026272 (Best: 0.0018077 @iter1789) ([92m↓4.73%[0m) [1.04% of initial]
+[Iter 1860/20000] Loss: 0.0023710 (Best: 0.0018077 @iter1789) ([92m↓9.75%[0m) [0.94% of initial]
+[Iter 1860/20000] Loss: 0.0023710 (Best: 0.0018077 @iter1789) ([92m↓9.75%[0m) [0.94% of initial]
+[Iter 1870/20000] Loss: 0.0022475 (Best: 0.0018077 @iter1789) ([92m↓5.21%[0m) [0.89% of initial]
+[Iter 1870/20000] Loss: 0.0022475 (Best: 0.0018077 @iter1789) ([92m↓5.21%[0m) [0.89% of initial]
+[Iter 1880/20000] Loss: 0.0021118 (Best: 0.0018077 @iter1789) ([92m↓6.03%[0m) [0.84% of initial]
+[Iter 1880/20000] Loss: 0.0021118 (Best: 0.0018077 @iter1789) ([92m↓6.03%[0m) [0.84% of initial]
+[Iter 1890/20000] Loss: 0.0018878 (Best: 0.0017169 @iter1890) ([92m↓10.61%[0m) [0.75% of initial]
+[Iter 1890/20000] Loss: 0.0018878 (Best: 0.0017169 @iter1890) ([92m↓10.61%[0m) [0.75% of initial]
+Iter:1899, L1 loss=0.001756, Total loss=0.001889, Time:13
+Iter:1899, L1 loss=0.001756, Total loss=0.001889, Time:13
+[Iter 1900/20000] Loss: 0.0019664 (Best: 0.0015890 @iter1891) ([91m↑4.16%[0m) [0.78% of initial]
+[Iter 1900/20000] Loss: 0.0019664 (Best: 0.0015890 @iter1891) ([91m↑4.16%[0m) [0.78% of initial]
+[Iter 1910/20000] Loss: 0.0020467 (Best: 0.0015890 @iter1891) ([91m↑4.09%[0m) [0.81% of initial]
+[Iter 1910/20000] Loss: 0.0020467 (Best: 0.0015890 @iter1891) ([91m↑4.09%[0m) [0.81% of initial]
+[Iter 1920/20000] Loss: 0.0020881 (Best: 0.0015890 @iter1891) ([91m↑2.02%[0m) [0.83% of initial]
+[Iter 1920/20000] Loss: 0.0020881 (Best: 0.0015890 @iter1891) ([91m↑2.02%[0m) [0.83% of initial]
+[Iter 1930/20000] Loss: 0.0017517 (Best: 0.0015675 @iter1930) ([92m↓16.11%[0m) [0.70% of initial]
+[Iter 1930/20000] Loss: 0.0017517 (Best: 0.0015675 @iter1930) ([92m↓16.11%[0m) [0.70% of initial]
+[Iter 1940/20000] Loss: 0.0019250 (Best: 0.0015619 @iter1939) ([91m↑9.89%[0m) [0.76% of initial]
+[Iter 1940/20000] Loss: 0.0019250 (Best: 0.0015619 @iter1939) ([91m↑9.89%[0m) [0.76% of initial]
+[Iter 1950/20000] Loss: 0.0020812 (Best: 0.0015619 @iter1939) ([91m↑8.11%[0m) [0.83% of initial]
+[Iter 1950/20000] Loss: 0.0020812 (Best: 0.0015619 @iter1939) ([91m↑8.11%[0m) [0.83% of initial]
+[Iter 1960/20000] Loss: 0.0018402 (Best: 0.0015619 @iter1939) ([92m↓11.58%[0m) [0.73% of initial]
+[Iter 1960/20000] Loss: 0.0018402 (Best: 0.0015619 @iter1939) ([92m↓11.58%[0m) [0.73% of initial]
+[Iter 1970/20000] Loss: 0.0016844 (Best: 0.0014912 @iter1963) ([92m↓8.46%[0m) [0.67% of initial]
+[Iter 1970/20000] Loss: 0.0016844 (Best: 0.0014912 @iter1963) ([92m↓8.46%[0m) [0.67% of initial]
+[Iter 1980/20000] Loss: 0.0020318 (Best: 0.0014912 @iter1963) ([91m↑20.62%[0m) [0.81% of initial]
+[Iter 1980/20000] Loss: 0.0020318 (Best: 0.0014912 @iter1963) ([91m↑20.62%[0m) [0.81% of initial]
+[Iter 1990/20000] Loss: 0.0017726 (Best: 0.0014912 @iter1963) ([92m↓12.76%[0m) [0.70% of initial]
+[Iter 1990/20000] Loss: 0.0017726 (Best: 0.0014912 @iter1963) ([92m↓12.76%[0m) [0.70% of initial]
+Iter:1999, L1 loss=0.001496, Total loss=0.001688, Time:14
+Iter:1999, L1 loss=0.001496, Total loss=0.001688, Time:14
+[Iter 2000/20000] Loss: 0.0019066 (Best: 0.0014440 @iter1996) ([91m↑7.56%[0m) [0.76% of initial]
+[Iter 2000/20000] Loss: 0.0019066 (Best: 0.0014440 @iter1996) ([91m↑7.56%[0m) [0.76% of initial]
+Testing Speed: 230.08004493750877 fps
+Testing Speed: 230.08004493750877 fps
+Testing Time: 0.217315673828125 s
+Testing Time: 0.217315673828125 s
+
+[ITER 2000] Evaluating test: SSIM = 0.8517311704158783, PSNR = 17.86451017379761
+
+[ITER 2000] Evaluating test: SSIM = 0.8517311704158783, PSNR = 17.86451017379761
+Testing Speed: 266.1979733017411 fps
+Testing Speed: 266.1979733017411 fps
+Testing Time: 0.011269807815551758 s
+Testing Time: 0.011269807815551758 s
+
+[ITER 2000] Evaluating train: SSIM = 0.9999508460362752, PSNR = 49.11960983276367
+
+[ITER 2000] Evaluating train: SSIM = 0.9999508460362752, PSNR = 49.11960983276367
+Iter:2000, total_points:43188
+Iter:2000, total_points:43188
+[Iter 2010/20000] Loss: 0.0066659 (Best: 0.0014440 @iter1996) ([91m↑249.61%[0m) [2.65% of initial]
+[Iter 2010/20000] Loss: 0.0066659 (Best: 0.0014440 @iter1996) ([91m↑249.61%[0m) [2.65% of initial]
+[Iter 2020/20000] Loss: 0.0037287 (Best: 0.0014440 @iter1996) ([92m↓44.06%[0m) [1.48% of initial]
+[Iter 2020/20000] Loss: 0.0037287 (Best: 0.0014440 @iter1996) ([92m↓44.06%[0m) [1.48% of initial]
+[Iter 2030/20000] Loss: 0.0028463 (Best: 0.0014440 @iter1996) ([92m↓23.67%[0m) [1.13% of initial]
+[Iter 2030/20000] Loss: 0.0028463 (Best: 0.0014440 @iter1996) ([92m↓23.67%[0m) [1.13% of initial]
+[Iter 2040/20000] Loss: 0.0024982 (Best: 0.0014440 @iter1996) ([92m↓12.23%[0m) [0.99% of initial]
+[Iter 2040/20000] Loss: 0.0024982 (Best: 0.0014440 @iter1996) ([92m↓12.23%[0m) [0.99% of initial]
+[Iter 2050/20000] Loss: 0.0020582 (Best: 0.0014440 @iter1996) ([92m↓17.61%[0m) [0.82% of initial]
+[Iter 2050/20000] Loss: 0.0020582 (Best: 0.0014440 @iter1996) ([92m↓17.61%[0m) [0.82% of initial]
+[Iter 2060/20000] Loss: 0.0017213 (Best: 0.0014440 @iter1996) ([92m↓16.37%[0m) [0.68% of initial]
+[Iter 2060/20000] Loss: 0.0017213 (Best: 0.0014440 @iter1996) ([92m↓16.37%[0m) [0.68% of initial]
+[Iter 2070/20000] Loss: 0.0019735 (Best: 0.0014440 @iter1996) ([91m↑14.65%[0m) [0.78% of initial]
+[Iter 2070/20000] Loss: 0.0019735 (Best: 0.0014440 @iter1996) ([91m↑14.65%[0m) [0.78% of initial]
+[Iter 2080/20000] Loss: 0.0018752 (Best: 0.0014440 @iter1996) ([92m↓4.98%[0m) [0.74% of initial]
+[Iter 2080/20000] Loss: 0.0018752 (Best: 0.0014440 @iter1996) ([92m↓4.98%[0m) [0.74% of initial]
+[Iter 2090/20000] Loss: 0.0018079 (Best: 0.0014129 @iter2089) ([92m↓3.59%[0m) [0.72% of initial]
+[Iter 2090/20000] Loss: 0.0018079 (Best: 0.0014129 @iter2089) ([92m↓3.59%[0m) [0.72% of initial]
+Iter:2099, L1 loss=0.001594, Total loss=0.0017, Time:15
+Iter:2099, L1 loss=0.001594, Total loss=0.0017, Time:15
+[Iter 2100/20000] Loss: 0.0016948 (Best: 0.0014129 @iter2089) ([92m↓6.26%[0m) [0.67% of initial]
+[Iter 2100/20000] Loss: 0.0016948 (Best: 0.0014129 @iter2089) ([92m↓6.26%[0m) [0.67% of initial]
+[Iter 2110/20000] Loss: 0.0015839 (Best: 0.0014129 @iter2089) ([92m↓6.54%[0m) [0.63% of initial]
+[Iter 2110/20000] Loss: 0.0015839 (Best: 0.0014129 @iter2089) ([92m↓6.54%[0m) [0.63% of initial]
+[Iter 2120/20000] Loss: 0.0014286 (Best: 0.0012930 @iter2120) ([92m↓9.80%[0m) [0.57% of initial]
+[Iter 2120/20000] Loss: 0.0014286 (Best: 0.0012930 @iter2120) ([92m↓9.80%[0m) [0.57% of initial]
+[Iter 2130/20000] Loss: 0.0015920 (Best: 0.0012231 @iter2125) ([91m↑11.44%[0m) [0.63% of initial]
+[Iter 2130/20000] Loss: 0.0015920 (Best: 0.0012231 @iter2125) ([91m↑11.44%[0m) [0.63% of initial]
+[Iter 2140/20000] Loss: 0.0017049 (Best: 0.0012231 @iter2125) ([91m↑7.09%[0m) [0.68% of initial]
+[Iter 2140/20000] Loss: 0.0017049 (Best: 0.0012231 @iter2125) ([91m↑7.09%[0m) [0.68% of initial]
+[Iter 2150/20000] Loss: 0.0017383 (Best: 0.0012231 @iter2125) ([91m↑1.96%[0m) [0.69% of initial]
+[Iter 2150/20000] Loss: 0.0017383 (Best: 0.0012231 @iter2125) ([91m↑1.96%[0m) [0.69% of initial]
+[Iter 2160/20000] Loss: 0.0015923 (Best: 0.0012231 @iter2125) ([92m↓8.40%[0m) [0.63% of initial]
+[Iter 2160/20000] Loss: 0.0015923 (Best: 0.0012231 @iter2125) ([92m↓8.40%[0m) [0.63% of initial]
+[Iter 2170/20000] Loss: 0.0016146 (Best: 0.0012231 @iter2125) ([91m↑1.40%[0m) [0.64% of initial]
+[Iter 2170/20000] Loss: 0.0016146 (Best: 0.0012231 @iter2125) ([91m↑1.40%[0m) [0.64% of initial]
+[Iter 2180/20000] Loss: 0.0013476 (Best: 0.0012231 @iter2125) ([92m↓16.54%[0m) [0.54% of initial]
+[Iter 2180/20000] Loss: 0.0013476 (Best: 0.0012231 @iter2125) ([92m↓16.54%[0m) [0.54% of initial]
+[Iter 2190/20000] Loss: 0.0015892 (Best: 0.0012231 @iter2125) ([91m↑17.93%[0m) [0.63% of initial]
+[Iter 2190/20000] Loss: 0.0015892 (Best: 0.0012231 @iter2125) ([91m↑17.93%[0m) [0.63% of initial]
+Iter:2199, L1 loss=0.001458, Total loss=0.001526, Time:16
+Iter:2199, L1 loss=0.001458, Total loss=0.001526, Time:16
+[Iter 2200/20000] Loss: 0.0015879 (Best: 0.0012231 @iter2125) ([92m↓0.08%[0m) [0.63% of initial]
+[Iter 2200/20000] Loss: 0.0015879 (Best: 0.0012231 @iter2125) ([92m↓0.08%[0m) [0.63% of initial]
+[Iter 2210/20000] Loss: 0.0079680 (Best: 0.0012231 @iter2125) ([91m↑401.80%[0m) [3.17% of initial]
+[Iter 2210/20000] Loss: 0.0079680 (Best: 0.0012231 @iter2125) ([91m↑401.80%[0m) [3.17% of initial]
+[Iter 2220/20000] Loss: 0.0043428 (Best: 0.0012231 @iter2125) ([92m↓45.50%[0m) [1.73% of initial]
+[Iter 2220/20000] Loss: 0.0043428 (Best: 0.0012231 @iter2125) ([92m↓45.50%[0m) [1.73% of initial]
+[Iter 2230/20000] Loss: 0.0026793 (Best: 0.0012231 @iter2125) ([92m↓38.31%[0m) [1.06% of initial]
+[Iter 2230/20000] Loss: 0.0026793 (Best: 0.0012231 @iter2125) ([92m↓38.31%[0m) [1.06% of initial]
+[Iter 2240/20000] Loss: 0.0022858 (Best: 0.0012231 @iter2125) ([92m↓14.69%[0m) [0.91% of initial]
+[Iter 2240/20000] Loss: 0.0022858 (Best: 0.0012231 @iter2125) ([92m↓14.69%[0m) [0.91% of initial]
+[Iter 2250/20000] Loss: 0.0021165 (Best: 0.0012231 @iter2125) ([92m↓7.41%[0m) [0.84% of initial]
+[Iter 2250/20000] Loss: 0.0021165 (Best: 0.0012231 @iter2125) ([92m↓7.41%[0m) [0.84% of initial]
+[Iter 2260/20000] Loss: 0.0017172 (Best: 0.0012231 @iter2125) ([92m↓18.86%[0m) [0.68% of initial]
+[Iter 2260/20000] Loss: 0.0017172 (Best: 0.0012231 @iter2125) ([92m↓18.86%[0m) [0.68% of initial]
+[Iter 2270/20000] Loss: 0.0018301 (Best: 0.0012231 @iter2125) ([91m↑6.57%[0m) [0.73% of initial]
+[Iter 2270/20000] Loss: 0.0018301 (Best: 0.0012231 @iter2125) ([91m↑6.57%[0m) [0.73% of initial]
+[Iter 2280/20000] Loss: 0.0014707 (Best: 0.0012231 @iter2125) ([92m↓19.64%[0m) [0.58% of initial]
+[Iter 2280/20000] Loss: 0.0014707 (Best: 0.0012231 @iter2125) ([92m↓19.64%[0m) [0.58% of initial]
+[Iter 2290/20000] Loss: 0.0014241 (Best: 0.0011960 @iter2285) ([92m↓3.17%[0m) [0.57% of initial]
+[Iter 2290/20000] Loss: 0.0014241 (Best: 0.0011960 @iter2285) ([92m↓3.17%[0m) [0.57% of initial]
+Iter:2299, L1 loss=0.001281, Total loss=0.001478, Time:15
+Iter:2299, L1 loss=0.001281, Total loss=0.001478, Time:15
+[Iter 2300/20000] Loss: 0.0017630 (Best: 0.0011960 @iter2285) ([91m↑23.80%[0m) [0.70% of initial]
+[Iter 2300/20000] Loss: 0.0017630 (Best: 0.0011960 @iter2285) ([91m↑23.80%[0m) [0.70% of initial]
+[Iter 2310/20000] Loss: 0.0015605 (Best: 0.0011960 @iter2285) ([92m↓11.49%[0m) [0.62% of initial]
+[Iter 2310/20000] Loss: 0.0015605 (Best: 0.0011960 @iter2285) ([92m↓11.49%[0m) [0.62% of initial]
+[Iter 2320/20000] Loss: 0.0013107 (Best: 0.0011700 @iter2320) ([92m↓16.01%[0m) [0.52% of initial]
+[Iter 2320/20000] Loss: 0.0013107 (Best: 0.0011700 @iter2320) ([92m↓16.01%[0m) [0.52% of initial]
+[Iter 2330/20000] Loss: 0.0012913 (Best: 0.0011132 @iter2327) ([92m↓1.47%[0m) [0.51% of initial]
+[Iter 2330/20000] Loss: 0.0012913 (Best: 0.0011132 @iter2327) ([92m↓1.47%[0m) [0.51% of initial]
+[Iter 2340/20000] Loss: 0.0013510 (Best: 0.0011050 @iter2338) ([91m↑4.62%[0m) [0.54% of initial]
+[Iter 2340/20000] Loss: 0.0013510 (Best: 0.0011050 @iter2338) ([91m↑4.62%[0m) [0.54% of initial]
+[Iter 2350/20000] Loss: 0.0015044 (Best: 0.0011050 @iter2338) ([91m↑11.36%[0m) [0.60% of initial]
+[Iter 2350/20000] Loss: 0.0015044 (Best: 0.0011050 @iter2338) ([91m↑11.36%[0m) [0.60% of initial]
+[Iter 2360/20000] Loss: 0.0013122 (Best: 0.0011050 @iter2338) ([92m↓12.78%[0m) [0.52% of initial]
+[Iter 2360/20000] Loss: 0.0013122 (Best: 0.0011050 @iter2338) ([92m↓12.78%[0m) [0.52% of initial]
+[Iter 2370/20000] Loss: 0.0014097 (Best: 0.0011050 @iter2338) ([91m↑7.43%[0m) [0.56% of initial]
+[Iter 2370/20000] Loss: 0.0014097 (Best: 0.0011050 @iter2338) ([91m↑7.43%[0m) [0.56% of initial]
+[Iter 2380/20000] Loss: 0.0014880 (Best: 0.0011050 @iter2338) ([91m↑5.56%[0m) [0.59% of initial]
+[Iter 2380/20000] Loss: 0.0014880 (Best: 0.0011050 @iter2338) ([91m↑5.56%[0m) [0.59% of initial]
+[Iter 2390/20000] Loss: 0.0016085 (Best: 0.0011050 @iter2338) ([91m↑8.10%[0m) [0.64% of initial]
+[Iter 2390/20000] Loss: 0.0016085 (Best: 0.0011050 @iter2338) ([91m↑8.10%[0m) [0.64% of initial]
+Iter:2399, L1 loss=0.00123, Total loss=0.001306, Time:14
+Iter:2399, L1 loss=0.00123, Total loss=0.001306, Time:14
+[Iter 2400/20000] Loss: 0.0013480 (Best: 0.0011050 @iter2338) ([92m↓16.20%[0m) [0.54% of initial]
+[Iter 2400/20000] Loss: 0.0013480 (Best: 0.0011050 @iter2338) ([92m↓16.20%[0m) [0.54% of initial]
+[Iter 2410/20000] Loss: 0.0061113 (Best: 0.0011050 @iter2338) ([91m↑353.36%[0m) [2.43% of initial]
+[Iter 2410/20000] Loss: 0.0061113 (Best: 0.0011050 @iter2338) ([91m↑353.36%[0m) [2.43% of initial]
+[Iter 2420/20000] Loss: 0.0034878 (Best: 0.0011050 @iter2338) ([92m↓42.93%[0m) [1.39% of initial]
+[Iter 2420/20000] Loss: 0.0034878 (Best: 0.0011050 @iter2338) ([92m↓42.93%[0m) [1.39% of initial]
+[Iter 2430/20000] Loss: 0.0025936 (Best: 0.0011050 @iter2338) ([92m↓25.64%[0m) [1.03% of initial]
+[Iter 2430/20000] Loss: 0.0025936 (Best: 0.0011050 @iter2338) ([92m↓25.64%[0m) [1.03% of initial]
+[Iter 2440/20000] Loss: 0.0020421 (Best: 0.0011050 @iter2338) ([92m↓21.26%[0m) [0.81% of initial]
+[Iter 2440/20000] Loss: 0.0020421 (Best: 0.0011050 @iter2338) ([92m↓21.26%[0m) [0.81% of initial]
+[Iter 2450/20000] Loss: 0.0019604 (Best: 0.0011050 @iter2338) ([92m↓4.00%[0m) [0.78% of initial]
+[Iter 2450/20000] Loss: 0.0019604 (Best: 0.0011050 @iter2338) ([92m↓4.00%[0m) [0.78% of initial]
+[Iter 2460/20000] Loss: 0.0016919 (Best: 0.0011050 @iter2338) ([92m↓13.69%[0m) [0.67% of initial]
+[Iter 2460/20000] Loss: 0.0016919 (Best: 0.0011050 @iter2338) ([92m↓13.69%[0m) [0.67% of initial]
+[Iter 2470/20000] Loss: 0.0016763 (Best: 0.0011050 @iter2338) ([92m↓0.92%[0m) [0.67% of initial]
+[Iter 2470/20000] Loss: 0.0016763 (Best: 0.0011050 @iter2338) ([92m↓0.92%[0m) [0.67% of initial]
+[Iter 2480/20000] Loss: 0.0016986 (Best: 0.0011050 @iter2338) ([91m↑1.33%[0m) [0.67% of initial]
+[Iter 2480/20000] Loss: 0.0016986 (Best: 0.0011050 @iter2338) ([91m↑1.33%[0m) [0.67% of initial]
+[Iter 2490/20000] Loss: 0.0014873 (Best: 0.0011050 @iter2338) ([92m↓12.44%[0m) [0.59% of initial]
+[Iter 2490/20000] Loss: 0.0014873 (Best: 0.0011050 @iter2338) ([92m↓12.44%[0m) [0.59% of initial]
+Iter:2499, L1 loss=0.00121, Total loss=0.001238, Time:17
+Iter:2499, L1 loss=0.00121, Total loss=0.001238, Time:17
+[Iter 2500/20000] Loss: 0.0013036 (Best: 0.0011050 @iter2338) ([92m↓12.35%[0m) [0.52% of initial]
+[Iter 2500/20000] Loss: 0.0013036 (Best: 0.0011050 @iter2338) ([92m↓12.35%[0m) [0.52% of initial]
+[Iter 2510/20000] Loss: 0.0013616 (Best: 0.0010396 @iter2504) ([91m↑4.46%[0m) [0.54% of initial]
+[Iter 2510/20000] Loss: 0.0013616 (Best: 0.0010396 @iter2504) ([91m↑4.46%[0m) [0.54% of initial]
+[Iter 2520/20000] Loss: 0.0012312 (Best: 0.0009997 @iter2519) ([92m↓9.58%[0m) [0.49% of initial]
+[Iter 2520/20000] Loss: 0.0012312 (Best: 0.0009997 @iter2519) ([92m↓9.58%[0m) [0.49% of initial]
+[Iter 2530/20000] Loss: 0.0011107 (Best: 0.0009715 @iter2528) ([92m↓9.79%[0m) [0.44% of initial]
+[Iter 2530/20000] Loss: 0.0011107 (Best: 0.0009715 @iter2528) ([92m↓9.79%[0m) [0.44% of initial]
+[Iter 2540/20000] Loss: 0.0012009 (Best: 0.0009715 @iter2528) ([91m↑8.12%[0m) [0.48% of initial]
+[Iter 2540/20000] Loss: 0.0012009 (Best: 0.0009715 @iter2528) ([91m↑8.12%[0m) [0.48% of initial]
+[Iter 2550/20000] Loss: 0.0014044 (Best: 0.0009715 @iter2528) ([91m↑16.95%[0m) [0.56% of initial]
+[Iter 2550/20000] Loss: 0.0014044 (Best: 0.0009715 @iter2528) ([91m↑16.95%[0m) [0.56% of initial]
+[Iter 2560/20000] Loss: 0.0011707 (Best: 0.0009707 @iter2557) ([92m↓16.64%[0m) [0.47% of initial]
+[Iter 2560/20000] Loss: 0.0011707 (Best: 0.0009707 @iter2557) ([92m↓16.64%[0m) [0.47% of initial]
+[Iter 2570/20000] Loss: 0.0014235 (Best: 0.0009707 @iter2557) ([91m↑21.59%[0m) [0.57% of initial]
+[Iter 2570/20000] Loss: 0.0014235 (Best: 0.0009707 @iter2557) ([91m↑21.59%[0m) [0.57% of initial]
+[Iter 2580/20000] Loss: 0.0012661 (Best: 0.0009270 @iter2578) ([92m↓11.06%[0m) [0.50% of initial]
+[Iter 2580/20000] Loss: 0.0012661 (Best: 0.0009270 @iter2578) ([92m↓11.06%[0m) [0.50% of initial]
+[Iter 2590/20000] Loss: 0.0013089 (Best: 0.0009270 @iter2578) ([91m↑3.38%[0m) [0.52% of initial]
+[Iter 2590/20000] Loss: 0.0013089 (Best: 0.0009270 @iter2578) ([91m↑3.38%[0m) [0.52% of initial]
+Iter:2599, L1 loss=0.001054, Total loss=0.001008, Time:16
+Iter:2599, L1 loss=0.001054, Total loss=0.001008, Time:16
+[Iter 2600/20000] Loss: 0.0011908 (Best: 0.0009210 @iter2594) ([92m↓9.02%[0m) [0.47% of initial]
+[Iter 2600/20000] Loss: 0.0011908 (Best: 0.0009210 @iter2594) ([92m↓9.02%[0m) [0.47% of initial]
+[Iter 2610/20000] Loss: 0.0060264 (Best: 0.0009210 @iter2594) ([91m↑406.07%[0m) [2.39% of initial]
+[Iter 2610/20000] Loss: 0.0060264 (Best: 0.0009210 @iter2594) ([91m↑406.07%[0m) [2.39% of initial]
+[Iter 2620/20000] Loss: 0.0033234 (Best: 0.0009210 @iter2594) ([92m↓44.85%[0m) [1.32% of initial]
+[Iter 2620/20000] Loss: 0.0033234 (Best: 0.0009210 @iter2594) ([92m↓44.85%[0m) [1.32% of initial]
+[Iter 2630/20000] Loss: 0.0022542 (Best: 0.0009210 @iter2594) ([92m↓32.17%[0m) [0.90% of initial]
+[Iter 2630/20000] Loss: 0.0022542 (Best: 0.0009210 @iter2594) ([92m↓32.17%[0m) [0.90% of initial]
+[Iter 2640/20000] Loss: 0.0017778 (Best: 0.0009210 @iter2594) ([92m↓21.14%[0m) [0.71% of initial]
+[Iter 2640/20000] Loss: 0.0017778 (Best: 0.0009210 @iter2594) ([92m↓21.14%[0m) [0.71% of initial]
+[Iter 2650/20000] Loss: 0.0014611 (Best: 0.0009210 @iter2594) ([92m↓17.81%[0m) [0.58% of initial]
+[Iter 2650/20000] Loss: 0.0014611 (Best: 0.0009210 @iter2594) ([92m↓17.81%[0m) [0.58% of initial]
+[Iter 2660/20000] Loss: 0.0016189 (Best: 0.0009210 @iter2594) ([91m↑10.80%[0m) [0.64% of initial]
+[Iter 2660/20000] Loss: 0.0016189 (Best: 0.0009210 @iter2594) ([91m↑10.80%[0m) [0.64% of initial]
+[Iter 2670/20000] Loss: 0.0015562 (Best: 0.0009210 @iter2594) ([92m↓3.87%[0m) [0.62% of initial]
+[Iter 2670/20000] Loss: 0.0015562 (Best: 0.0009210 @iter2594) ([92m↓3.87%[0m) [0.62% of initial]
+[Iter 2680/20000] Loss: 0.0012256 (Best: 0.0009210 @iter2594) ([92m↓21.24%[0m) [0.49% of initial]
+[Iter 2680/20000] Loss: 0.0012256 (Best: 0.0009210 @iter2594) ([92m↓21.24%[0m) [0.49% of initial]
+[Iter 2690/20000] Loss: 0.0011885 (Best: 0.0009210 @iter2594) ([92m↓3.03%[0m) [0.47% of initial]
+[Iter 2690/20000] Loss: 0.0011885 (Best: 0.0009210 @iter2594) ([92m↓3.03%[0m) [0.47% of initial]
+Iter:2699, L1 loss=0.00114, Total loss=0.001157, Time:16
+Iter:2699, L1 loss=0.00114, Total loss=0.001157, Time:16
+[Iter 2700/20000] Loss: 0.0014467 (Best: 0.0009210 @iter2594) ([91m↑21.73%[0m) [0.57% of initial]
+[Iter 2700/20000] Loss: 0.0014467 (Best: 0.0009210 @iter2594) ([91m↑21.73%[0m) [0.57% of initial]
+[Iter 2710/20000] Loss: 0.0012612 (Best: 0.0009210 @iter2594) ([92m↓12.82%[0m) [0.50% of initial]
+[Iter 2710/20000] Loss: 0.0012612 (Best: 0.0009210 @iter2594) ([92m↓12.82%[0m) [0.50% of initial]
+[Iter 2720/20000] Loss: 0.0011277 (Best: 0.0009210 @iter2594) ([92m↓10.59%[0m) [0.45% of initial]
+[Iter 2720/20000] Loss: 0.0011277 (Best: 0.0009210 @iter2594) ([92m↓10.59%[0m) [0.45% of initial]
+[Iter 2730/20000] Loss: 0.0010149 (Best: 0.0008751 @iter2727) ([92m↓10.00%[0m) [0.40% of initial]
+[Iter 2730/20000] Loss: 0.0010149 (Best: 0.0008751 @iter2727) ([92m↓10.00%[0m) [0.40% of initial]
+[Iter 2740/20000] Loss: 0.0008781 (Best: 0.0007820 @iter2740) ([92m↓13.48%[0m) [0.35% of initial]
+[Iter 2740/20000] Loss: 0.0008781 (Best: 0.0007820 @iter2740) ([92m↓13.48%[0m) [0.35% of initial]
+[Iter 2750/20000] Loss: 0.0011353 (Best: 0.0007820 @iter2740) ([91m↑29.29%[0m) [0.45% of initial]
+[Iter 2750/20000] Loss: 0.0011353 (Best: 0.0007820 @iter2740) ([91m↑29.29%[0m) [0.45% of initial]
+[Iter 2760/20000] Loss: 0.0011704 (Best: 0.0007820 @iter2740) ([91m↑3.09%[0m) [0.46% of initial]
+[Iter 2760/20000] Loss: 0.0011704 (Best: 0.0007820 @iter2740) ([91m↑3.09%[0m) [0.46% of initial]
+[Iter 2770/20000] Loss: 0.0012931 (Best: 0.0007820 @iter2740) ([91m↑10.49%[0m) [0.51% of initial]
+[Iter 2770/20000] Loss: 0.0012931 (Best: 0.0007820 @iter2740) ([91m↑10.49%[0m) [0.51% of initial]
+[Iter 2780/20000] Loss: 0.0011058 (Best: 0.0007820 @iter2740) ([92m↓14.48%[0m) [0.44% of initial]
+[Iter 2780/20000] Loss: 0.0011058 (Best: 0.0007820 @iter2740) ([92m↓14.48%[0m) [0.44% of initial]
+[Iter 2790/20000] Loss: 0.0011605 (Best: 0.0007820 @iter2740) ([91m↑4.95%[0m) [0.46% of initial]
+[Iter 2790/20000] Loss: 0.0011605 (Best: 0.0007820 @iter2740) ([91m↑4.95%[0m) [0.46% of initial]
+Iter:2799, L1 loss=0.001278, Total loss=0.001304, Time:16
+Iter:2799, L1 loss=0.001278, Total loss=0.001304, Time:16
+[Iter 2800/20000] Loss: 0.0011854 (Best: 0.0007820 @iter2740) ([91m↑2.15%[0m) [0.47% of initial]
+[Iter 2800/20000] Loss: 0.0011854 (Best: 0.0007820 @iter2740) ([91m↑2.15%[0m) [0.47% of initial]
+[Iter 2810/20000] Loss: 0.0050917 (Best: 0.0007820 @iter2740) ([91m↑329.52%[0m) [2.02% of initial]
+[Iter 2810/20000] Loss: 0.0050917 (Best: 0.0007820 @iter2740) ([91m↑329.52%[0m) [2.02% of initial]
+[Iter 2820/20000] Loss: 0.0027653 (Best: 0.0007820 @iter2740) ([92m↓45.69%[0m) [1.10% of initial]
+[Iter 2820/20000] Loss: 0.0027653 (Best: 0.0007820 @iter2740) ([92m↓45.69%[0m) [1.10% of initial]
+[Iter 2830/20000] Loss: 0.0018263 (Best: 0.0007820 @iter2740) ([92m↓33.95%[0m) [0.73% of initial]
+[Iter 2830/20000] Loss: 0.0018263 (Best: 0.0007820 @iter2740) ([92m↓33.95%[0m) [0.73% of initial]
+[Iter 2840/20000] Loss: 0.0015724 (Best: 0.0007820 @iter2740) ([92m↓13.90%[0m) [0.62% of initial]
+[Iter 2840/20000] Loss: 0.0015724 (Best: 0.0007820 @iter2740) ([92m↓13.90%[0m) [0.62% of initial]
+[Iter 2850/20000] Loss: 0.0013431 (Best: 0.0007820 @iter2740) ([92m↓14.58%[0m) [0.53% of initial]
+[Iter 2850/20000] Loss: 0.0013431 (Best: 0.0007820 @iter2740) ([92m↓14.58%[0m) [0.53% of initial]
+[Iter 2860/20000] Loss: 0.0014726 (Best: 0.0007820 @iter2740) ([91m↑9.64%[0m) [0.59% of initial]
+[Iter 2860/20000] Loss: 0.0014726 (Best: 0.0007820 @iter2740) ([91m↑9.64%[0m) [0.59% of initial]
+[Iter 2870/20000] Loss: 0.0012416 (Best: 0.0007820 @iter2740) ([92m↓15.69%[0m) [0.49% of initial]
+[Iter 2870/20000] Loss: 0.0012416 (Best: 0.0007820 @iter2740) ([92m↓15.69%[0m) [0.49% of initial]
+[Iter 2880/20000] Loss: 0.0011669 (Best: 0.0007820 @iter2740) ([92m↓6.02%[0m) [0.46% of initial]
+[Iter 2880/20000] Loss: 0.0011669 (Best: 0.0007820 @iter2740) ([92m↓6.02%[0m) [0.46% of initial]
+[Iter 2890/20000] Loss: 0.0011449 (Best: 0.0007820 @iter2740) ([92m↓1.88%[0m) [0.45% of initial]
+[Iter 2890/20000] Loss: 0.0011449 (Best: 0.0007820 @iter2740) ([92m↓1.88%[0m) [0.45% of initial]
+Iter:2899, L1 loss=0.0008878, Total loss=0.0008848, Time:19
+Iter:2899, L1 loss=0.0008878, Total loss=0.0008848, Time:19
+[Iter 2900/20000] Loss: 0.0010884 (Best: 0.0007820 @iter2740) ([92m↓4.94%[0m) [0.43% of initial]
+[Iter 2900/20000] Loss: 0.0010884 (Best: 0.0007820 @iter2740) ([92m↓4.94%[0m) [0.43% of initial]
+[Iter 2910/20000] Loss: 0.0011314 (Best: 0.0007820 @iter2740) ([91m↑3.94%[0m) [0.45% of initial]
+[Iter 2910/20000] Loss: 0.0011314 (Best: 0.0007820 @iter2740) ([91m↑3.94%[0m) [0.45% of initial]
+[Iter 2920/20000] Loss: 0.0011826 (Best: 0.0007820 @iter2740) ([91m↑4.53%[0m) [0.47% of initial]
+[Iter 2920/20000] Loss: 0.0011826 (Best: 0.0007820 @iter2740) ([91m↑4.53%[0m) [0.47% of initial]
+[Iter 2930/20000] Loss: 0.0011536 (Best: 0.0007820 @iter2740) ([92m↓2.45%[0m) [0.46% of initial]
+[Iter 2930/20000] Loss: 0.0011536 (Best: 0.0007820 @iter2740) ([92m↓2.45%[0m) [0.46% of initial]
+[Iter 2940/20000] Loss: 0.0009692 (Best: 0.0007820 @iter2740) ([92m↓15.98%[0m) [0.39% of initial]
+[Iter 2940/20000] Loss: 0.0009692 (Best: 0.0007820 @iter2740) ([92m↓15.98%[0m) [0.39% of initial]
+[Iter 2950/20000] Loss: 0.0009331 (Best: 0.0007767 @iter2950) ([92m↓3.73%[0m) [0.37% of initial]
+[Iter 2950/20000] Loss: 0.0009331 (Best: 0.0007767 @iter2950) ([92m↓3.73%[0m) [0.37% of initial]
+[Iter 2960/20000] Loss: 0.0010308 (Best: 0.0007767 @iter2950) ([91m↑10.48%[0m) [0.41% of initial]
+[Iter 2960/20000] Loss: 0.0010308 (Best: 0.0007767 @iter2950) ([91m↑10.48%[0m) [0.41% of initial]
+[Iter 2970/20000] Loss: 0.0009184 (Best: 0.0007197 @iter2969) ([92m↓10.91%[0m) [0.36% of initial]
+[Iter 2970/20000] Loss: 0.0009184 (Best: 0.0007197 @iter2969) ([92m↓10.91%[0m) [0.36% of initial]
+[Iter 2980/20000] Loss: 0.0008411 (Best: 0.0007197 @iter2969) ([92m↓8.42%[0m) [0.33% of initial]
+[Iter 2980/20000] Loss: 0.0008411 (Best: 0.0007197 @iter2969) ([92m↓8.42%[0m) [0.33% of initial]
+[Iter 2990/20000] Loss: 0.0009022 (Best: 0.0006887 @iter2983) ([91m↑7.26%[0m) [0.36% of initial]
+[Iter 2990/20000] Loss: 0.0009022 (Best: 0.0006887 @iter2983) ([91m↑7.26%[0m) [0.36% of initial]
+Iter:2999, L1 loss=0.0007087, Total loss=0.0006713, Time:18
+Iter:2999, L1 loss=0.0007087, Total loss=0.0006713, Time:18
+[Iter 3000/20000] Loss: 0.0008657 (Best: 0.0006713 @iter2999) ([92m↓4.04%[0m) [0.34% of initial]
+[Iter 3000/20000] Loss: 0.0008657 (Best: 0.0006713 @iter2999) ([92m↓4.04%[0m) [0.34% of initial]
+[Iter 3010/20000] Loss: 0.0046394 (Best: 0.0006713 @iter2999) ([91m↑435.91%[0m) [1.84% of initial]
+[Iter 3010/20000] Loss: 0.0046394 (Best: 0.0006713 @iter2999) ([91m↑435.91%[0m) [1.84% of initial]
+[Iter 3020/20000] Loss: 0.0027093 (Best: 0.0006713 @iter2999) ([92m↓41.60%[0m) [1.08% of initial]
+[Iter 3020/20000] Loss: 0.0027093 (Best: 0.0006713 @iter2999) ([92m↓41.60%[0m) [1.08% of initial]
+[Iter 3030/20000] Loss: 0.0021167 (Best: 0.0006713 @iter2999) ([92m↓21.87%[0m) [0.84% of initial]
+[Iter 3030/20000] Loss: 0.0021167 (Best: 0.0006713 @iter2999) ([92m↓21.87%[0m) [0.84% of initial]
+[Iter 3040/20000] Loss: 0.0016990 (Best: 0.0006713 @iter2999) ([92m↓19.73%[0m) [0.67% of initial]
+[Iter 3040/20000] Loss: 0.0016990 (Best: 0.0006713 @iter2999) ([92m↓19.73%[0m) [0.67% of initial]
+[Iter 3050/20000] Loss: 0.0014227 (Best: 0.0006713 @iter2999) ([92m↓16.26%[0m) [0.57% of initial]
+[Iter 3050/20000] Loss: 0.0014227 (Best: 0.0006713 @iter2999) ([92m↓16.26%[0m) [0.57% of initial]
+[Iter 3060/20000] Loss: 0.0013843 (Best: 0.0006713 @iter2999) ([92m↓2.70%[0m) [0.55% of initial]
+[Iter 3060/20000] Loss: 0.0013843 (Best: 0.0006713 @iter2999) ([92m↓2.70%[0m) [0.55% of initial]
+[Iter 3070/20000] Loss: 0.0011546 (Best: 0.0006713 @iter2999) ([92m↓16.59%[0m) [0.46% of initial]
+[Iter 3070/20000] Loss: 0.0011546 (Best: 0.0006713 @iter2999) ([92m↓16.59%[0m) [0.46% of initial]
+[Iter 3080/20000] Loss: 0.0011452 (Best: 0.0006713 @iter2999) ([92m↓0.81%[0m) [0.45% of initial]
+[Iter 3080/20000] Loss: 0.0011452 (Best: 0.0006713 @iter2999) ([92m↓0.81%[0m) [0.45% of initial]
+[Iter 3090/20000] Loss: 0.0010643 (Best: 0.0006713 @iter2999) ([92m↓7.07%[0m) [0.42% of initial]
+[Iter 3090/20000] Loss: 0.0010643 (Best: 0.0006713 @iter2999) ([92m↓7.07%[0m) [0.42% of initial]
+Iter:3099, L1 loss=0.0009215, Total loss=0.000855, Time:18
+Iter:3099, L1 loss=0.0009215, Total loss=0.000855, Time:18
+[Iter 3100/20000] Loss: 0.0010017 (Best: 0.0006713 @iter2999) ([92m↓5.88%[0m) [0.40% of initial]
+[Iter 3100/20000] Loss: 0.0010017 (Best: 0.0006713 @iter2999) ([92m↓5.88%[0m) [0.40% of initial]
+[Iter 3110/20000] Loss: 0.0010856 (Best: 0.0006713 @iter2999) ([91m↑8.37%[0m) [0.43% of initial]
+[Iter 3110/20000] Loss: 0.0010856 (Best: 0.0006713 @iter2999) ([91m↑8.37%[0m) [0.43% of initial]
+[Iter 3120/20000] Loss: 0.0010447 (Best: 0.0006713 @iter2999) ([92m↓3.76%[0m) [0.42% of initial]
+[Iter 3120/20000] Loss: 0.0010447 (Best: 0.0006713 @iter2999) ([92m↓3.76%[0m) [0.42% of initial]
+[Iter 3130/20000] Loss: 0.0008586 (Best: 0.0006713 @iter2999) ([92m↓17.82%[0m) [0.34% of initial]
+[Iter 3130/20000] Loss: 0.0008586 (Best: 0.0006713 @iter2999) ([92m↓17.82%[0m) [0.34% of initial]
+[Iter 3140/20000] Loss: 0.0008658 (Best: 0.0006713 @iter2999) ([91m↑0.84%[0m) [0.34% of initial]
+[Iter 3140/20000] Loss: 0.0008658 (Best: 0.0006713 @iter2999) ([91m↑0.84%[0m) [0.34% of initial]
+[Iter 3150/20000] Loss: 0.0008860 (Best: 0.0006713 @iter2999) ([91m↑2.33%[0m) [0.35% of initial]
+[Iter 3150/20000] Loss: 0.0008860 (Best: 0.0006713 @iter2999) ([91m↑2.33%[0m) [0.35% of initial]
+[Iter 3160/20000] Loss: 0.0008144 (Best: 0.0006713 @iter2999) ([92m↓8.08%[0m) [0.32% of initial]
+[Iter 3160/20000] Loss: 0.0008144 (Best: 0.0006713 @iter2999) ([92m↓8.08%[0m) [0.32% of initial]
+[Iter 3170/20000] Loss: 0.0008377 (Best: 0.0006713 @iter2999) ([91m↑2.86%[0m) [0.33% of initial]
+[Iter 3170/20000] Loss: 0.0008377 (Best: 0.0006713 @iter2999) ([91m↑2.86%[0m) [0.33% of initial]
+[Iter 3180/20000] Loss: 0.0008571 (Best: 0.0006713 @iter2999) ([91m↑2.32%[0m) [0.34% of initial]
+[Iter 3180/20000] Loss: 0.0008571 (Best: 0.0006713 @iter2999) ([91m↑2.32%[0m) [0.34% of initial]
+[Iter 3190/20000] Loss: 0.0008445 (Best: 0.0006713 @iter2999) ([92m↓1.47%[0m) [0.34% of initial]
+[Iter 3190/20000] Loss: 0.0008445 (Best: 0.0006713 @iter2999) ([92m↓1.47%[0m) [0.34% of initial]
+Iter:3199, L1 loss=0.0007892, Total loss=0.0007318, Time:18
+Iter:3199, L1 loss=0.0007892, Total loss=0.0007318, Time:18
+[Iter 3200/20000] Loss: 0.0008220 (Best: 0.0006418 @iter3196) ([92m↓2.66%[0m) [0.33% of initial]
+[Iter 3200/20000] Loss: 0.0008220 (Best: 0.0006418 @iter3196) ([92m↓2.66%[0m) [0.33% of initial]
+[Iter 3210/20000] Loss: 0.0052154 (Best: 0.0006418 @iter3196) ([91m↑534.43%[0m) [2.07% of initial]
+[Iter 3210/20000] Loss: 0.0052154 (Best: 0.0006418 @iter3196) ([91m↑534.43%[0m) [2.07% of initial]
+[Iter 3220/20000] Loss: 0.0028213 (Best: 0.0006418 @iter3196) ([92m↓45.90%[0m) [1.12% of initial]
+[Iter 3220/20000] Loss: 0.0028213 (Best: 0.0006418 @iter3196) ([92m↓45.90%[0m) [1.12% of initial]
+[Iter 3230/20000] Loss: 0.0017170 (Best: 0.0006418 @iter3196) ([92m↓39.14%[0m) [0.68% of initial]
+[Iter 3230/20000] Loss: 0.0017170 (Best: 0.0006418 @iter3196) ([92m↓39.14%[0m) [0.68% of initial]
+[Iter 3240/20000] Loss: 0.0015272 (Best: 0.0006418 @iter3196) ([92m↓11.05%[0m) [0.61% of initial]
+[Iter 3240/20000] Loss: 0.0015272 (Best: 0.0006418 @iter3196) ([92m↓11.05%[0m) [0.61% of initial]
+[Iter 3250/20000] Loss: 0.0011228 (Best: 0.0006418 @iter3196) ([92m↓26.48%[0m) [0.45% of initial]
+[Iter 3250/20000] Loss: 0.0011228 (Best: 0.0006418 @iter3196) ([92m↓26.48%[0m) [0.45% of initial]
+[Iter 3260/20000] Loss: 0.0009681 (Best: 0.0006418 @iter3196) ([92m↓13.77%[0m) [0.38% of initial]
+[Iter 3260/20000] Loss: 0.0009681 (Best: 0.0006418 @iter3196) ([92m↓13.77%[0m) [0.38% of initial]
+[Iter 3270/20000] Loss: 0.0010060 (Best: 0.0006418 @iter3196) ([91m↑3.91%[0m) [0.40% of initial]
+[Iter 3270/20000] Loss: 0.0010060 (Best: 0.0006418 @iter3196) ([91m↑3.91%[0m) [0.40% of initial]
+[Iter 3280/20000] Loss: 0.0010620 (Best: 0.0006418 @iter3196) ([91m↑5.57%[0m) [0.42% of initial]
+[Iter 3280/20000] Loss: 0.0010620 (Best: 0.0006418 @iter3196) ([91m↑5.57%[0m) [0.42% of initial]
+[Iter 3290/20000] Loss: 0.0008013 (Best: 0.0006418 @iter3196) ([92m↓24.55%[0m) [0.32% of initial]
+[Iter 3290/20000] Loss: 0.0008013 (Best: 0.0006418 @iter3196) ([92m↓24.55%[0m) [0.32% of initial]
+Iter:3299, L1 loss=0.001253, Total loss=0.001328, Time:15
+Iter:3299, L1 loss=0.001253, Total loss=0.001328, Time:15
+[Iter 3300/20000] Loss: 0.0010777 (Best: 0.0006418 @iter3196) ([91m↑34.49%[0m) [0.43% of initial]
+[Iter 3300/20000] Loss: 0.0010777 (Best: 0.0006418 @iter3196) ([91m↑34.49%[0m) [0.43% of initial]
+[Iter 3310/20000] Loss: 0.0008085 (Best: 0.0006418 @iter3196) ([92m↓24.98%[0m) [0.32% of initial]
+[Iter 3310/20000] Loss: 0.0008085 (Best: 0.0006418 @iter3196) ([92m↓24.98%[0m) [0.32% of initial]
+[Iter 3320/20000] Loss: 0.0009283 (Best: 0.0006418 @iter3196) ([91m↑14.82%[0m) [0.37% of initial]
+[Iter 3320/20000] Loss: 0.0009283 (Best: 0.0006418 @iter3196) ([91m↑14.82%[0m) [0.37% of initial]
+[Iter 3330/20000] Loss: 0.0009393 (Best: 0.0006418 @iter3196) ([91m↑1.18%[0m) [0.37% of initial]
+[Iter 3330/20000] Loss: 0.0009393 (Best: 0.0006418 @iter3196) ([91m↑1.18%[0m) [0.37% of initial]
+[Iter 3340/20000] Loss: 0.0010740 (Best: 0.0006418 @iter3196) ([91m↑14.35%[0m) [0.43% of initial]
+[Iter 3340/20000] Loss: 0.0010740 (Best: 0.0006418 @iter3196) ([91m↑14.35%[0m) [0.43% of initial]
+[Iter 3350/20000] Loss: 0.0008690 (Best: 0.0006418 @iter3196) ([92m↓19.09%[0m) [0.35% of initial]
+[Iter 3350/20000] Loss: 0.0008690 (Best: 0.0006418 @iter3196) ([92m↓19.09%[0m) [0.35% of initial]
+[Iter 3360/20000] Loss: 0.0011032 (Best: 0.0006418 @iter3196) ([91m↑26.95%[0m) [0.44% of initial]
+[Iter 3360/20000] Loss: 0.0011032 (Best: 0.0006418 @iter3196) ([91m↑26.95%[0m) [0.44% of initial]
+[Iter 3370/20000] Loss: 0.0007862 (Best: 0.0006418 @iter3196) ([92m↓28.74%[0m) [0.31% of initial]
+[Iter 3370/20000] Loss: 0.0007862 (Best: 0.0006418 @iter3196) ([92m↓28.74%[0m) [0.31% of initial]
+[Iter 3380/20000] Loss: 0.0007741 (Best: 0.0006289 @iter3379) ([92m↓1.54%[0m) [0.31% of initial]
+[Iter 3380/20000] Loss: 0.0007741 (Best: 0.0006289 @iter3379) ([92m↓1.54%[0m) [0.31% of initial]
+[Iter 3390/20000] Loss: 0.0010080 (Best: 0.0006289 @iter3379) ([91m↑30.23%[0m) [0.40% of initial]
+[Iter 3390/20000] Loss: 0.0010080 (Best: 0.0006289 @iter3379) ([91m↑30.23%[0m) [0.40% of initial]
+Iter:3399, L1 loss=0.001241, Total loss=0.00124, Time:18
+Iter:3399, L1 loss=0.001241, Total loss=0.00124, Time:18
+[Iter 3400/20000] Loss: 0.0010314 (Best: 0.0006289 @iter3379) ([91m↑2.32%[0m) [0.41% of initial]
+[Iter 3400/20000] Loss: 0.0010314 (Best: 0.0006289 @iter3379) ([91m↑2.32%[0m) [0.41% of initial]
+[Iter 3410/20000] Loss: 0.0043589 (Best: 0.0006289 @iter3379) ([91m↑322.61%[0m) [1.73% of initial]
+[Iter 3410/20000] Loss: 0.0043589 (Best: 0.0006289 @iter3379) ([91m↑322.61%[0m) [1.73% of initial]
+[Iter 3420/20000] Loss: 0.0023098 (Best: 0.0006289 @iter3379) ([92m↓47.01%[0m) [0.92% of initial]
+[Iter 3420/20000] Loss: 0.0023098 (Best: 0.0006289 @iter3379) ([92m↓47.01%[0m) [0.92% of initial]
+[Iter 3430/20000] Loss: 0.0015330 (Best: 0.0006289 @iter3379) ([92m↓33.63%[0m) [0.61% of initial]
+[Iter 3430/20000] Loss: 0.0015330 (Best: 0.0006289 @iter3379) ([92m↓33.63%[0m) [0.61% of initial]
+[Iter 3440/20000] Loss: 0.0013342 (Best: 0.0006289 @iter3379) ([92m↓12.96%[0m) [0.53% of initial]
+[Iter 3440/20000] Loss: 0.0013342 (Best: 0.0006289 @iter3379) ([92m↓12.96%[0m) [0.53% of initial]
+[Iter 3450/20000] Loss: 0.0011990 (Best: 0.0006289 @iter3379) ([92m↓10.14%[0m) [0.48% of initial]
+[Iter 3450/20000] Loss: 0.0011990 (Best: 0.0006289 @iter3379) ([92m↓10.14%[0m) [0.48% of initial]
+[Iter 3460/20000] Loss: 0.0010892 (Best: 0.0006289 @iter3379) ([92m↓9.16%[0m) [0.43% of initial]
+[Iter 3460/20000] Loss: 0.0010892 (Best: 0.0006289 @iter3379) ([92m↓9.16%[0m) [0.43% of initial]
+[Iter 3470/20000] Loss: 0.0009957 (Best: 0.0006289 @iter3379) ([92m↓8.58%[0m) [0.40% of initial]
+[Iter 3470/20000] Loss: 0.0009957 (Best: 0.0006289 @iter3379) ([92m↓8.58%[0m) [0.40% of initial]
+[Iter 3480/20000] Loss: 0.0009311 (Best: 0.0006289 @iter3379) ([92m↓6.49%[0m) [0.37% of initial]
+[Iter 3480/20000] Loss: 0.0009311 (Best: 0.0006289 @iter3379) ([92m↓6.49%[0m) [0.37% of initial]
+Optimizing 
+Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 0, 'end_sample_pseudo': 30000}
+Create gaussians1
+GsDict.keys() is dict_keys(['gs0', 'gs1'])
+
+Starting training...
+Total iterations: 20000
+==================================================
+[Iter 10/20000] Loss: 0.2179127 (Best: 0.2126908 @iter10) [100.00% of initial]
+[Iter 20/20000] Loss: 0.1746701 (Best: 0.1693031 @iter20) ([92m↓19.84%[0m) [69.39% of initial]
+[Iter 30/20000] Loss: 0.1374906 (Best: 0.1327878 @iter30) ([92m↓21.29%[0m) [54.62% of initial]
+[Iter 40/20000] Loss: 0.1123922 (Best: 0.1098378 @iter40) ([92m↓18.25%[0m) [44.65% of initial]
+[Iter 50/20000] Loss: 0.0993461 (Best: 0.0965453 @iter49) ([92m↓11.61%[0m) [39.47% of initial]
+[Iter 60/20000] Loss: 0.0936759 (Best: 0.0908450 @iter59) ([92m↓5.71%[0m) [37.22% of initial]
+[Iter 70/20000] Loss: 0.0884556 (Best: 0.0869402 @iter70) ([92m↓5.57%[0m) [35.14% of initial]
+[Iter 80/20000] Loss: 0.0851898 (Best: 0.0831016 @iter80) ([92m↓3.69%[0m) [33.85% of initial]
+[Iter 90/20000] Loss: 0.0824184 (Best: 0.0801595 @iter88) ([92m↓3.25%[0m) [32.74% of initial]
+Iter:99, L1 loss=0.05723, Total loss=0.07877, Time:13
+[Iter 100/20000] Loss: 0.0786774 (Best: 0.0766314 @iter97) ([92m↓4.54%[0m) [31.26% of initial]
+[Iter 110/20000] Loss: 0.0753295 (Best: 0.0731336 @iter106) ([92m↓4.26%[0m) [29.93% of initial]
+[Iter 120/20000] Loss: 0.0714518 (Best: 0.0685731 @iter118) ([92m↓5.15%[0m) [28.39% of initial]
+[Iter 130/20000] Loss: 0.0667159 (Best: 0.0642162 @iter130) ([92m↓6.63%[0m) [26.51% of initial]
+[Iter 140/20000] Loss: 0.0635590 (Best: 0.0613103 @iter140) ([92m↓4.73%[0m) [25.25% of initial]
+[Iter 150/20000] Loss: 0.0613015 (Best: 0.0584095 @iter148) ([92m↓3.55%[0m) [24.35% of initial]
+[Iter 160/20000] Loss: 0.0590986 (Best: 0.0559598 @iter157) ([92m↓3.59%[0m) [23.48% of initial]
+[Iter 170/20000] Loss: 0.0564072 (Best: 0.0535446 @iter167) ([92m↓4.55%[0m) [22.41% of initial]
+[Iter 180/20000] Loss: 0.0523819 (Best: 0.0500636 @iter179) ([92m↓7.14%[0m) [20.81% of initial]
+[Iter 190/20000] Loss: 0.0495916 (Best: 0.0478368 @iter188) ([92m↓5.33%[0m) [19.70% of initial]
+Iter:199, L1 loss=0.03439, Total loss=0.04979, Time:13
+[Iter 200/20000] Loss: 0.0478299 (Best: 0.0457557 @iter198) ([92m↓3.55%[0m) [19.00% of initial]
+[Iter 210/20000] Loss: 0.0450539 (Best: 0.0428284 @iter209) ([92m↓5.80%[0m) [17.90% of initial]
+[Iter 220/20000] Loss: 0.0440717 (Best: 0.0412574 @iter219) ([92m↓2.18%[0m) [17.51% of initial]
+[Iter 230/20000] Loss: 0.0422844 (Best: 0.0398593 @iter227) ([92m↓4.06%[0m) [16.80% of initial]
+[Iter 240/20000] Loss: 0.0402716 (Best: 0.0377602 @iter238) ([92m↓4.76%[0m) [16.00% of initial]
+[Iter 250/20000] Loss: 0.0379821 (Best: 0.0362288 @iter248) ([92m↓5.68%[0m) [15.09% of initial]
+[Iter 260/20000] Loss: 0.0359069 (Best: 0.0343433 @iter260) ([92m↓5.46%[0m) [14.27% of initial]
+[Iter 270/20000] Loss: 0.0349451 (Best: 0.0328457 @iter269) ([92m↓2.68%[0m) [13.88% of initial]
+[Iter 280/20000] Loss: 0.0346833 (Best: 0.0316945 @iter277) ([92m↓0.75%[0m) [13.78% of initial]
+[Iter 290/20000] Loss: 0.0331149 (Best: 0.0304131 @iter287) ([92m↓4.52%[0m) [13.16% of initial]
+Iter:299, L1 loss=0.02212, Total loss=0.03347, Time:13
+[Iter 300/20000] Loss: 0.0308962 (Best: 0.0289975 @iter300) ([92m↓6.70%[0m) [12.27% of initial]
+[Iter 310/20000] Loss: 0.0294044 (Best: 0.0274145 @iter310) ([92m↓4.83%[0m) [11.68% of initial]
+[Iter 320/20000] Loss: 0.0279572 (Best: 0.0266253 @iter320) ([92m↓4.92%[0m) [11.11% of initial]
+[Iter 330/20000] Loss: 0.0275480 (Best: 0.0256602 @iter330) ([92m↓1.46%[0m) [10.94% of initial]
+[Iter 340/20000] Loss: 0.0255335 (Best: 0.0244979 @iter340) ([92m↓7.31%[0m) [10.14% of initial]
+[Iter 350/20000] Loss: 0.0261390 (Best: 0.0235734 @iter349) ([91m↑2.37%[0m) [10.38% of initial]
+[Iter 360/20000] Loss: 0.0248085 (Best: 0.0227957 @iter358) ([92m↓5.09%[0m) [9.86% of initial]
+[Iter 370/20000] Loss: 0.0245300 (Best: 0.0222807 @iter368) ([92m↓1.12%[0m) [9.75% of initial]
+[Iter 380/20000] Loss: 0.0221990 (Best: 0.0210888 @iter379) ([92m↓9.50%[0m) [8.82% of initial]
+[Iter 390/20000] Loss: 0.0216734 (Best: 0.0202980 @iter385) ([92m↓2.37%[0m) [8.61% of initial]
