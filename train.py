@@ -68,7 +68,7 @@ def setup_logger(log_path):
     
     return logger
 
-def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold):
+def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold, args):
     # 使用全局logger
     global logger
     
@@ -114,10 +114,12 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
     ema_loss_for_log = 0.0
     first_iter += 1
-    
+
     viewpoint_stack, pseudo_stack = None, None
     pseudo_stack_co = None
-    
+
+    allCameras = scene.getTrainCameras().copy()
+
     logger.info("\nStarting training...")
     logger.info(f"Total iterations: {opt.iterations}")
     logger.info("="*50)
@@ -162,24 +164,30 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
         if (iteration - 1) == debug_from:
             pipe.debug = True
+        # print("是否使用归一化图像作为GT", args.normal)
+        gt_image = viewpoint_cam.normalized_image.cuda() if args.normal else viewpoint_cam.original_image.cuda()
+
+        RenderDict = {}
+        LossDict = {}
 
         bg = torch.rand((3), device="cuda") if opt.random_background else background
 
         # 为每个高斯场渲染
-        RenderDict = {}
-        LossDict = {}
+        
         for i in range(gaussiansN):
             RenderDict[f"render_pkg_gs{i}"] = render(viewpoint_cam, GsDict[f'gs{i}'], pipe, bg)
             RenderDict[f"image_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["render"]
+            # RenderDict[f"depth_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["depth"] 还没实现
+            # RenderDict[f"alpha_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["alpha"]
             RenderDict[f"viewspace_point_tensor_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["viewspace_points"]
             RenderDict[f"visibility_filter_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["visibility_filter"]
             RenderDict[f"radii_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["radii"]
 
         # 计算每个高斯场的损失
-        gt_image = viewpoint_cam.normalized_image.cuda()
+        # gt_image = viewpoint_cam.normalized_image.cuda()
         for i in range(gaussiansN):
             Ll1 = l1_loss(RenderDict[f"image_gs{i}"], gt_image)
-            LossDict[f"loss_gs{i}"] = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(RenderDict[f"image_gs{i}"], gt_image))
+            LossDict[f"loss_gs{i}"] = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(RenderDict[f"image_gs{i}"], gt_image)) # dssim是0.2
             LossDict[f"loss_gs{i}"].backward()
 
         iter_end.record()
@@ -456,12 +464,13 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
-    parser.add_argument("--coprune", action='store_true', default=False) # 多高斯
+    parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
+    parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     
     # 添加伪视角相关参数
     parser.add_argument("--onlyrgb", action='store_true', default=False)
+    parser.add_argument("--normal", action='store_true', default=False, help="是否使用归一化图像作为GT")
     args = parser.parse_args(sys.argv[1:])
     
     lp.train_num = args.train_num
@@ -493,6 +502,6 @@ if __name__ == "__main__":
         setattr(args, key, value) # 最后按照config设置
     
     logger.info("args is ", args)
-    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint,  args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold)
+    training(lp.extract(args), op.extract(args), pp.extract(args), args.test_iterations, args.save_iterations, args.checkpoint_iterations, args.start_checkpoint,  args.debug_from, args.gaussiansN, args.coreg, args.coprune, args.coprune_threshold, args)
 
     logger.info("\nTraining complete.")
