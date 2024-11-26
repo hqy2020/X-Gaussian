@@ -70,7 +70,7 @@ def _ssim(img1, img2, window, window_size, channel, size_average=True):
 def loss_photometric(image, gt_image, opt, valid=None):
     Ll1 =  l1_loss_mask(image, gt_image, mask=valid)
     loss = ((1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(image, gt_image, mask=valid)))
-    return loss
+    return Ll1, loss
 
 
 

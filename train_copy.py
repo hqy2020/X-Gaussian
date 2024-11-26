@@ -144,7 +144,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     
     # 添加伪视角损失的跟踪变量
     ema_pseudo_loss_for_log = 0.0
-    
+    print("是否使用归一化图像作为GT", args.normal)
     for iteration in range(first_iter, opt.iterations + 1):
         iter_start.record()
 
@@ -164,7 +164,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
         if (iteration - 1) == debug_from:
             pipe.debug = True
-        # print("是否使用归一化图像作为GT", args.normal)
+        
         gt_image = viewpoint_cam.normalized_image.cuda() if args.normal else viewpoint_cam.original_image.cuda()
 
         RenderDict = {}
@@ -184,35 +184,12 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
             RenderDict[f"radii_gs{i}"] = RenderDict[f"render_pkg_gs{i}"]["radii"]
 
         # 计算每个高斯场的损失
-        
+        # gt_image = viewpoint_cam.normalized_image.cuda()
         for i in range(gaussiansN):
-            # LossDict[f"loss_gs{i}"] = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(RenderDict[f"image_gs{i}"], gt_image)) # dssim是0.2
-            Ll1, LossDict[f"loss_gs{i}"] = loss_photometric(RenderDict[f"image_gs{i}"], gt_image, opt=opt)
-        # 不是只有rgb损失
-        if not args.onlyrgb:
-            if iteration % args.sample_pseudo_interval == 0 and iteration <= args.end_sample_pseudo:
-                loss_scale = min((iteration - args.start_sample_pseudo) / 500., 1)
-                if not pseudo_stack_co:
-                    pseudo_stack_co = scene.getPseudoCameras().copy()
-                pseudo_cam_co = pseudo_stack_co.pop(randint(0, len(pseudo_stack_co) - 1))
-
-                for i in range(args.gaussiansN):
-                        RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
-                        RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
-                        # RenderDict[f"depth_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["depth"]
-                if iteration >= args.start_sample_pseudo:
-                    ####################################################################
-                    # co-reg
-                    if args.coreg:
-                        # co photometric
-                        for i in range(args.gaussiansN):
-                            for j in range(args.gaussiansN):
-                                if i != j:
-                                    LossDict[f"loss_gs{i}"] += loss_photometric(RenderDict[f"image_pseudo_co_gs{i}"], RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), opt=opt)[1] / (args.gaussiansN - 1)
-        # 梯度回传
-        loss = LossDict["loss_gs0"]
-        for i in range(args.gaussiansN):
+            Ll1 = l1_loss(RenderDict[f"image_gs{i}"], gt_image)
+            LossDict[f"loss_gs{i}"] = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(RenderDict[f"image_gs{i}"], gt_image)) # dssim是0.2
             LossDict[f"loss_gs{i}"].backward()
+
         iter_end.record()
 
         with torch.no_grad():
@@ -316,7 +293,40 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     logger.info(f"Pruning {pruned_points} points ({prune_ratio:.1f}%) from gaussian{i} at iteration {iteration}")
                     GsDict[f"gs{i}"].prune_from_mask(GsDict[f"mask_inconsistent_gs{i}"].squeeze(), iter=iteration)
 
-            
+            # 添加伪视角损失的计算
+            if iteration % opt.sample_pseudo_interval == 0 and iteration <= opt.end_sample_pseudo:
+                loss_scale = min((iteration - opt.start_sample_pseudo) / 500., 1)
+                if not pseudo_stack_co:
+                    pseudo_stack_co = scene.getPseudoCameras().copy()
+                pseudo_cam_co = pseudo_stack_co.pop(randint(0, len(pseudo_stack_co) - 1))
+
+                pseudo_loss_total = 0.0  # 用于累积当前迭代的伪视角损失
+                
+                for i in range(gaussiansN):
+                    RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
+                    RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
+                    
+                if iteration >= opt.start_sample_pseudo:
+                    # co-reg 协同注册损失
+                    if coreg:
+                        for i in range(gaussiansN):
+                            for j in range(gaussiansN):
+                                if i != j:
+                                    pseudo_loss = loss_photometric(
+                                        RenderDict[f"image_pseudo_co_gs{i}"], 
+                                        RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), 
+                                        opt=opt
+                                    ) / (gaussiansN - 1)
+                                    LossDict[f"loss_gs{i}"] += pseudo_loss
+                                    pseudo_loss_total += pseudo_loss.item()
+                                    
+                # 更新伪视角损失的指数移动平均
+                if pseudo_loss_total > 0:
+                    ema_pseudo_loss_for_log = 0.4 * pseudo_loss_total + 0.6 * ema_pseudo_loss_for_log
+                    
+                    # 每10次迭代输出一次伪视角损失
+                    if iteration % 10 == 0:
+                        logger.info(f"[Iter {iteration}] Pseudo Loss: {ema_pseudo_loss_for_log:.7f}")
 
     # 训练结束后打印统计信息
     logger.info("\nTraining completed!")
@@ -404,7 +414,7 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
                     gt_image_norm = viewpoint.normalized_image.to("cuda")
 
                     ssim_test += ssim(image_backnorm, gt_image).mean().double()
-                    psnr_test += psnr(image, gt_image_norm).mean().double()
+                    psnr_test += psnr(image_backnorm, gt_image).mean().double()
 
                 psnr_test /= len(config['cameras'])
                 ssim_test /= len(config['cameras'])
@@ -454,13 +464,13 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
+    parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
     parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     
     # 添加伪视角相关参数
     parser.add_argument("--onlyrgb", action='store_true', default=False)
-    parser.add_argument("--normal", action='store_true', default=True, help="是否使用归一化图像作为GT") # 不用归一化会崩
+    parser.add_argument("--normal", action='store_true', default=True, help="是否使用归一化图像作为GT")
     args = parser.parse_args(sys.argv[1:])
     
     lp.train_num = args.train_num
