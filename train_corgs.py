@@ -1,19 +1,9 @@
-#
-# Copyright (C) 2023, Inria
-# GRAPHDECO research group, https://team.inria.fr/graphdeco
-# All rights reserved.
-#
-# This software is free for non-commercial, research and evaluation use
-# under the terms of the LICENSE.md file.
-#
-# For inquiries contact  george.drettakis@inria.fr
-#
+
 try:
     from torch.utils.tensorboard import SummaryWriter
     TENSORBOARD_FOUND = True
 except ImportError:
     TENSORBOARD_FOUND = False
-
 import torchvision
 import numpy as np
 import matplotlib.cm as cm
@@ -43,6 +33,7 @@ import kmeans1d
 import open3d as o3d
 
 import copy
+
 
 def seed_everything(seed):
     random.seed(seed)
@@ -84,8 +75,8 @@ def training(dataset, opt, pipe, args):
     bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
-    iter_start = torch.cuda.Event(enable_timing=True)
-    iter_end = torch.cuda.Event(enable_timing=True)
+    iter_start = torch.cuda.Event(enable_timing = True)
+    iter_end = torch.cuda.Event(enable_timing = True)
     progress_bar = tqdm(range(first_iter, opt.iterations), desc="Training progress")
 
     viewpoint_stack, pseudo_stack = None, None
@@ -420,7 +411,6 @@ def training_report(args, tb_writer, iteration, loss, l1_loss, testing_iteration
         torch.cuda.empty_cache()
 
 if __name__ == "__main__":
-    # Set up command line argument parser
     parser = ArgumentParser(description="Training")
     lp = ModelParams(parser)
     op = OptimizationParams(parser)
@@ -429,7 +419,6 @@ if __name__ == "__main__":
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
-
     parser.add_argument("--configs", type=str, default = "")
     parser.add_argument("--test_iterations", nargs="+", type=int, default=[500, 2000, 3000, 5000, 7000, 10000, 15000, 30000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[10000, 30000])

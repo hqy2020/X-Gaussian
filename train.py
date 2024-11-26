@@ -14,6 +14,7 @@ from arguments import ModelParams, PipelineParams, OptimizationParams
 import datetime
 import time
 import yaml
+import random
 import shutil
 import numpy as np
 import open3d as o3d
@@ -21,6 +22,15 @@ import logging
 
 from pdb import set_trace as stx
 
+def seed_everything(seed):
+    random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    # torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
+    # torch.backends.cudnn.benchmark = False
 # import debugpy
 # try:
 #     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
@@ -95,13 +105,16 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
             logger.info(f"Create gaussians{i}")
     logger.info(f"GsDict.keys() is {GsDict.keys()}")
 
+
     bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
     iter_start = torch.cuda.Event(enable_timing = True)
     iter_end = torch.cuda.Event(enable_timing = True)
+
     ema_loss_for_log = 0.0
     first_iter += 1
+    
     viewpoint_stack, pseudo_stack = None, None
     pseudo_stack_co = None
     
@@ -465,6 +478,10 @@ if __name__ == "__main__":
     logger = setup_logger(log_path)
     
     logger.info("Optimizing " + args.model_path)
+
+    # 设置随机种子
+    seed_everything(42)
+
     safe_state(args.quiet)
     
     torch.autograd.set_detect_anomaly(args.detect_anomaly)
