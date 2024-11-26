@@ -108,10 +108,8 @@ class Scene:
     def getTestCameras(self, scale=1.0):
         return self.test_cameras[scale]
     
-    def getAddCameras(self, scale=1.0):
+    def getAddCameras(self, scale=1.0): # 目前没用到
         return self.add_cameras[scale]
+    
     def getPseudoCameras(self, scale=1.0):
-        if len(self.pseudo_cameras) == 0:
-            return [None]
-        else:
-            return self.pseudo_cameras[scale]
+        return self.pseudo_cameras[scale]

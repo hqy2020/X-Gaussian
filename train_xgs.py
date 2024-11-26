@@ -152,7 +152,9 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
                     gt_image_norm = viewpoint.normalized_image.to("cuda")
 
                     ssim_test += ssim(image_backnorm, gt_image).mean().double()
-                    psnr_test += psnr(image, gt_image_norm).mean().double()
+                    # psnr_test += psnr(image, gt_image_norm).mean().double()
+                    psnr_test += psnr(image_backnorm, gt_image).mean().double()
+                     
 
                 psnr_test /= len(config['cameras'])
                 ssim_test /= len(config['cameras'])
@@ -170,6 +172,7 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Training script parameters") 
+    parser.add_argument("--train_num", type=int, default=50)
     lp = ModelParams(parser)                      # 
     op = OptimizationParams(parser)
     pp = PipelineParams(parser)
@@ -185,6 +188,7 @@ if __name__ == "__main__":
     parser.add_argument("--start_checkpoint", type=str, default = None)
     parser.add_argument("--gpu_id", default="0", help="gpu to use")
     args = parser.parse_args(sys.argv[1:])
+    lp.train_num = args.train_num
     args.save_iterations.append(args.iterations)
 
     os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'

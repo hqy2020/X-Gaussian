@@ -8,7 +8,7 @@ import sys
 from scene import Scene, GaussianModel_Xray
 from utils.general_utils import safe_state, gen_log
 from tqdm import tqdm
-from utils.image_utils import psnr, time2file_name
+from utils.image_utils import min_max_norm, psnr, time2file_name
 from argparse import ArgumentParser, Namespace
 from arguments import ModelParams, PipelineParams, OptimizationParams
 import datetime
@@ -118,7 +118,6 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     viewpoint_stack, pseudo_stack = None, None
     pseudo_stack_co = None
 
-    allCameras = scene.getTrainCameras().copy()
 
     logger.info("\nStarting training...")
     logger.info(f"Total iterations: {opt.iterations}")
@@ -142,6 +141,11 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     RED = '\033[91m'
     RESET = '\033[0m'
     
+    # print("train num: ", len(scene.getTrainCameras())) # 长度
+    # print("test num: ", len(scene.getTestCameras()))
+    # print("add num: ", len(scene.getAddCameras()))
+    # print("pseudo num: ", len(scene.getPseudoCameras()))
+    
     # 添加伪视角损失的跟踪变量
     ema_pseudo_loss_for_log = 0.0
     
@@ -160,13 +164,17 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         # 选择随机相机视角
         if not viewpoint_stack:
             viewpoint_stack = scene.getTrainCameras().copy()
+        # print("viewpoint_cam length: ", len(viewpoint_stack))
         viewpoint_cam = viewpoint_stack.pop(randint(0, len(viewpoint_stack)-1))
+        # print("viewpoint_cam length: ", len(viewpoint_stack))
+        
+        
 
         if (iteration - 1) == debug_from:
             pipe.debug = True
-        # print("是否使用归一化图像作为GT", args.normal)
+        
         gt_image = viewpoint_cam.normalized_image.cuda() if args.normal else viewpoint_cam.original_image.cuda()
-
+       
         RenderDict = {}
         LossDict = {}
 
@@ -192,13 +200,15 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         if not args.onlyrgb:
             if iteration % args.sample_pseudo_interval == 0 and iteration <= args.end_sample_pseudo:
                 loss_scale = min((iteration - args.start_sample_pseudo) / 500., 1)
+                
                 if not pseudo_stack_co:
                     pseudo_stack_co = scene.getPseudoCameras().copy()
                 pseudo_cam_co = pseudo_stack_co.pop(randint(0, len(pseudo_stack_co) - 1))
-
+                
                 for i in range(args.gaussiansN):
                         RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
                         RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
+                        # print(f"gs{i} pseudo_co image max: {RenderDict[f'image_pseudo_co_gs{i}'].max()}, min: {RenderDict[f'image_pseudo_co_gs{i}'].min()}")
                         # RenderDict[f"depth_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["depth"]
                 if iteration >= args.start_sample_pseudo:
                     ####################################################################
@@ -208,7 +218,9 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                         for i in range(args.gaussiansN):
                             for j in range(args.gaussiansN):
                                 if i != j:
-                                    LossDict[f"loss_gs{i}"] += loss_photometric(RenderDict[f"image_pseudo_co_gs{i}"], RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), opt=opt)[1] / (args.gaussiansN - 1)
+                                    loss_value = loss_photometric(RenderDict[f"image_pseudo_co_gs{i}"], RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), opt=opt)[1] / (args.gaussiansN - 1)
+                                    logger.info(f"[Iter {iteration}] Co-reg loss between gs{i} and gs{j}: {loss_value.item():.7f}")
+                                    LossDict[f"loss_gs{i}"] += loss_value
         # 梯度回传
         loss = LossDict["loss_gs0"]
         for i in range(args.gaussiansN):
@@ -281,16 +293,23 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     size_threshold = 20 if iteration > opt.opacity_reset_interval else None
                     for i in range(gaussiansN):
                         GsDict[f"gs{i}"].densify_and_prune(opt.densify_grad_threshold, 0.005, scene.cameras_extent, size_threshold)
-
+                # x-gaussian的重置透明度
+                # if iteration % opt.opacity_reset_interval == 0 or (dataset.white_background and iteration == opt.densify_from_iter):
+                #     for i in range(gaussiansN):
+                #         GsDict[f"gs{i}"].reset_opacity()
             # 优化器步进
             if iteration < opt.iterations:
                 for i in range(gaussiansN):
                     GsDict[f"gs{i}"].optimizer.step()
                     GsDict[f"gs{i}"].optimizer.zero_grad(set_to_none = True)
 
-            # 重置不透明度
-            for i in range(gaussiansN):
-                if iteration % opt.opacity_reset_interval == 0:
+            # corgs的重置透明度
+            for i in range(args.gaussiansN):
+                GsDict[f"gs{i}"].update_learning_rate(iteration)
+                if (iteration - args.start_sample_pseudo - 1) % opt.opacity_reset_interval == 0 and \
+                        iteration > args.start_sample_pseudo:
+                # if iteration % opt.opacity_reset_interval == 0 or (dataset.white_background and iteration == opt.densify_from_iter):
+                    print(f"reset opacity of gaussians-{i} at iteration {iteration}")
                     GsDict[f"gs{i}"].reset_opacity()
 
             # 协同剪枝
@@ -455,7 +474,7 @@ if __name__ == "__main__":
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
     parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
-    parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
+    parser.add_argument("--coprune", action='store_true', default=False) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     
     # 添加伪视角相关参数

@@ -367,7 +367,7 @@ def generate_random_poses_llff(views):
 
 def generate_random_poses_pickle(views):
     """Generates random poses."""
-    n_poses = 10000 # args.n_random_poses
+    n_poses = 3 # args.n_random_poses
     poses = []
     for view in views:
         tmp_view = np.eye(4)
