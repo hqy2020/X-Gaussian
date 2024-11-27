@@ -195,6 +195,21 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
         for i in range(gaussiansN):
             # LossDict[f"loss_gs{i}"] = (1.0 - opt.lambda_dssim) * Ll1 + opt.lambda_dssim * (1.0 - ssim(RenderDict[f"image_gs{i}"], gt_image)) # dssim是0.2
             Ll1, LossDict[f"loss_gs{i}"] = loss_photometric(RenderDict[f"image_gs{i}"], gt_image, opt=opt)
+        
+        if args.perturbation:
+            if iteration >= args.start_perturbation:
+                # 好的监督差的
+                # supervised_img = RenderDict[f"image_gs1"].clone().detach();
+                # loss_value = loss_photometric(RenderDict[f"image_gs0"], supervised_img, opt=opt)[1]
+                # # logger.info(f"[Iter {iteration}] Perturbation loss between gs0 and gs1: {loss_value.item():.7f}")
+                # LossDict[f"loss_gs0"] += loss_value
+                # gs0和gs1相互监督
+                for i in range(gaussiansN):
+                    for j in range(gaussiansN):
+                        if i != j:
+                            loss_value = loss_photometric(RenderDict[f"image_gs{i}"], RenderDict[f"image_gs{j}"].clone().detach(), opt=opt)[1]
+                            # logger.info(f"[Iter {iteration}] Perturbation loss between gs{i} and gs{j}: {loss_value.item():.7f}")
+                            LossDict[f"loss_gs{i}"] += loss_value
         # 不是只有rgb损失
         if not args.onlyrgb:
             if iteration % args.sample_pseudo_interval == 0 and iteration <= args.end_sample_pseudo:
@@ -506,6 +521,7 @@ if __name__ == "__main__":
     parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
     parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
+    parser.add_argument("--perturbation", action='store_true', default=False) # 多一个扰动损失
     
     # 添加伪视角相关参数
     parser.add_argument("--onlyrgb", action='store_true', default=False)

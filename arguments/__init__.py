@@ -96,6 +96,7 @@ class OptimizationParams(ParamGroup): # TODO: 设置超参数,x->y,x是3dgs，y�
         self.sample_pseudo_interval = 1
         self.start_sample_pseudo = 2000
         self.end_sample_pseudo = 10000
+        self.start_perturbation = 2000
         
         # 最后调用父类构造函数
         super().__init__(parser, "Optimization Parameters" if name is None else name)
