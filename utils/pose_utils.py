@@ -366,18 +366,63 @@ def generate_random_poses_llff(views):
     return render_poses
 
 def generate_random_poses_pickle(views):
+    # """Generates random poses."""
+    # n_poses = 3 # args.n_random_poses
+    # poses = []
+    # for view in views:
+    #     tmp_view = np.eye(4)
+    #     tmp_view[:3] = np.concatenate([view.R.T, view.T[:, None]], 1)
+    #     tmp_view = np.linalg.inv(tmp_view)
+    #     tmp_view[:, 1:3] *= -1
+    #     poses.append(tmp_view)
+    # poses = np.stack(poses, 0)
+
+    # poses, transform = recenter_poses(poses)
+
+    # # Get radii for spiral path using 90th percentile of camera positions.
+    # positions = poses[:, :3, 3]
+    # radii = np.percentile(np.abs(positions), 100, 0)
+    # radii = np.concatenate([radii, [1.]])
+
+    # # Generate random poses.
+    # random_poses = []
+    # cam2world = poses_avg(poses)
+    # up = poses[:, :3, 1].mean(0)
+    # for _ in range(n_poses):
+    #   t = radii * np.concatenate([2 * np.random.rand(3) - 1., [1,]])
+    #   position = cam2world @ t
+    #   lookat = cam2world @ [0, 0, -1, 1.]
+    #   z_axis = position - lookat
+    #   random_pose = np.eye(4)
+    #   random_pose[:3] = viewmatrix(z_axis, up, position)
+    #   random_pose = np.linalg.inv(transform) @ random_pose
+    #   random_pose[:3, 1:3] *= -1
+    #   random_poses.append(np.linalg.inv(random_pose))
+    # render_poses = np.stack(random_poses, axis=0)
+    # return render_poses
     """Generates random poses."""
-    n_poses = 3 # args.n_random_poses
-    poses = []
+    n_poses = 10000 # args.n_random_poses
+    poses, bounds = [], []
     for view in views:
         tmp_view = np.eye(4)
         tmp_view[:3] = np.concatenate([view.R.T, view.T[:, None]], 1)
         tmp_view = np.linalg.inv(tmp_view)
         tmp_view[:, 1:3] *= -1
         poses.append(tmp_view)
+        bounds.append(view.bounds)
     poses = np.stack(poses, 0)
+    bounds = np.stack(bounds) # np.array([[ 16.21311152, 153.86329729]])
 
+    scale = 1. / (bounds.min() * .75)
+    poses[:, :3, 3] *= scale
+    bounds *= scale
     poses, transform = recenter_poses(poses)
+
+    # Find a reasonable 'focus depth' for this dataset as a weighted average
+    # of near and far bounds in disparity space.
+    close_depth, inf_depth = bounds.min() * .9, bounds.max() * 5.
+    dt = .75
+    focal = 1 / (((1 - dt) / close_depth + dt / inf_depth))
 
     # Get radii for spiral path using 90th percentile of camera positions.
     positions = poses[:, :3, 3]
@@ -391,12 +436,13 @@ def generate_random_poses_pickle(views):
     for _ in range(n_poses):
       t = radii * np.concatenate([2 * np.random.rand(3) - 1., [1,]])
       position = cam2world @ t
-      lookat = cam2world @ [0, 0, -1, 1.]
+      lookat = cam2world @ [0, 0, -focal, 1.]
       z_axis = position - lookat
       random_pose = np.eye(4)
       random_pose[:3] = viewmatrix(z_axis, up, position)
       random_pose = np.linalg.inv(transform) @ random_pose
       random_pose[:3, 1:3] *= -1
+      random_pose[:3, 3] /= scale
       random_poses.append(np.linalg.inv(random_pose))
     render_poses = np.stack(random_poses, axis=0)
     return render_poses

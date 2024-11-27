@@ -25,6 +25,7 @@ class Scene:
         self.volume_positions = None
         self.image_3d = None
         self.gaussians = gaussians
+        self.bounds = None
 
         if load_iteration:
             if load_iteration == -1:
@@ -81,7 +82,7 @@ class Scene:
             pseudo_cams = []
             pseudo_poses = generate_random_poses_pickle(self.train_cameras[resolution_scale])
             view = self.train_cameras[resolution_scale][0]
-            
+            self.bounds = view.bounds
             for pose in pseudo_poses:
                 pseudo_cams.append(PseudoCamera(
                     R=pose[:3, :3].T, T=pose[:3, 3], FoVx=view.FoVx, FoVy=view.FoVy,

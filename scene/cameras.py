@@ -7,7 +7,7 @@ from utils.image_utils import min_max_norm
 class Camera(nn.Module):
     def __init__(self, colmap_id, R, T, FoVx, FoVy, image, gt_alpha_mask,
                  image_name, uid, angle,
-                 trans=np.array([0.0, 0.0, 0.0]), scale=1.0, data_device = "cuda"
+                 trans=np.array([0.0, 0.0, 0.0]), scale=1.0, data_device = "cuda", bounds = None
                  ):
         super(Camera, self).__init__()
 
@@ -19,7 +19,7 @@ class Camera(nn.Module):
         self.FoVy = FoVy                
         self.image_name = image_name    
         self.angle = angle    # x-gaussion 新添加的
-
+        self.bounds = bounds if bounds is not None else np.array([[-1, -1, -1], [1, 1, 1]], dtype=np.float32)
         try:
             self.data_device = torch.device(data_device)
         except Exception as e:
