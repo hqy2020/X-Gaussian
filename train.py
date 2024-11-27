@@ -34,14 +34,7 @@ def seed_everything(seed):
     # torch.cuda.manual_seed(seed)
     torch.backends.cudnn.deterministic = True
     # torch.backends.cudnn.benchmark = False
-# import debugpy
-# try:
-#     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
-#     debugpy.listen(("localhost", 9501))
-#     logger.info("Waiting for debugger attach")
-#     debugpy.wait_for_client()
-# except Exception as e:
-#     pass
+
 
 def setup_logger(log_path):
     """设置logger将输出同时写入文件和终端"""
@@ -70,7 +63,14 @@ def setup_logger(log_path):
     logger.addHandler(ch)
     
     return logger
-
+# import debugpy
+# try:
+#     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
+#     debugpy.listen(("localhost", 9501))
+#     # logger.info("Waiting for debugger attach")
+#     debugpy.wait_for_client()
+# except Exception as e:
+#     pass
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold, args):
     # 使用全局logger
     global logger
@@ -222,7 +222,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                 for i in range(args.gaussiansN):
                         RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
                         RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
-                        # logger.info(f"gs{i} pseudo_co image max: {RenderDict[f'image_pseudo_co_gs{i}'].max()}, min: {RenderDict[f'image_pseudo_co_gs{i}'].min()}")  # TODO: 之后打印
+                        logger.info(f"gs{i} pseudo_co image max: {RenderDict[f'image_pseudo_co_gs{i}'].max()}, min: {RenderDict[f'image_pseudo_co_gs{i}'].min()}")  # TODO: 之后打印
                         # RenderDict[f"depth_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["depth"]
                 if iteration >= args.start_sample_pseudo:
                     ####################################################################
@@ -518,7 +518,7 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
+    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
     parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     parser.add_argument("--perturbation", action='store_true', default=False) # 多一个扰动损失

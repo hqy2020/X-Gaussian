@@ -86,7 +86,7 @@ class Scene:
             for pose in pseudo_poses:
                 pseudo_cams.append(PseudoCamera(
                     R=pose[:3, :3].T, T=pose[:3, 3], FoVx=view.FoVx, FoVy=view.FoVy,
-                    width=view.image_width, height=view.image_height
+                    width=view.image_width, height=view.image_height, angle=view.angle
                 ))
             self.pseudo_cameras[resolution_scale] = pseudo_cams
 

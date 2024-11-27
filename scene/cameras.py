@@ -69,7 +69,7 @@ class MiniCam:
         self.camera_center = view_inv[3][:3]
 
 class PseudoCamera(nn.Module):
-    def __init__(self, R, T, FoVx, FoVy, width, height, trans=np.array([0.0, 0.0, 0.0]), scale=1.0 ):
+    def __init__(self, R, T, FoVx, FoVy, width, height, angle,trans=np.array([0.0, 0.0, 0.0]), scale=1.0 ):
         super(PseudoCamera, self).__init__()
 
         self.R = R
@@ -78,6 +78,7 @@ class PseudoCamera(nn.Module):
         self.FoVy = FoVy
         self.image_width = width
         self.image_height = height
+        self.angle = angle    # x-gaussion 新添加的
 
         self.zfar = 100.0
         self.znear = 0.01
