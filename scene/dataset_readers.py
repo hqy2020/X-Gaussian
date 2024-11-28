@@ -421,7 +421,7 @@ def normalize_and_save_image(img_arr, save_path):
     # 保存为PNG
     iio.imwrite(save_path, img_uint8)
 
-def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, add_num = 50, train_num = 50): # TODO: ACUI
+def Xray_readNerfSyntheticInfo(args,path, eval, cube_pcd_init = True, interval = 2, add_num = 50, train_num = 50): # TODO: ACUI
     print("Reading Training Transforms")
     train_cam_infos = Xray_readCamerasFromTransforms(path, type = "train")
     print("Reading Test Transforms")
@@ -467,14 +467,15 @@ def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, a
         pcd = fetchPly(ply_path)
     except:
         pcd = None
-
+    sampled_train_cams = train_cam_infos[:train_num]
+    if (args.sample_method == "uniform"):
     # 均匀采样train_num个相机
-    total_cams = len(train_cam_infos)
-    if train_num < total_cams:
-        indices = np.linspace(0, total_cams-1, train_num, dtype=int)
-        sampled_train_cams = [train_cam_infos[i] for i in indices]
-    else:
-        sampled_train_cams = train_cam_infos
+        total_cams = len(train_cam_infos)
+        if train_num < total_cams:
+            indices = np.linspace(0, total_cams-1, train_num, dtype=int)
+            sampled_train_cams = [train_cam_infos[i] for i in indices]
+        else:
+            sampled_train_cams = train_cam_infos
 
     part = path.split('/')[-1].split('.')[0]
     save_dir = os.path.join(os.path.dirname(path), part)
@@ -493,8 +494,9 @@ def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, a
         save_path = os.path.join(save_dir, f"test_{i:03d}.png") 
         normalize_and_save_image(cam.image, save_path)
 
+    
     scene_info = SceneInfo(point_cloud=pcd,
-                           train_cameras=train_cam_infos[:train_num],
+                           train_cameras=sampled_train_cams,
                            test_cameras=test_cam_infos,
                            add_cameras=add_cam_infos,
                            nerf_normalization=nerf_normalization,

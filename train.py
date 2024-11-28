@@ -94,6 +94,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     # 初始化第一个高斯场
     gaussians = GaussianModel_Xray(dataset.sh_degree)
     dataset.pseudo_strategy = args.pseudo_strategy
+    dataset.sample_method = args.sample_method
     scene = Scene(dataset, gaussians)
     gaussians.training_setup(opt)
     if checkpoint:
@@ -238,7 +239,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                             for j in range(args.gaussiansN):
                                 if i != j:
                                     loss_value = loss_photometric(RenderDict[f"image_pseudo_co_gs{i}"], RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), opt=opt)[1] / (args.gaussiansN - 1)
-                                    logger.info(f"[Iter {iteration}] Co-reg loss between gs{i} and gs{j}: {loss_value.item():.7f}")
+                                    # logger.info(f"[Iter {iteration}] Co-reg loss between gs{i} and gs{j}: {loss_value.item():.7f}")
                                     LossDict[f"loss_gs{i}"] += loss_value
         # 梯度回传
         loss = LossDict["loss_gs0"]
@@ -531,6 +532,8 @@ if __name__ == "__main__":
     # 添加伪视角相关参数
     parser.add_argument("--onlyrgb", action='store_true', default=False)
     parser.add_argument("--normal", action='store_true', default=True, help="是否使用归一化图像作为GT") # 不用归一化会崩
+    # 采样方法
+    parser.add_argument("--sample_method", type=str, default="uniform") # 均匀采样uniform 顺序采样seq
     args = parser.parse_args(sys.argv[1:])
     
     lp.train_num = args.train_num
