@@ -63,14 +63,14 @@ def setup_logger(log_path):
     logger.addHandler(ch)
     
     return logger
-# import debugpy
-# try:
-#     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
-#     debugpy.listen(("localhost", 9501))
-#     # logger.info("Waiting for debugger attach")
-#     debugpy.wait_for_client()
-# except Exception as e:
-#     pass
+import debugpy
+try:
+    # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
+    debugpy.listen(("localhost", 9501))
+    # logger.info("Waiting for debugger attach")
+    debugpy.wait_for_client()
+except Exception as e:
+    pass
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold, args):
     # 使用全局logger
     global logger

@@ -50,7 +50,7 @@ class Scene:
             scene_info, self.volume_positions, self.image_3d = sceneLoadTypeCallbacks["Xray"](path = args.source_path, eval = args.eval, interval = args.interval, add_num = args.add_num, train_num = args.train_num)
         else:
             assert False, "Could not recognize scene type!"
-
+        
         if not self.loaded_iter:
             with open(scene_info.ply_path, 'rb') as src_file, open(os.path.join(self.model_path, "input.ply") , 'wb') as dest_file:
                 dest_file.write(src_file.read())
@@ -82,11 +82,16 @@ class Scene:
             pseudo_cams = []
             pseudo_poses = generate_random_poses_pickle(self.train_cameras[resolution_scale])
             view = self.train_cameras[resolution_scale][0]
+            # 获取所有训练train_cameras的信息，放入列表里
+            
             self.bounds = view.bounds
             for pose in pseudo_poses:
+                # 随机获取train_cameras中的一个相机信息的角度
+                t = random.randint(0, len(self.train_cameras[resolution_scale]) - 1)
+                angle = self.train_cameras[resolution_scale][t].angle
                 pseudo_cams.append(PseudoCamera(
                     R=pose[:3, :3].T, T=pose[:3, 3], FoVx=view.FoVx, FoVy=view.FoVy,
-                    width=view.image_width, height=view.image_height, angle=view.angle
+                    width=view.image_width, height=view.image_height, angle= angle
                 ))
             self.pseudo_cameras[resolution_scale] = pseudo_cams
 

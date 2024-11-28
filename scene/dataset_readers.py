@@ -14,7 +14,7 @@ from utils.sh_utils import SH2RGB
 from scene.gaussian_model import BasicPointCloud
 import pickle
 from pdb import set_trace as stx
-
+import imageio.v3 as iio
 
 class ConeGeometry(object):
     def __init__(self, data):
@@ -315,16 +315,16 @@ def readNerfSyntheticInfo(path, white_background, eval, extension=".png"):
 
 # 添加的內容
 
-def angle2pose(DSO, angle): # TODO: 论文里的内参矩阵
+def angle2pose(DSO, angle): # TODO: 论文里的外参矩阵
     phi1 = -np.pi / 2
     R1 = np.array([[1.0, 0.0, 0.0],
                 [0.0, np.cos(phi1), -np.sin(phi1)],
-                [0.0, np.sin(phi1), np.cos(phi1)]])
+                [0.0, np.sin(phi1), np.cos(phi1)]]) # 绕x轴旋转-90度
 
     phi2 = np.pi / 2
     R2 = np.array([[np.cos(phi2), -np.sin(phi2), 0.0],
                 [np.sin(phi2), np.cos(phi2), 0.0],
-                [0.0, 0.0, 1.0]])
+                [0.0, 0.0, 1.0]]) # 绕z轴旋转90度
 
     R3 = np.array([[np.cos(angle), -np.sin(angle), 0.0],
                 [np.sin(angle), np.cos(angle), 0.0],
@@ -340,7 +340,6 @@ def angle2pose(DSO, angle): # TODO: 论文里的内参矩阵
 
 
 def Xray_readCamerasFromTransforms(path, type = 'train'): # 论文新添加
-
     cam_infos = []
     with open(path, "rb") as handle:
         data = pickle.load(handle)
@@ -349,19 +348,26 @@ def Xray_readCamerasFromTransforms(path, type = 'train'): # 论文新添加
     projs = data[type]["projections"]
     angles = data[type]["angles"]
     h, w = projs[0].shape
-    fovx = focal2fov(geometry.DSD, w)
-    
+    fovx = focal2fov(geometry.DSD, w) # 计算水平视角
+
+   
 
     for idx, image_arr in enumerate(projs):
         c2w = angle2pose(geometry.DSO,angles[idx])
         image_name = str(idx)
 
         w2c = np.linalg.inv(c2w)
-        R = np.transpose(w2c[:3,:3]) 
-        T = w2c[:3, 3]
+        R = np.transpose(w2c[:3,:3]) # 旋转矩阵
+        T = w2c[:3, 3] # 平移矩阵
+       
 
-
-        image = image_arr
+        image = image_arr # 图片
+        part = path.split('/')[-1].split('.')[0]
+        # 保存归一化后的图像
+        save_dir = os.path.join(os.path.dirname(path), part, f"{type}_images")
+        os.makedirs(save_dir, exist_ok=True)
+        save_path = os.path.join(save_dir, f"{image_name}.png")
+        normalize_and_save_image(image, save_path)
         angle = angles[idx]
 
         fovy = focal2fov(geometry.DSD, h)
@@ -372,10 +378,7 @@ def Xray_readCamerasFromTransforms(path, type = 'train'): # 论文新添加
             
     return cam_infos
 
-
-
 def Xray_readCamerasFromTransforms_addtional(path, add_num = 50): # 论文新添加
-
     cam_infos = []
     with open(path, "rb") as handle:
         data = pickle.load(handle)
@@ -386,17 +389,25 @@ def Xray_readCamerasFromTransforms_addtional(path, add_num = 50): # 论文新添
     projs = np.zeros((add_num, h, w))
     angles = np.random.uniform(0, np.pi, add_num)
     fovx = focal2fov(geometry.DSD, w)
+
     
 
     for idx, image_arr in enumerate(projs):
-
         c2w = angle2pose(geometry.DSO,angles[idx])
         image_name = str(idx)
         w2c = np.linalg.inv(c2w)
         R = np.transpose(w2c[:3,:3]) 
         T = w2c[:3, 3]
 
+        
+
         image = image_arr
+        # part = path.split('/')[-1].split('.')[0]
+        # # 保存归一化后的图像
+        # save_dir = os.path.join(os.path.dirname(path), part, f"additional_images")
+        # os.makedirs(save_dir, exist_ok=True)
+        # save_path = os.path.join(save_dir, f"{image_name}.png")
+        # normalize_and_save_image(image, save_path)
         angle = angles[idx]
 
         fovy = focal2fov(geometry.DSD, h)
@@ -407,7 +418,14 @@ def Xray_readCamerasFromTransforms_addtional(path, add_num = 50): # 论文新添
             
     return cam_infos
 
-
+# 归一化并保存图像
+def normalize_and_save_image(img_arr, save_path):
+    # 归一化到0-1范围
+    img_norm = (img_arr - img_arr.min()) / (img_arr.max() - img_arr.min())
+    # 转换为uint8格式
+    img_uint8 = (img_norm * 255).astype(np.uint8)
+    # 保存为PNG
+    iio.imwrite(save_path, img_uint8)
 
 def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, add_num = 50, train_num = 50): # TODO: ACUI
     print("Reading Training Transforms")
