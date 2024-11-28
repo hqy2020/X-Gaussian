@@ -63,14 +63,17 @@ def setup_logger(log_path):
     logger.addHandler(ch)
     
     return logger
-import debugpy
-try:
-    # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
-    debugpy.listen(("localhost", 9501))
-    # logger.info("Waiting for debugger attach")
-    debugpy.wait_for_client()
-except Exception as e:
-    pass
+
+# import debugpy
+# try:
+#     # 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1
+#     debugpy.listen(("localhost", 9501))
+#     # logger.info("Waiting for debugger attach")
+#     debugpy.wait_for_client()
+# except Exception as e:
+#     pass
+
+
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, gaussiansN, coreg, coprune, coprune_threshold, args):
     # 使用全局logger
     global logger
@@ -90,6 +93,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
 
     # 初始化第一个高斯场
     gaussians = GaussianModel_Xray(dataset.sh_degree)
+    dataset.pseudo_strategy = args.pseudo_strategy
     scene = Scene(dataset, gaussians)
     gaussians.training_setup(opt)
     if checkpoint:
@@ -109,7 +113,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
     logger.info(f"GsDict.keys() is {GsDict.keys()}")
 
 
-    bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
+    bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0] # 黑色背景
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
 
     iter_start = torch.cuda.Event(enable_timing = True)
@@ -217,12 +221,13 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                 
                 if not pseudo_stack_co:
                     pseudo_stack_co = scene.getPseudoCameras().copy()
+                    logger.info(f"pseudo_stack_co length: {len(pseudo_stack_co)}")
                 pseudo_cam_co = pseudo_stack_co.pop(randint(0, len(pseudo_stack_co) - 1))
                 
                 for i in range(args.gaussiansN):
                         RenderDict[f"render_pkg_pseudo_co_gs{i}"] = render(pseudo_cam_co, GsDict[f'gs{i}'], pipe, bg)
                         RenderDict[f"image_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["render"]
-                        logger.info(f"gs{i} pseudo_co image max: {RenderDict[f'image_pseudo_co_gs{i}'].max()}, min: {RenderDict[f'image_pseudo_co_gs{i}'].min()}")  # TODO: 之后打印
+                        # logger.info(f"gs{i} pseudo_co image max: {RenderDict[f'image_pseudo_co_gs{i}'].max()}, min: {RenderDict[f'image_pseudo_co_gs{i}'].min()}")  # TODO: 之后打印
                         # RenderDict[f"depth_pseudo_co_gs{i}"] = RenderDict[f"render_pkg_pseudo_co_gs{i}"]["depth"]
                 if iteration >= args.start_sample_pseudo:
                     ####################################################################
@@ -522,7 +527,7 @@ if __name__ == "__main__":
     parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     parser.add_argument("--perturbation", action='store_true', default=False) # 多一个扰动损失
-    
+    parser.add_argument("--pseudo_strategy", type=str, default="single") # 伪视角策略 # 360 single
     # 添加伪视角相关参数
     parser.add_argument("--onlyrgb", action='store_true', default=False)
     parser.add_argument("--normal", action='store_true', default=True, help="是否使用归一化图像作为GT") # 不用归一化会崩

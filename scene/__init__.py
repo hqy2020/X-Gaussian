@@ -3,13 +3,13 @@ import random
 import json
 import imageio.v2 as iio
 from scene.cameras import PseudoCamera
-from utils.pose_utils import generate_random_poses_pickle
+from utils.pose_utils import generate_random_poses_360, generate_random_poses_llff, generate_random_poses_pickle
 from utils.system_utils import searchForMaxIteration
 from scene.dataset_readers import sceneLoadTypeCallbacks
 from scene.gaussian_model import GaussianModel_Xray
 from arguments import ModelParams
 from utils.camera_utils import cameraList_from_camInfos, camera_to_JSON
-
+from utils.generatecam_utils import generate_uniform_poses_forview
 class Scene:
 
     gaussians : GaussianModel_Xray
@@ -80,19 +80,29 @@ class Scene:
             self.add_cameras[resolution_scale] = cameraList_from_camInfos(scene_info.add_cameras, resolution_scale, args)
             print("Loading Pseudo Cameras")
             pseudo_cams = []
-            pseudo_poses = generate_random_poses_pickle(self.train_cameras[resolution_scale])
+            # pseudo_poses = generate_random_poses_pickle(self.train_cameras[resolution_scale])
+            # pseudo_poses = generate_random_poses_llff(self.train_cameras[resolution_scale])
+            if args.pseudo_strategy == "360":
+                pseudo_poses = generate_random_poses_360(self.train_cameras[resolution_scale])
+            
             view = self.train_cameras[resolution_scale][0]
             # 获取所有训练train_cameras的信息，放入列表里
             
             self.bounds = view.bounds
-            for pose in pseudo_poses:
-                # 随机获取train_cameras中的一个相机信息的角度
-                t = random.randint(0, len(self.train_cameras[resolution_scale]) - 1)
-                angle = self.train_cameras[resolution_scale][t].angle
-                pseudo_cams.append(PseudoCamera(
-                    R=pose[:3, :3].T, T=pose[:3, 3], FoVx=view.FoVx, FoVy=view.FoVy,
-                    width=view.image_width, height=view.image_height, angle= angle
-                ))
+            if args.pseudo_strategy == "360":
+                for pose in pseudo_poses:
+                    pseudo_cams.append(PseudoCamera(
+                        R=pose[:3, :3].T, T=pose[:3, 3], FoVx=view.FoVx, FoVy=view.FoVy,
+                        width=view.image_width, height=view.image_height
+                    ))
+            elif args.pseudo_strategy == "single":
+                for idx, camera in enumerate(self.train_cameras[resolution_scale]):
+                    pseudo_poses = generate_uniform_poses_forview(camera)
+                    for pose in pseudo_poses:
+                        pseudo_cams.append(PseudoCamera(
+                            R=pose['R'].T, T=pose['T'], FoVx=camera.FoVx, FoVy=camera.FoVy,
+                            width=camera.image_width, height=camera.image_height
+                        ))
             self.pseudo_cameras[resolution_scale] = pseudo_cams
 
         if self.loaded_iter:

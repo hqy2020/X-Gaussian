@@ -362,12 +362,7 @@ def Xray_readCamerasFromTransforms(path, type = 'train'): # 论文新添加
        
 
         image = image_arr # 图片
-        part = path.split('/')[-1].split('.')[0]
-        # 保存归一化后的图像
-        save_dir = os.path.join(os.path.dirname(path), part, f"{type}_images")
-        os.makedirs(save_dir, exist_ok=True)
-        save_path = os.path.join(save_dir, f"{image_name}.png")
-        normalize_and_save_image(image, save_path)
+        
         angle = angles[idx]
 
         fovy = focal2fov(geometry.DSD, h)
@@ -390,7 +385,6 @@ def Xray_readCamerasFromTransforms_addtional(path, add_num = 50): # 论文新添
     angles = np.random.uniform(0, np.pi, add_num)
     fovx = focal2fov(geometry.DSD, w)
 
-    
 
     for idx, image_arr in enumerate(projs):
         c2w = angle2pose(geometry.DSO,angles[idx])
@@ -441,7 +435,6 @@ def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, a
 
     nerf_normalization = getNerfppNorm(train_cam_infos)
 
-
     data_dir = os.path.dirname(path)
     ply_path = os.path.join(data_dir, "points3d.ply")
 
@@ -474,6 +467,31 @@ def Xray_readNerfSyntheticInfo(path, eval, cube_pcd_init = True, interval = 2, a
         pcd = fetchPly(ply_path)
     except:
         pcd = None
+
+    # 均匀采样train_num个相机
+    total_cams = len(train_cam_infos)
+    if train_num < total_cams:
+        indices = np.linspace(0, total_cams-1, train_num, dtype=int)
+        sampled_train_cams = [train_cam_infos[i] for i in indices]
+    else:
+        sampled_train_cams = train_cam_infos
+
+    part = path.split('/')[-1].split('.')[0]
+    save_dir = os.path.join(os.path.dirname(path), part)
+    
+    # 创建保存目录
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+        
+    # 保存训练集图像
+    for i, cam in enumerate(sampled_train_cams):
+        save_path = os.path.join(save_dir, f"train_{i:03d}.png")
+        normalize_and_save_image(cam.image, save_path)
+
+    # 保存测试集图像  
+    for i, cam in enumerate(test_cam_infos):
+        save_path = os.path.join(save_dir, f"test_{i:03d}.png") 
+        normalize_and_save_image(cam.image, save_path)
 
     scene_info = SceneInfo(point_cloud=pcd,
                            train_cameras=train_cam_infos[:train_num],
