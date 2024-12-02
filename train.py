@@ -235,7 +235,7 @@ def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoi
                     # co-reg
                     if args.coreg:
                         # co photometric
-                        for i in range(args.gaussiansN):
+                        for i in range(args.gaussiansN):                        
                             for j in range(args.gaussiansN):
                                 if i != j:
                                     loss_value = loss_photometric(RenderDict[f"image_pseudo_co_gs{i}"], RenderDict[f"image_pseudo_co_gs{j}"].clone().detach(), opt=opt)[1] / (args.gaussiansN - 1)
@@ -514,7 +514,7 @@ if __name__ == "__main__":
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
-    parser.add_argument('--config', type=str, default='config/chest.yaml', help='Path to the configuration file')
+    parser.add_argument('--config', type=str, default='config/abdomen.yaml', help='Path to the configuration file') # chest foot abdomen head pancreas
     parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 500, 1000, 2000,3000,5000,10000,15000,20000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[20_000,])
     parser.add_argument("--quiet", action="store_true")
@@ -533,7 +533,7 @@ if __name__ == "__main__":
     parser.add_argument("--onlyrgb", action='store_true', default=False)
     parser.add_argument("--normal", action='store_true', default=True, help="是否使用归一化图像作为GT") # 不用归一化会崩
     # 采样方法
-    parser.add_argument("--sample_method", type=str, default="uniform") # 均匀采样uniform 顺序采样seq
+    parser.add_argument("--sample_method", type=str, default="seq") # 均匀采样uniform 顺序采样seq
     args = parser.parse_args(sys.argv[1:])
     
     lp.train_num = args.train_num
