@@ -1,6 +1,6 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"] = 'PCI_BUS_ID'
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 强制使用GPU 1
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 强制使用GPU 1
 
 import torch
 from random import randint
@@ -504,7 +504,7 @@ def training_report(exp_logger, iteration, Ll1, loss, l1_loss, elapsed, testing_
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="Training script parameters") 
-    parser.add_argument("--train_num", type=int, default=3)
+    parser.add_argument("--train_num", type=int, default=9)
     lp = ModelParams(parser)           
     op = OptimizationParams(parser)
     pp = PipelineParams(parser)
@@ -514,7 +514,7 @@ if __name__ == "__main__":
     parser.add_argument('--port', type=int, default=6009)
     parser.add_argument('--debug_from', type=int, default=-1)
     parser.add_argument('--detect_anomaly', action='store_true', default=False)
-    parser.add_argument('--config', type=str, default='config/abdomen.yaml', help='Path to the configuration file') # chest foot abdomen head pancreas
+    parser.add_argument('--config', type=str, default='config/pancreas.yaml', help='Path to the configuration file') # chest foot head abdomen pancreas
     parser.add_argument("--test_iterations", nargs="+", type=int, default=[100, 500, 1000, 2000,3000,5000,10000,15000,20000])
     parser.add_argument("--save_iterations", nargs="+", type=int, default=[20_000,])
     parser.add_argument("--quiet", action="store_true")
@@ -524,8 +524,8 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
-    parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
+    parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
+    parser.add_argument("--coprune", action='store_true', default=False) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     parser.add_argument("--perturbation", action='store_true', default=False) # 多一个扰动损失
     parser.add_argument("--pseudo_strategy", type=str, default="single") # 伪视角策略 # 360 single
