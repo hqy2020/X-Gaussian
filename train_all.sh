@@ -4,58 +4,18 @@
 configs=("chest" "foot" "head" "abdomen" "pancreas")
 train_nums=(3 6 9)
 
-# 用于跟踪运行的进程数量
-process_count=0
+# 创建新的tmux会话名称，使用时间戳避免冲突
+session_name="training_$(date +%Y%m%d_%H%M%S)"
 
-# 存储所有后台进程的信息
-declare -A pids
-declare -A status
+# 创建新的tmux会话
+tmux new-session -d -s "$session_name"
 
-# 信号处理函数
-cleanup() {
-    echo -e "\n正在终止所有训练进程..."
-    for pid in "${!pids[@]}"; do
-        kill -9 $pid 2>/dev/null
-    done
-    print_summary
-    exit 1
-}
+# 创建一个窗口用于显示训练状态
+tmux new-window -t "$session_name:1" -n "status"
+tmux send-keys -t "$session_name:1" "echo '训练状态监控窗口'" C-m
 
-# 打印训练结果统计
-print_summary() {
-    echo -e "\n训练结果统计："
-    echo "----------------------------------------"
-    echo "配置文件    训练样本数    GPU    状态"
-    echo "----------------------------------------"
-    for key in "${!pids[@]}"; do
-        if wait $key 2>/dev/null; then
-            status[$key]="成功"
-        else
-            status[$key]="失败"
-        fi
-        echo "${pids[$key]} -> ${status[$key]}"
-    done
-    echo "----------------------------------------"
-    
-    # 统计成功和失败的数量
-    success_count=0
-    fail_count=0
-    for key in "${!status[@]}"; do
-        if [ "${status[$key]}" == "成功" ]; then
-            ((success_count++))
-        else
-            ((fail_count++))
-        fi
-    done
-    
-    echo -e "\n总结："
-    echo "成功: $success_count"
-    echo "失败: $fail_count"
-    echo "总计: $process_count"
-}
-
-# 注册SIGINT信号处理
-trap cleanup SIGINT SIGTERM
+# 用于跟踪窗口索引
+window_index=2
 
 # 遍历所有组合
 for config in "${configs[@]}"; do
@@ -67,26 +27,28 @@ for config in "${configs[@]}"; do
             gpu="0"
         fi
         
-        # 运行训练命令
-        CUDA_VISIBLE_DEVICES=$gpu python train.py \
-            --train_num $train_num \
-            --config "config/${config}.yaml" &
-            
-        # 存储进程信息
-        pid=$!
-        pids[$pid]="$config    $train_num        $gpu"
+        # 为每个训练任务创建新的窗口
+        window_name="${config}_${train_num}"
+        tmux new-window -t "$session_name:$window_index" -n "$window_name"
         
-        # 增加进程计数
-        ((process_count++))
+        # 构建训练命令
+        cmd="CUDA_VISIBLE_DEVICES=$gpu python train.py --train_num $train_num --config config/${config}.yaml"
         
-        echo "Started training: config=${config}, train_num=${train_num}, GPU=${gpu}, PID=$pid"
+        # 在新窗口中执行训练命令
+        tmux send-keys -t "$session_name:$window_index" "$cmd" C-m
+        
+        echo "Started training in window $window_index: config=${config}, train_num=${train_num}, GPU=${gpu}"
+        
+        ((window_index++))
     done
 done
 
-# 等待所有进程完成
-wait
+# 切换到第一个窗口
+tmux select-window -t "$session_name:1"
 
-# 打印最终统计结果
-print_summary
+echo "所有训练任务已在tmux会话 '$session_name' 中启动"
+echo "使用以下命令连接到tmux会话："
+echo "tmux attach-session -t $session_name"
 
-echo "所有训练进程已完成！"
+# 自动连接到tmux会话
+tmux attach-session -t "$session_name"
