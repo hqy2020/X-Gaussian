@@ -1,0 +1,701 @@
+\n============== 开始训练 chest (train_num=3) ==============
+Optimizing 
+args: Namespace(add_num=50, checkpoint_iterations=[], compute_cov3D_python=False, config='config/chest.yaml', convert_SHs_python=False, coprune=False, coprune_threshold=5, coreg=False, data_device='cuda', debug=False, debug_from=-1, densification_interval=200, densify_from_iter=500, densify_grad_threshold=2.6e-05, densify_until_iter=8000, detect_anomaly=False, dump_pickle=False, end_sample_pseudo=10000, eval=True, feature_lr=0.002, gaussiansN=2, gpu_id='1', images='images', interval=8, ip='127.0.0.1', iterations=20000, lambda_dssim=0.2, model_path='', normal=True, nview=5, onlyrgb=False, opacity_lr=0.008, opacity_reset_interval=4000, percent_dense=0.01, perturbation=False, port=6009, position_lr_delay_mult=0.01, position_lr_final=1.9e-06, position_lr_init=0.00019, position_lr_max_steps=20000, pseudo_strategy='single', quiet=False, radiodensity_lr=0.05, radiodensity_reset_interval=2000, random_background=False, resolution=-1, rotation_lr=0.001, sample_method='seq', sample_pseudo_interval=1, save_iterations=[20000, 30000], scaling_lr=0.005, scene='chest', sh_degree=3, source_path='data/chest_50.pickle', start_checkpoint=None, start_perturbation=2000, start_sample_pseudo=2000, test_iterations=[100, 500, 1000, 2000, 3000, 5000, 10000, 15000, 20000], train_num=3, white_background=False)
+Output folder: ./output/chest/2024_12_06_15_20_17
+Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 2000, 'end_sample_pseudo': 10000, 'start_perturbation': 2000}
+2024-12-06 15:20:17,289 - INFO: Training parameters: {'iterations': 20000, 'position_lr_init': 0.00019, 'position_lr_final': 1.9e-06, 'position_lr_delay_mult': 0.01, 'position_lr_max_steps': 20000, 'feature_lr': 0.002, 'opacity_lr': 0.008, 'scaling_lr': 0.005, 'rotation_lr': 0.001, 'percent_dense': 0.01, 'lambda_dssim': 0.2, 'densification_interval': 200, 'opacity_reset_interval': 4000, 'densify_from_iter': 500, 'densify_until_iter': 8000, 'densify_grad_threshold': 2.6e-05, 'random_background': False, 'sample_pseudo_interval': 1, 'start_sample_pseudo': 2000, 'end_sample_pseudo': 10000, 'start_perturbation': 2000}
+args.source_path is /home/qyhu/Documents/X-Gaussian/data/chest_50.pickle [06/12 15:20:17]
+/home/qyhu/Documents/X-Gaussian/data/chest_50.pickle [06/12 15:20:17]
+Loading pickle file for X-ray rendering [06/12 15:20:17]
+Reading Training Transforms [06/12 15:20:17]
+Reading Test Transforms [06/12 15:20:17]
+creating additional camera poses [06/12 15:20:17]
+Generating point cloud from uniform cube (4096) [06/12 15:20:17]
+Loading Training Cameras [06/12 15:20:18]
+Loading Test Cameras [06/12 15:20:21]
+Loading Additional Cameras [06/12 15:20:22]
+Loading Pseudo Cameras [06/12 15:20:22]
+Number of points at initialisation :  4096 [06/12 15:20:22]
+Number of points at initialisation :  4096 [06/12 15:20:22]
+Create gaussians1
+2024-12-06 15:20:22,867 - INFO: Create gaussians1
+GsDict.keys() is dict_keys(['gs0', 'gs1'])
+2024-12-06 15:20:22,867 - INFO: GsDict.keys() is dict_keys(['gs0', 'gs1'])
+
+Starting training...
+2024-12-06 15:20:22,868 - INFO: 
+Starting training...
+Total iterations: 20000
+2024-12-06 15:20:22,868 - INFO: Total iterations: 20000
+==================================================
+2024-12-06 15:20:22,868 - INFO: ==================================================
+pseudo_stack_co length: 60
+2024-12-06 15:20:25,024 - INFO: pseudo_stack_co length: 60
+[Iter 10/20000] Loss: 0.2171753 (Best: 0.2108473 @iter10) [100.00% of initial]
+2024-12-06 15:20:25,604 - INFO: [Iter 10/20000] Loss: 0.2171753 (Best: 0.2108473 @iter10) [100.00% of initial]
+[Iter 20/20000] Loss: 0.1742596 (Best: 0.1685710 @iter20) ([92m↓19.76%[0m) [69.23% of initial]
+2024-12-06 15:20:25,985 - INFO: [Iter 20/20000] Loss: 0.1742596 (Best: 0.1685710 @iter20) ([92m↓19.76%[0m) [69.23% of initial]
+[Iter 30/20000] Loss: 0.1374631 (Best: 0.1327778 @iter30) ([92m↓21.12%[0m) [54.61% of initial]
+2024-12-06 15:20:26,548 - INFO: [Iter 30/20000] Loss: 0.1374631 (Best: 0.1327778 @iter30) ([92m↓21.12%[0m) [54.61% of initial]
+[Iter 40/20000] Loss: 0.1125630 (Best: 0.1096229 @iter39) ([92m↓18.11%[0m) [44.72% of initial]
+2024-12-06 15:20:27,057 - INFO: [Iter 40/20000] Loss: 0.1125630 (Best: 0.1096229 @iter39) ([92m↓18.11%[0m) [44.72% of initial]
+[Iter 50/20000] Loss: 0.0986316 (Best: 0.0959908 @iter50) ([92m↓12.38%[0m) [39.19% of initial]
+2024-12-06 15:20:27,446 - INFO: [Iter 50/20000] Loss: 0.0986316 (Best: 0.0959908 @iter50) ([92m↓12.38%[0m) [39.19% of initial]
+[Iter 60/20000] Loss: 0.0938877 (Best: 0.0912751 @iter58) ([92m↓4.81%[0m) [37.30% of initial]
+2024-12-06 15:20:27,978 - INFO: [Iter 60/20000] Loss: 0.0938877 (Best: 0.0912751 @iter58) ([92m↓4.81%[0m) [37.30% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:27,994 - INFO: pseudo_stack_co length: 60
+[Iter 70/20000] Loss: 0.0886480 (Best: 0.0866748 @iter70) ([92m↓5.58%[0m) [35.22% of initial]
+2024-12-06 15:20:28,260 - INFO: [Iter 70/20000] Loss: 0.0886480 (Best: 0.0866748 @iter70) ([92m↓5.58%[0m) [35.22% of initial]
+[Iter 80/20000] Loss: 0.0854075 (Best: 0.0829506 @iter80) ([92m↓3.66%[0m) [33.93% of initial]
+2024-12-06 15:20:28,681 - INFO: [Iter 80/20000] Loss: 0.0854075 (Best: 0.0829506 @iter80) ([92m↓3.66%[0m) [33.93% of initial]
+[Iter 90/20000] Loss: 0.0820317 (Best: 0.0797784 @iter89) ([92m↓3.95%[0m) [32.59% of initial]
+2024-12-06 15:20:29,244 - INFO: [Iter 90/20000] Loss: 0.0820317 (Best: 0.0797784 @iter89) ([92m↓3.95%[0m) [32.59% of initial]
+Iter:99, L1 loss=0.05716, Total loss=0.0787, Time:26
+2024-12-06 15:20:29,502 - INFO: Iter:99, L1 loss=0.05716, Total loss=0.0787, Time:26
+[Iter 100/20000] Loss: 0.0791361 (Best: 0.0763251 @iter97) ([92m↓3.53%[0m) [31.44% of initial]
+2024-12-06 15:20:29,547 - INFO: [Iter 100/20000] Loss: 0.0791361 (Best: 0.0763251 @iter97) ([92m↓3.53%[0m) [31.44% of initial]
+Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+2024-12-06 15:20:29,548 - INFO: Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+
+[ITER 100] Evaluating test Gaussian0: SSIM = 0.8548058342933655, PSNR = 15.162417011260986, Points = 4096
+2024-12-06 15:20:29,885 - INFO: 
+[ITER 100] Evaluating test Gaussian0: SSIM = 0.8548058342933655, PSNR = 15.162417011260986, Points = 4096
+
+[ITER 100] Evaluating test Gaussian1: SSIM = 0.8547676002979279, PSNR = 15.161893119812012, Points = 4096
+2024-12-06 15:20:30,178 - INFO: 
+[ITER 100] Evaluating test Gaussian1: SSIM = 0.8547676002979279, PSNR = 15.161893119812012, Points = 4096
+Testing Speed: 79.24315986876138 fps
+2024-12-06 15:20:30,179 - INFO: Testing Speed: 79.24315986876138 fps
+Testing Time: 0.6309692859649658 s
+2024-12-06 15:20:30,179 - INFO: Testing Time: 0.6309692859649658 s
+[Iter 110/20000] Loss: 0.0735574 (Best: 0.0718322 @iter110) ([92m↓7.05%[0m) [29.22% of initial]
+2024-12-06 15:20:30,816 - INFO: [Iter 110/20000] Loss: 0.0735574 (Best: 0.0718322 @iter110) ([92m↓7.05%[0m) [29.22% of initial]
+[Iter 120/20000] Loss: 0.0711507 (Best: 0.0681386 @iter119) ([92m↓3.27%[0m) [28.27% of initial]
+2024-12-06 15:20:31,113 - INFO: [Iter 120/20000] Loss: 0.0711507 (Best: 0.0681386 @iter119) ([92m↓3.27%[0m) [28.27% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:31,140 - INFO: pseudo_stack_co length: 60
+[Iter 130/20000] Loss: 0.0661366 (Best: 0.0640968 @iter130) ([92m↓7.05%[0m) [26.28% of initial]
+2024-12-06 15:20:31,586 - INFO: [Iter 130/20000] Loss: 0.0661366 (Best: 0.0640968 @iter130) ([92m↓7.05%[0m) [26.28% of initial]
+[Iter 140/20000] Loss: 0.0636524 (Best: 0.0612990 @iter139) ([92m↓3.76%[0m) [25.29% of initial]
+2024-12-06 15:20:32,162 - INFO: [Iter 140/20000] Loss: 0.0636524 (Best: 0.0612990 @iter139) ([92m↓3.76%[0m) [25.29% of initial]
+[Iter 150/20000] Loss: 0.0604921 (Best: 0.0583580 @iter149) ([92m↓4.96%[0m) [24.03% of initial]
+2024-12-06 15:20:32,464 - INFO: [Iter 150/20000] Loss: 0.0604921 (Best: 0.0583580 @iter149) ([92m↓4.96%[0m) [24.03% of initial]
+[Iter 160/20000] Loss: 0.0587324 (Best: 0.0556989 @iter158) ([92m↓2.91%[0m) [23.33% of initial]
+2024-12-06 15:20:32,922 - INFO: [Iter 160/20000] Loss: 0.0587324 (Best: 0.0556989 @iter158) ([92m↓2.91%[0m) [23.33% of initial]
+[Iter 170/20000] Loss: 0.0544422 (Best: 0.0530061 @iter169) ([92m↓7.30%[0m) [21.63% of initial]
+2024-12-06 15:20:33,452 - INFO: [Iter 170/20000] Loss: 0.0544422 (Best: 0.0530061 @iter169) ([92m↓7.30%[0m) [21.63% of initial]
+[Iter 180/20000] Loss: 0.0520704 (Best: 0.0496881 @iter180) ([92m↓4.36%[0m) [20.69% of initial]
+2024-12-06 15:20:33,899 - INFO: [Iter 180/20000] Loss: 0.0520704 (Best: 0.0496881 @iter180) ([92m↓4.36%[0m) [20.69% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:33,914 - INFO: pseudo_stack_co length: 60
+[Iter 190/20000] Loss: 0.0487315 (Best: 0.0470263 @iter190) ([92m↓6.41%[0m) [19.36% of initial]
+2024-12-06 15:20:34,262 - INFO: [Iter 190/20000] Loss: 0.0487315 (Best: 0.0470263 @iter190) ([92m↓6.41%[0m) [19.36% of initial]
+Iter:199, L1 loss=0.03473, Total loss=0.04998, Time:24
+2024-12-06 15:20:34,680 - INFO: Iter:199, L1 loss=0.03473, Total loss=0.04998, Time:24
+[Iter 200/20000] Loss: 0.0473498 (Best: 0.0449690 @iter200) ([92m↓2.84%[0m) [18.81% of initial]
+2024-12-06 15:20:34,744 - INFO: [Iter 200/20000] Loss: 0.0473498 (Best: 0.0449690 @iter200) ([92m↓2.84%[0m) [18.81% of initial]
+[Iter 210/20000] Loss: 0.0455634 (Best: 0.0432187 @iter208) ([92m↓3.77%[0m) [18.10% of initial]
+2024-12-06 15:20:35,222 - INFO: [Iter 210/20000] Loss: 0.0455634 (Best: 0.0432187 @iter208) ([92m↓3.77%[0m) [18.10% of initial]
+[Iter 220/20000] Loss: 0.0422681 (Best: 0.0411549 @iter220) ([92m↓7.23%[0m) [16.79% of initial]
+2024-12-06 15:20:35,572 - INFO: [Iter 220/20000] Loss: 0.0422681 (Best: 0.0411549 @iter220) ([92m↓7.23%[0m) [16.79% of initial]
+[Iter 230/20000] Loss: 0.0412863 (Best: 0.0397507 @iter229) ([92m↓2.32%[0m) [16.40% of initial]
+2024-12-06 15:20:36,085 - INFO: [Iter 230/20000] Loss: 0.0412863 (Best: 0.0397507 @iter229) ([92m↓2.32%[0m) [16.40% of initial]
+[Iter 240/20000] Loss: 0.0405181 (Best: 0.0378018 @iter238) ([92m↓1.86%[0m) [16.10% of initial]
+2024-12-06 15:20:36,447 - INFO: [Iter 240/20000] Loss: 0.0405181 (Best: 0.0378018 @iter238) ([92m↓1.86%[0m) [16.10% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:36,462 - INFO: pseudo_stack_co length: 60
+[Iter 250/20000] Loss: 0.0378416 (Best: 0.0364283 @iter249) ([92m↓6.61%[0m) [15.03% of initial]
+2024-12-06 15:20:36,903 - INFO: [Iter 250/20000] Loss: 0.0378416 (Best: 0.0364283 @iter249) ([92m↓6.61%[0m) [15.03% of initial]
+[Iter 260/20000] Loss: 0.0361293 (Best: 0.0342805 @iter259) ([92m↓4.52%[0m) [14.35% of initial]
+2024-12-06 15:20:37,370 - INFO: [Iter 260/20000] Loss: 0.0361293 (Best: 0.0342805 @iter259) ([92m↓4.52%[0m) [14.35% of initial]
+[Iter 270/20000] Loss: 0.0346775 (Best: 0.0328641 @iter270) ([92m↓4.02%[0m) [13.78% of initial]
+2024-12-06 15:20:37,980 - INFO: [Iter 270/20000] Loss: 0.0346775 (Best: 0.0328641 @iter270) ([92m↓4.02%[0m) [13.78% of initial]
+[Iter 280/20000] Loss: 0.0336400 (Best: 0.0316291 @iter278) ([92m↓2.99%[0m) [13.36% of initial]
+2024-12-06 15:20:38,250 - INFO: [Iter 280/20000] Loss: 0.0336400 (Best: 0.0316291 @iter278) ([92m↓2.99%[0m) [13.36% of initial]
+[Iter 290/20000] Loss: 0.0322786 (Best: 0.0298998 @iter289) ([92m↓4.05%[0m) [12.82% of initial]
+2024-12-06 15:20:38,672 - INFO: [Iter 290/20000] Loss: 0.0322786 (Best: 0.0298998 @iter289) ([92m↓4.05%[0m) [12.82% of initial]
+Iter:299, L1 loss=0.02026, Total loss=0.0291, Time:15
+2024-12-06 15:20:39,166 - INFO: Iter:299, L1 loss=0.02026, Total loss=0.0291, Time:15
+[Iter 300/20000] Loss: 0.0310245 (Best: 0.0290993 @iter299) ([92m↓3.89%[0m) [12.33% of initial]
+2024-12-06 15:20:39,191 - INFO: [Iter 300/20000] Loss: 0.0310245 (Best: 0.0290993 @iter299) ([92m↓3.89%[0m) [12.33% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:39,205 - INFO: pseudo_stack_co length: 60
+[Iter 310/20000] Loss: 0.0289329 (Best: 0.0274768 @iter310) ([92m↓6.74%[0m) [11.49% of initial]
+2024-12-06 15:20:39,513 - INFO: [Iter 310/20000] Loss: 0.0289329 (Best: 0.0274768 @iter310) ([92m↓6.74%[0m) [11.49% of initial]
+[Iter 320/20000] Loss: 0.0289701 (Best: 0.0265866 @iter319) ([91m↑0.13%[0m) [11.51% of initial]
+2024-12-06 15:20:39,993 - INFO: [Iter 320/20000] Loss: 0.0289701 (Best: 0.0265866 @iter319) ([91m↑0.13%[0m) [11.51% of initial]
+[Iter 330/20000] Loss: 0.0280907 (Best: 0.0254574 @iter328) ([92m↓3.04%[0m) [11.16% of initial]
+2024-12-06 15:20:40,443 - INFO: [Iter 330/20000] Loss: 0.0280907 (Best: 0.0254574 @iter328) ([92m↓3.04%[0m) [11.16% of initial]
+[Iter 340/20000] Loss: 0.0257925 (Best: 0.0240233 @iter340) ([92m↓8.18%[0m) [10.25% of initial]
+2024-12-06 15:20:40,827 - INFO: [Iter 340/20000] Loss: 0.0257925 (Best: 0.0240233 @iter340) ([92m↓8.18%[0m) [10.25% of initial]
+[Iter 350/20000] Loss: 0.0249755 (Best: 0.0229101 @iter350) ([92m↓3.17%[0m) [9.92% of initial]
+2024-12-06 15:20:41,306 - INFO: [Iter 350/20000] Loss: 0.0249755 (Best: 0.0229101 @iter350) ([92m↓3.17%[0m) [9.92% of initial]
+[Iter 360/20000] Loss: 0.0241107 (Best: 0.0223466 @iter355) ([92m↓3.46%[0m) [9.58% of initial]
+2024-12-06 15:20:41,639 - INFO: [Iter 360/20000] Loss: 0.0241107 (Best: 0.0223466 @iter355) ([92m↓3.46%[0m) [9.58% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:41,653 - INFO: pseudo_stack_co length: 60
+[Iter 370/20000] Loss: 0.0228825 (Best: 0.0213102 @iter370) ([92m↓5.09%[0m) [9.09% of initial]
+2024-12-06 15:20:42,118 - INFO: [Iter 370/20000] Loss: 0.0228825 (Best: 0.0213102 @iter370) ([92m↓5.09%[0m) [9.09% of initial]
+[Iter 380/20000] Loss: 0.0217739 (Best: 0.0205415 @iter380) ([92m↓4.84%[0m) [8.65% of initial]
+2024-12-06 15:20:42,581 - INFO: [Iter 380/20000] Loss: 0.0217739 (Best: 0.0205415 @iter380) ([92m↓4.84%[0m) [8.65% of initial]
+[Iter 390/20000] Loss: 0.0215636 (Best: 0.0199405 @iter385) ([92m↓0.97%[0m) [8.57% of initial]
+2024-12-06 15:20:43,094 - INFO: [Iter 390/20000] Loss: 0.0215636 (Best: 0.0199405 @iter385) ([92m↓0.97%[0m) [8.57% of initial]
+Iter:399, L1 loss=0.01303, Total loss=0.0195, Time:20
+2024-12-06 15:20:43,382 - INFO: Iter:399, L1 loss=0.01303, Total loss=0.0195, Time:20
+[Iter 400/20000] Loss: 0.0202179 (Best: 0.0191437 @iter400) ([92m↓6.24%[0m) [8.03% of initial]
+2024-12-06 15:20:43,430 - INFO: [Iter 400/20000] Loss: 0.0202179 (Best: 0.0191437 @iter400) ([92m↓6.24%[0m) [8.03% of initial]
+[Iter 410/20000] Loss: 0.0200329 (Best: 0.0183459 @iter409) ([92m↓0.91%[0m) [7.96% of initial]
+2024-12-06 15:20:43,863 - INFO: [Iter 410/20000] Loss: 0.0200329 (Best: 0.0183459 @iter409) ([92m↓0.91%[0m) [7.96% of initial]
+[Iter 420/20000] Loss: 0.0196162 (Best: 0.0179935 @iter418) ([92m↓2.08%[0m) [7.79% of initial]
+2024-12-06 15:20:44,471 - INFO: [Iter 420/20000] Loss: 0.0196162 (Best: 0.0179935 @iter418) ([92m↓2.08%[0m) [7.79% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:44,520 - INFO: pseudo_stack_co length: 60
+[Iter 430/20000] Loss: 0.0187509 (Best: 0.0170011 @iter427) ([92m↓4.41%[0m) [7.45% of initial]
+2024-12-06 15:20:44,816 - INFO: [Iter 430/20000] Loss: 0.0187509 (Best: 0.0170011 @iter427) ([92m↓4.41%[0m) [7.45% of initial]
+[Iter 440/20000] Loss: 0.0185606 (Best: 0.0165043 @iter436) ([92m↓1.01%[0m) [7.37% of initial]
+2024-12-06 15:20:45,243 - INFO: [Iter 440/20000] Loss: 0.0185606 (Best: 0.0165043 @iter436) ([92m↓1.01%[0m) [7.37% of initial]
+[Iter 450/20000] Loss: 0.0167593 (Best: 0.0153035 @iter450) ([92m↓9.71%[0m) [6.66% of initial]
+2024-12-06 15:20:45,715 - INFO: [Iter 450/20000] Loss: 0.0167593 (Best: 0.0153035 @iter450) ([92m↓9.71%[0m) [6.66% of initial]
+[Iter 460/20000] Loss: 0.0164920 (Best: 0.0145183 @iter458) ([92m↓1.59%[0m) [6.55% of initial]
+2024-12-06 15:20:46,143 - INFO: [Iter 460/20000] Loss: 0.0164920 (Best: 0.0145183 @iter458) ([92m↓1.59%[0m) [6.55% of initial]
+[Iter 470/20000] Loss: 0.0152257 (Best: 0.0137585 @iter470) ([92m↓7.68%[0m) [6.05% of initial]
+2024-12-06 15:20:46,532 - INFO: [Iter 470/20000] Loss: 0.0152257 (Best: 0.0137585 @iter470) ([92m↓7.68%[0m) [6.05% of initial]
+[Iter 480/20000] Loss: 0.0146496 (Best: 0.0133636 @iter480) ([92m↓3.78%[0m) [5.82% of initial]
+2024-12-06 15:20:47,026 - INFO: [Iter 480/20000] Loss: 0.0146496 (Best: 0.0133636 @iter480) ([92m↓3.78%[0m) [5.82% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:47,074 - INFO: pseudo_stack_co length: 60
+[Iter 490/20000] Loss: 0.0150889 (Best: 0.0126014 @iter487) ([91m↑3.00%[0m) [5.99% of initial]
+2024-12-06 15:20:47,387 - INFO: [Iter 490/20000] Loss: 0.0150889 (Best: 0.0126014 @iter487) ([91m↑3.00%[0m) [5.99% of initial]
+Iter:499, L1 loss=0.007239, Total loss=0.01283, Time:24
+2024-12-06 15:20:47,779 - INFO: Iter:499, L1 loss=0.007239, Total loss=0.01283, Time:24
+[Iter 500/20000] Loss: 0.0140988 (Best: 0.0126014 @iter487) ([92m↓6.56%[0m) [5.60% of initial]
+2024-12-06 15:20:47,840 - INFO: [Iter 500/20000] Loss: 0.0140988 (Best: 0.0126014 @iter487) ([92m↓6.56%[0m) [5.60% of initial]
+Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+2024-12-06 15:20:47,841 - INFO: Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+
+[ITER 500] Evaluating test Gaussian0: SSIM = 0.8759715783596039, PSNR = 18.08209186553955, Points = 4096
+2024-12-06 15:20:48,123 - INFO: 
+[ITER 500] Evaluating test Gaussian0: SSIM = 0.8759715783596039, PSNR = 18.08209186553955, Points = 4096
+
+[ITER 500] Evaluating test Gaussian1: SSIM = 0.8766070377826691, PSNR = 18.120142307281494, Points = 4096
+2024-12-06 15:20:48,460 - INFO: 
+[ITER 500] Evaluating test Gaussian1: SSIM = 0.8766070377826691, PSNR = 18.120142307281494, Points = 4096
+Testing Speed: 80.72063638816537 fps
+2024-12-06 15:20:48,461 - INFO: Testing Speed: 80.72063638816537 fps
+Testing Time: 0.6194202899932861 s
+2024-12-06 15:20:48,461 - INFO: Testing Time: 0.6194202899932861 s
+[Iter 510/20000] Loss: 0.0136216 (Best: 0.0120553 @iter509) ([92m↓3.38%[0m) [5.41% of initial]
+2024-12-06 15:20:49,007 - INFO: [Iter 510/20000] Loss: 0.0136216 (Best: 0.0120553 @iter509) ([92m↓3.38%[0m) [5.41% of initial]
+[Iter 520/20000] Loss: 0.0135563 (Best: 0.0119264 @iter515) ([92m↓0.48%[0m) [5.39% of initial]
+2024-12-06 15:20:49,311 - INFO: [Iter 520/20000] Loss: 0.0135563 (Best: 0.0119264 @iter515) ([92m↓0.48%[0m) [5.39% of initial]
+[Iter 530/20000] Loss: 0.0135580 (Best: 0.0118214 @iter523) ([91m↑0.01%[0m) [5.39% of initial]
+2024-12-06 15:20:49,735 - INFO: [Iter 530/20000] Loss: 0.0135580 (Best: 0.0118214 @iter523) ([91m↑0.01%[0m) [5.39% of initial]
+[Iter 540/20000] Loss: 0.0129916 (Best: 0.0112611 @iter538) ([92m↓4.18%[0m) [5.16% of initial]
+2024-12-06 15:20:50,242 - INFO: [Iter 540/20000] Loss: 0.0129916 (Best: 0.0112611 @iter538) ([92m↓4.18%[0m) [5.16% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:50,257 - INFO: pseudo_stack_co length: 60
+[Iter 550/20000] Loss: 0.0132743 (Best: 0.0112611 @iter538) ([91m↑2.18%[0m) [5.27% of initial]
+2024-12-06 15:20:50,556 - INFO: [Iter 550/20000] Loss: 0.0132743 (Best: 0.0112611 @iter538) ([91m↑2.18%[0m) [5.27% of initial]
+[Iter 560/20000] Loss: 0.0117508 (Best: 0.0107050 @iter560) ([92m↓11.48%[0m) [4.67% of initial]
+2024-12-06 15:20:51,050 - INFO: [Iter 560/20000] Loss: 0.0117508 (Best: 0.0107050 @iter560) ([92m↓11.48%[0m) [4.67% of initial]
+[Iter 570/20000] Loss: 0.0115623 (Best: 0.0105077 @iter566) ([92m↓1.60%[0m) [4.59% of initial]
+2024-12-06 15:20:51,483 - INFO: [Iter 570/20000] Loss: 0.0115623 (Best: 0.0105077 @iter566) ([92m↓1.60%[0m) [4.59% of initial]
+[Iter 580/20000] Loss: 0.0117047 (Best: 0.0102033 @iter574) ([91m↑1.23%[0m) [4.65% of initial]
+2024-12-06 15:20:51,859 - INFO: [Iter 580/20000] Loss: 0.0117047 (Best: 0.0102033 @iter574) ([91m↑1.23%[0m) [4.65% of initial]
+[Iter 590/20000] Loss: 0.0112859 (Best: 0.0102033 @iter574) ([92m↓3.58%[0m) [4.48% of initial]
+2024-12-06 15:20:52,348 - INFO: [Iter 590/20000] Loss: 0.0112859 (Best: 0.0102033 @iter574) ([92m↓3.58%[0m) [4.48% of initial]
+Iter:599, L1 loss=0.005938, Total loss=0.01025, Time:15
+2024-12-06 15:20:52,880 - INFO: Iter:599, L1 loss=0.005938, Total loss=0.01025, Time:15
+[Iter 600/20000] Loss: 0.0114149 (Best: 0.0102033 @iter574) ([91m↑1.14%[0m) [4.54% of initial]
+2024-12-06 15:20:52,897 - INFO: [Iter 600/20000] Loss: 0.0114149 (Best: 0.0102033 @iter574) ([91m↑1.14%[0m) [4.54% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:52,937 - INFO: pseudo_stack_co length: 60
+[Iter 610/20000] Loss: 0.0219388 (Best: 0.0102033 @iter574) ([91m↑92.20%[0m) [8.72% of initial]
+2024-12-06 15:20:53,261 - INFO: [Iter 610/20000] Loss: 0.0219388 (Best: 0.0102033 @iter574) ([91m↑92.20%[0m) [8.72% of initial]
+[Iter 620/20000] Loss: 0.0142999 (Best: 0.0102033 @iter574) ([92m↓34.82%[0m) [5.68% of initial]
+2024-12-06 15:20:53,715 - INFO: [Iter 620/20000] Loss: 0.0142999 (Best: 0.0102033 @iter574) ([92m↓34.82%[0m) [5.68% of initial]
+[Iter 630/20000] Loss: 0.0122174 (Best: 0.0102033 @iter574) ([92m↓14.56%[0m) [4.85% of initial]
+2024-12-06 15:20:54,211 - INFO: [Iter 630/20000] Loss: 0.0122174 (Best: 0.0102033 @iter574) ([92m↓14.56%[0m) [4.85% of initial]
+[Iter 640/20000] Loss: 0.0104386 (Best: 0.0097318 @iter640) ([92m↓14.56%[0m) [4.15% of initial]
+2024-12-06 15:20:54,526 - INFO: [Iter 640/20000] Loss: 0.0104386 (Best: 0.0097318 @iter640) ([92m↓14.56%[0m) [4.15% of initial]
+[Iter 650/20000] Loss: 0.0101486 (Best: 0.0091535 @iter649) ([92m↓2.78%[0m) [4.03% of initial]
+2024-12-06 15:20:55,001 - INFO: [Iter 650/20000] Loss: 0.0101486 (Best: 0.0091535 @iter649) ([92m↓2.78%[0m) [4.03% of initial]
+[Iter 660/20000] Loss: 0.0098803 (Best: 0.0088831 @iter659) ([92m↓2.64%[0m) [3.93% of initial]
+2024-12-06 15:20:55,378 - INFO: [Iter 660/20000] Loss: 0.0098803 (Best: 0.0088831 @iter659) ([92m↓2.64%[0m) [3.93% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:55,393 - INFO: pseudo_stack_co length: 60
+[Iter 670/20000] Loss: 0.0098232 (Best: 0.0086089 @iter661) ([92m↓0.58%[0m) [3.90% of initial]
+2024-12-06 15:20:55,806 - INFO: [Iter 670/20000] Loss: 0.0098232 (Best: 0.0086089 @iter661) ([92m↓0.58%[0m) [3.90% of initial]
+[Iter 680/20000] Loss: 0.0094735 (Best: 0.0081163 @iter679) ([92m↓3.56%[0m) [3.76% of initial]
+2024-12-06 15:20:56,317 - INFO: [Iter 680/20000] Loss: 0.0094735 (Best: 0.0081163 @iter679) ([92m↓3.56%[0m) [3.76% of initial]
+[Iter 690/20000] Loss: 0.0092883 (Best: 0.0080359 @iter688) ([92m↓1.95%[0m) [3.69% of initial]
+2024-12-06 15:20:56,759 - INFO: [Iter 690/20000] Loss: 0.0092883 (Best: 0.0080359 @iter688) ([92m↓1.95%[0m) [3.69% of initial]
+Iter:699, L1 loss=0.00558, Total loss=0.009314, Time:22
+2024-12-06 15:20:57,023 - INFO: Iter:699, L1 loss=0.00558, Total loss=0.009314, Time:22
+[Iter 700/20000] Loss: 0.0090172 (Best: 0.0078244 @iter697) ([92m↓2.92%[0m) [3.58% of initial]
+2024-12-06 15:20:57,087 - INFO: [Iter 700/20000] Loss: 0.0090172 (Best: 0.0078244 @iter697) ([92m↓2.92%[0m) [3.58% of initial]
+[Iter 710/20000] Loss: 0.0084680 (Best: 0.0078244 @iter697) ([92m↓6.09%[0m) [3.36% of initial]
+2024-12-06 15:20:57,475 - INFO: [Iter 710/20000] Loss: 0.0084680 (Best: 0.0078244 @iter697) ([92m↓6.09%[0m) [3.36% of initial]
+[Iter 720/20000] Loss: 0.0089362 (Best: 0.0076365 @iter718) ([91m↑5.53%[0m) [3.55% of initial]
+2024-12-06 15:20:57,966 - INFO: [Iter 720/20000] Loss: 0.0089362 (Best: 0.0076365 @iter718) ([91m↑5.53%[0m) [3.55% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:20:57,981 - INFO: pseudo_stack_co length: 60
+[Iter 730/20000] Loss: 0.0087221 (Best: 0.0076365 @iter718) ([92m↓2.40%[0m) [3.47% of initial]
+2024-12-06 15:20:58,285 - INFO: [Iter 730/20000] Loss: 0.0087221 (Best: 0.0076365 @iter718) ([92m↓2.40%[0m) [3.47% of initial]
+[Iter 740/20000] Loss: 0.0077963 (Best: 0.0072332 @iter740) ([92m↓10.61%[0m) [3.10% of initial]
+2024-12-06 15:20:58,723 - INFO: [Iter 740/20000] Loss: 0.0077963 (Best: 0.0072332 @iter740) ([92m↓10.61%[0m) [3.10% of initial]
+[Iter 750/20000] Loss: 0.0080698 (Best: 0.0069511 @iter745) ([91m↑3.51%[0m) [3.21% of initial]
+2024-12-06 15:20:59,331 - INFO: [Iter 750/20000] Loss: 0.0080698 (Best: 0.0069511 @iter745) ([91m↑3.51%[0m) [3.21% of initial]
+[Iter 760/20000] Loss: 0.0080296 (Best: 0.0069511 @iter745) ([92m↓0.50%[0m) [3.19% of initial]
+2024-12-06 15:20:59,650 - INFO: [Iter 760/20000] Loss: 0.0080296 (Best: 0.0069511 @iter745) ([92m↓0.50%[0m) [3.19% of initial]
+[Iter 770/20000] Loss: 0.0076317 (Best: 0.0067635 @iter768) ([92m↓4.95%[0m) [3.03% of initial]
+2024-12-06 15:21:00,045 - INFO: [Iter 770/20000] Loss: 0.0076317 (Best: 0.0067635 @iter768) ([92m↓4.95%[0m) [3.03% of initial]
+[Iter 780/20000] Loss: 0.0076416 (Best: 0.0064707 @iter775) ([91m↑0.13%[0m) [3.04% of initial]
+2024-12-06 15:21:00,482 - INFO: [Iter 780/20000] Loss: 0.0076416 (Best: 0.0064707 @iter775) ([91m↑0.13%[0m) [3.04% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:00,497 - INFO: pseudo_stack_co length: 60
+[Iter 790/20000] Loss: 0.0072160 (Best: 0.0064707 @iter775) ([92m↓5.57%[0m) [2.87% of initial]
+2024-12-06 15:21:00,840 - INFO: [Iter 790/20000] Loss: 0.0072160 (Best: 0.0064707 @iter775) ([92m↓5.57%[0m) [2.87% of initial]
+Iter:799, L1 loss=0.004243, Total loss=0.006512, Time:21
+2024-12-06 15:21:01,229 - INFO: Iter:799, L1 loss=0.004243, Total loss=0.006512, Time:21
+[Iter 800/20000] Loss: 0.0074606 (Best: 0.0064707 @iter775) ([91m↑3.39%[0m) [2.96% of initial]
+2024-12-06 15:21:01,293 - INFO: [Iter 800/20000] Loss: 0.0074606 (Best: 0.0064707 @iter775) ([91m↑3.39%[0m) [2.96% of initial]
+[Iter 810/20000] Loss: 0.0150777 (Best: 0.0064707 @iter775) ([91m↑102.10%[0m) [5.99% of initial]
+2024-12-06 15:21:01,914 - INFO: [Iter 810/20000] Loss: 0.0150777 (Best: 0.0064707 @iter775) ([91m↑102.10%[0m) [5.99% of initial]
+[Iter 820/20000] Loss: 0.0101822 (Best: 0.0064707 @iter775) ([92m↓32.47%[0m) [4.05% of initial]
+2024-12-06 15:21:02,358 - INFO: [Iter 820/20000] Loss: 0.0101822 (Best: 0.0064707 @iter775) ([92m↓32.47%[0m) [4.05% of initial]
+[Iter 830/20000] Loss: 0.0086348 (Best: 0.0064707 @iter775) ([92m↓15.20%[0m) [3.43% of initial]
+2024-12-06 15:21:02,931 - INFO: [Iter 830/20000] Loss: 0.0086348 (Best: 0.0064707 @iter775) ([92m↓15.20%[0m) [3.43% of initial]
+[Iter 840/20000] Loss: 0.0074621 (Best: 0.0064707 @iter775) ([92m↓13.58%[0m) [2.96% of initial]
+2024-12-06 15:21:03,284 - INFO: [Iter 840/20000] Loss: 0.0074621 (Best: 0.0064707 @iter775) ([92m↓13.58%[0m) [2.96% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:03,300 - INFO: pseudo_stack_co length: 60
+[Iter 850/20000] Loss: 0.0077349 (Best: 0.0064031 @iter847) ([91m↑3.66%[0m) [3.07% of initial]
+2024-12-06 15:21:03,681 - INFO: [Iter 850/20000] Loss: 0.0077349 (Best: 0.0064031 @iter847) ([91m↑3.66%[0m) [3.07% of initial]
+[Iter 860/20000] Loss: 0.0070731 (Best: 0.0063780 @iter853) ([92m↓8.56%[0m) [2.81% of initial]
+2024-12-06 15:21:04,188 - INFO: [Iter 860/20000] Loss: 0.0070731 (Best: 0.0063780 @iter853) ([92m↓8.56%[0m) [2.81% of initial]
+[Iter 870/20000] Loss: 0.0072945 (Best: 0.0062283 @iter865) ([91m↑3.13%[0m) [2.90% of initial]
+2024-12-06 15:21:04,516 - INFO: [Iter 870/20000] Loss: 0.0072945 (Best: 0.0062283 @iter865) ([91m↑3.13%[0m) [2.90% of initial]
+[Iter 880/20000] Loss: 0.0070934 (Best: 0.0062283 @iter865) ([92m↓2.76%[0m) [2.82% of initial]
+2024-12-06 15:21:04,933 - INFO: [Iter 880/20000] Loss: 0.0070934 (Best: 0.0062283 @iter865) ([92m↓2.76%[0m) [2.82% of initial]
+[Iter 890/20000] Loss: 0.0070776 (Best: 0.0060147 @iter886) ([92m↓0.22%[0m) [2.81% of initial]
+2024-12-06 15:21:05,402 - INFO: [Iter 890/20000] Loss: 0.0070776 (Best: 0.0060147 @iter886) ([92m↓0.22%[0m) [2.81% of initial]
+Iter:899, L1 loss=0.003971, Total loss=0.006081, Time:15
+2024-12-06 15:21:05,689 - INFO: Iter:899, L1 loss=0.003971, Total loss=0.006081, Time:15
+[Iter 900/20000] Loss: 0.0069265 (Best: 0.0059633 @iter892) ([92m↓2.14%[0m) [2.75% of initial]
+2024-12-06 15:21:05,724 - INFO: [Iter 900/20000] Loss: 0.0069265 (Best: 0.0059633 @iter892) ([92m↓2.14%[0m) [2.75% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:05,774 - INFO: pseudo_stack_co length: 60
+[Iter 910/20000] Loss: 0.0067283 (Best: 0.0057449 @iter901) ([92m↓2.86%[0m) [2.67% of initial]
+2024-12-06 15:21:06,223 - INFO: [Iter 910/20000] Loss: 0.0067283 (Best: 0.0057449 @iter901) ([92m↓2.86%[0m) [2.67% of initial]
+[Iter 920/20000] Loss: 0.0065236 (Best: 0.0055645 @iter916) ([92m↓3.04%[0m) [2.59% of initial]
+2024-12-06 15:21:06,640 - INFO: [Iter 920/20000] Loss: 0.0065236 (Best: 0.0055645 @iter916) ([92m↓3.04%[0m) [2.59% of initial]
+[Iter 930/20000] Loss: 0.0063683 (Best: 0.0054458 @iter929) ([92m↓2.38%[0m) [2.53% of initial]
+2024-12-06 15:21:07,024 - INFO: [Iter 930/20000] Loss: 0.0063683 (Best: 0.0054458 @iter929) ([92m↓2.38%[0m) [2.53% of initial]
+[Iter 940/20000] Loss: 0.0067624 (Best: 0.0052314 @iter931) ([91m↑6.19%[0m) [2.69% of initial]
+2024-12-06 15:21:07,534 - INFO: [Iter 940/20000] Loss: 0.0067624 (Best: 0.0052314 @iter931) ([91m↑6.19%[0m) [2.69% of initial]
+[Iter 950/20000] Loss: 0.0059974 (Best: 0.0052314 @iter931) ([92m↓11.31%[0m) [2.38% of initial]
+2024-12-06 15:21:07,871 - INFO: [Iter 950/20000] Loss: 0.0059974 (Best: 0.0052314 @iter931) ([92m↓11.31%[0m) [2.38% of initial]
+[Iter 960/20000] Loss: 0.0064139 (Best: 0.0052314 @iter931) ([91m↑6.95%[0m) [2.55% of initial]
+2024-12-06 15:21:08,272 - INFO: [Iter 960/20000] Loss: 0.0064139 (Best: 0.0052314 @iter931) ([91m↑6.95%[0m) [2.55% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:08,322 - INFO: pseudo_stack_co length: 60
+[Iter 970/20000] Loss: 0.0056215 (Best: 0.0050910 @iter970) ([92m↓12.36%[0m) [2.23% of initial]
+2024-12-06 15:21:08,840 - INFO: [Iter 970/20000] Loss: 0.0056215 (Best: 0.0050910 @iter970) ([92m↓12.36%[0m) [2.23% of initial]
+[Iter 980/20000] Loss: 0.0057194 (Best: 0.0050910 @iter970) ([91m↑1.74%[0m) [2.27% of initial]
+2024-12-06 15:21:09,146 - INFO: [Iter 980/20000] Loss: 0.0057194 (Best: 0.0050910 @iter970) ([91m↑1.74%[0m) [2.27% of initial]
+[Iter 990/20000] Loss: 0.0058383 (Best: 0.0049032 @iter988) ([91m↑2.08%[0m) [2.32% of initial]
+2024-12-06 15:21:09,579 - INFO: [Iter 990/20000] Loss: 0.0058383 (Best: 0.0049032 @iter988) ([91m↑2.08%[0m) [2.32% of initial]
+Iter:999, L1 loss=0.003553, Total loss=0.005544, Time:22
+2024-12-06 15:21:10,095 - INFO: Iter:999, L1 loss=0.003553, Total loss=0.005544, Time:22
+[Iter 1000/20000] Loss: 0.0055400 (Best: 0.0048148 @iter991) ([92m↓5.11%[0m) [2.20% of initial]
+2024-12-06 15:21:10,156 - INFO: [Iter 1000/20000] Loss: 0.0055400 (Best: 0.0048148 @iter991) ([92m↓5.11%[0m) [2.20% of initial]
+Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+2024-12-06 15:21:10,157 - INFO: Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+
+[ITER 1000] Evaluating test Gaussian0: SSIM = 0.8697761189937592, PSNR = 18.503357543945313, Points = 9871
+2024-12-06 15:21:10,424 - INFO: 
+[ITER 1000] Evaluating test Gaussian0: SSIM = 0.8697761189937592, PSNR = 18.503357543945313, Points = 9871
+
+[ITER 1000] Evaluating test Gaussian1: SSIM = 0.8668582510948182, PSNR = 18.436226196289063, Points = 9828
+2024-12-06 15:21:10,667 - INFO: 
+[ITER 1000] Evaluating test Gaussian1: SSIM = 0.8668582510948182, PSNR = 18.436226196289063, Points = 9828
+Testing Speed: 98.07433748501751 fps
+2024-12-06 15:21:10,667 - INFO: Testing Speed: 98.07433748501751 fps
+Testing Time: 0.509817361831665 s
+2024-12-06 15:21:10,667 - INFO: Testing Time: 0.509817361831665 s
+[Iter 1010/20000] Loss: 0.0115210 (Best: 0.0048148 @iter991) ([91m↑107.96%[0m) [4.58% of initial]
+2024-12-06 15:21:11,261 - INFO: [Iter 1010/20000] Loss: 0.0115210 (Best: 0.0048148 @iter991) ([91m↑107.96%[0m) [4.58% of initial]
+[Iter 1020/20000] Loss: 0.0084644 (Best: 0.0048148 @iter991) ([92m↓26.53%[0m) [3.36% of initial]
+2024-12-06 15:21:11,698 - INFO: [Iter 1020/20000] Loss: 0.0084644 (Best: 0.0048148 @iter991) ([92m↓26.53%[0m) [3.36% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:11,713 - INFO: pseudo_stack_co length: 60
+[Iter 1030/20000] Loss: 0.0069884 (Best: 0.0048148 @iter991) ([92m↓17.44%[0m) [2.78% of initial]
+2024-12-06 15:21:12,100 - INFO: [Iter 1030/20000] Loss: 0.0069884 (Best: 0.0048148 @iter991) ([92m↓17.44%[0m) [2.78% of initial]
+[Iter 1040/20000] Loss: 0.0060406 (Best: 0.0048148 @iter991) ([92m↓13.56%[0m) [2.40% of initial]
+2024-12-06 15:21:12,589 - INFO: [Iter 1040/20000] Loss: 0.0060406 (Best: 0.0048148 @iter991) ([92m↓13.56%[0m) [2.40% of initial]
+[Iter 1050/20000] Loss: 0.0058643 (Best: 0.0048148 @iter991) ([92m↓2.92%[0m) [2.33% of initial]
+2024-12-06 15:21:12,993 - INFO: [Iter 1050/20000] Loss: 0.0058643 (Best: 0.0048148 @iter991) ([92m↓2.92%[0m) [2.33% of initial]
+[Iter 1060/20000] Loss: 0.0057199 (Best: 0.0048148 @iter991) ([92m↓2.46%[0m) [2.27% of initial]
+2024-12-06 15:21:13,391 - INFO: [Iter 1060/20000] Loss: 0.0057199 (Best: 0.0048148 @iter991) ([92m↓2.46%[0m) [2.27% of initial]
+[Iter 1070/20000] Loss: 0.0056887 (Best: 0.0046848 @iter1063) ([92m↓0.54%[0m) [2.26% of initial]
+2024-12-06 15:21:13,916 - INFO: [Iter 1070/20000] Loss: 0.0056887 (Best: 0.0046848 @iter1063) ([92m↓0.54%[0m) [2.26% of initial]
+[Iter 1080/20000] Loss: 0.0050407 (Best: 0.0044993 @iter1076) ([92m↓11.39%[0m) [2.00% of initial]
+2024-12-06 15:21:14,234 - INFO: [Iter 1080/20000] Loss: 0.0050407 (Best: 0.0044993 @iter1076) ([92m↓11.39%[0m) [2.00% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:14,257 - INFO: pseudo_stack_co length: 60
+[Iter 1090/20000] Loss: 0.0051605 (Best: 0.0044176 @iter1081) ([91m↑2.38%[0m) [2.05% of initial]
+2024-12-06 15:21:14,691 - INFO: [Iter 1090/20000] Loss: 0.0051605 (Best: 0.0044176 @iter1081) ([91m↑2.38%[0m) [2.05% of initial]
+Iter:1099, L1 loss=0.003496, Total loss=0.005022, Time:25
+2024-12-06 15:21:15,236 - INFO: Iter:1099, L1 loss=0.003496, Total loss=0.005022, Time:25
+[Iter 1100/20000] Loss: 0.0053174 (Best: 0.0043928 @iter1098) ([91m↑3.04%[0m) [2.11% of initial]
+2024-12-06 15:21:15,297 - INFO: [Iter 1100/20000] Loss: 0.0053174 (Best: 0.0043928 @iter1098) ([91m↑3.04%[0m) [2.11% of initial]
+[Iter 1110/20000] Loss: 0.0049179 (Best: 0.0041898 @iter1102) ([92m↓7.51%[0m) [1.95% of initial]
+2024-12-06 15:21:15,599 - INFO: [Iter 1110/20000] Loss: 0.0049179 (Best: 0.0041898 @iter1102) ([92m↓7.51%[0m) [1.95% of initial]
+[Iter 1120/20000] Loss: 0.0047395 (Best: 0.0041761 @iter1114) ([92m↓3.63%[0m) [1.88% of initial]
+2024-12-06 15:21:16,058 - INFO: [Iter 1120/20000] Loss: 0.0047395 (Best: 0.0041761 @iter1114) ([92m↓3.63%[0m) [1.88% of initial]
+[Iter 1130/20000] Loss: 0.0046582 (Best: 0.0039967 @iter1129) ([92m↓1.72%[0m) [1.85% of initial]
+2024-12-06 15:21:16,671 - INFO: [Iter 1130/20000] Loss: 0.0046582 (Best: 0.0039967 @iter1129) ([92m↓1.72%[0m) [1.85% of initial]
+[Iter 1140/20000] Loss: 0.0050996 (Best: 0.0039967 @iter1129) ([91m↑9.48%[0m) [2.03% of initial]
+2024-12-06 15:21:16,953 - INFO: [Iter 1140/20000] Loss: 0.0050996 (Best: 0.0039967 @iter1129) ([91m↑9.48%[0m) [2.03% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:16,969 - INFO: pseudo_stack_co length: 60
+[Iter 1150/20000] Loss: 0.0048789 (Best: 0.0039967 @iter1129) ([92m↓4.33%[0m) [1.94% of initial]
+2024-12-06 15:21:17,415 - INFO: [Iter 1150/20000] Loss: 0.0048789 (Best: 0.0039967 @iter1129) ([92m↓4.33%[0m) [1.94% of initial]
+[Iter 1160/20000] Loss: 0.0049639 (Best: 0.0039967 @iter1129) ([91m↑1.74%[0m) [1.97% of initial]
+2024-12-06 15:21:17,948 - INFO: [Iter 1160/20000] Loss: 0.0049639 (Best: 0.0039967 @iter1129) ([91m↑1.74%[0m) [1.97% of initial]
+[Iter 1170/20000] Loss: 0.0048551 (Best: 0.0039768 @iter1169) ([92m↓2.19%[0m) [1.93% of initial]
+2024-12-06 15:21:18,360 - INFO: [Iter 1170/20000] Loss: 0.0048551 (Best: 0.0039768 @iter1169) ([92m↓2.19%[0m) [1.93% of initial]
+[Iter 1180/20000] Loss: 0.0042771 (Best: 0.0038603 @iter1180) ([92m↓11.90%[0m) [1.70% of initial]
+2024-12-06 15:21:18,778 - INFO: [Iter 1180/20000] Loss: 0.0042771 (Best: 0.0038603 @iter1180) ([92m↓11.90%[0m) [1.70% of initial]
+[Iter 1190/20000] Loss: 0.0048197 (Best: 0.0038603 @iter1180) ([91m↑12.69%[0m) [1.91% of initial]
+2024-12-06 15:21:19,287 - INFO: [Iter 1190/20000] Loss: 0.0048197 (Best: 0.0038603 @iter1180) ([91m↑12.69%[0m) [1.91% of initial]
+Iter:1199, L1 loss=0.002792, Total loss=0.003836, Time:17
+2024-12-06 15:21:19,626 - INFO: Iter:1199, L1 loss=0.002792, Total loss=0.003836, Time:17
+[Iter 1200/20000] Loss: 0.0045996 (Best: 0.0038362 @iter1199) ([92m↓4.57%[0m) [1.83% of initial]
+2024-12-06 15:21:19,651 - INFO: [Iter 1200/20000] Loss: 0.0045996 (Best: 0.0038362 @iter1199) ([92m↓4.57%[0m) [1.83% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:19,694 - INFO: pseudo_stack_co length: 60
+[Iter 1210/20000] Loss: 0.0096430 (Best: 0.0038362 @iter1199) ([91m↑109.65%[0m) [3.83% of initial]
+2024-12-06 15:21:20,107 - INFO: [Iter 1210/20000] Loss: 0.0096430 (Best: 0.0038362 @iter1199) ([91m↑109.65%[0m) [3.83% of initial]
+[Iter 1220/20000] Loss: 0.0071622 (Best: 0.0038362 @iter1199) ([92m↓25.73%[0m) [2.85% of initial]
+2024-12-06 15:21:20,697 - INFO: [Iter 1220/20000] Loss: 0.0071622 (Best: 0.0038362 @iter1199) ([92m↓25.73%[0m) [2.85% of initial]
+[Iter 1230/20000] Loss: 0.0057154 (Best: 0.0038362 @iter1199) ([92m↓20.20%[0m) [2.27% of initial]
+2024-12-06 15:21:21,030 - INFO: [Iter 1230/20000] Loss: 0.0057154 (Best: 0.0038362 @iter1199) ([92m↓20.20%[0m) [2.27% of initial]
+[Iter 1240/20000] Loss: 0.0046777 (Best: 0.0038362 @iter1199) ([92m↓18.16%[0m) [1.86% of initial]
+2024-12-06 15:21:21,518 - INFO: [Iter 1240/20000] Loss: 0.0046777 (Best: 0.0038362 @iter1199) ([92m↓18.16%[0m) [1.86% of initial]
+[Iter 1250/20000] Loss: 0.0047656 (Best: 0.0038362 @iter1199) ([91m↑1.88%[0m) [1.89% of initial]
+2024-12-06 15:21:22,054 - INFO: [Iter 1250/20000] Loss: 0.0047656 (Best: 0.0038362 @iter1199) ([91m↑1.88%[0m) [1.89% of initial]
+[Iter 1260/20000] Loss: 0.0046765 (Best: 0.0038362 @iter1199) ([92m↓1.87%[0m) [1.86% of initial]
+2024-12-06 15:21:22,540 - INFO: [Iter 1260/20000] Loss: 0.0046765 (Best: 0.0038362 @iter1199) ([92m↓1.87%[0m) [1.86% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:22,554 - INFO: pseudo_stack_co length: 60
+[Iter 1270/20000] Loss: 0.0046224 (Best: 0.0038362 @iter1199) ([92m↓1.16%[0m) [1.84% of initial]
+2024-12-06 15:21:22,880 - INFO: [Iter 1270/20000] Loss: 0.0046224 (Best: 0.0038362 @iter1199) ([92m↓1.16%[0m) [1.84% of initial]
+[Iter 1280/20000] Loss: 0.0043441 (Best: 0.0034718 @iter1279) ([92m↓6.02%[0m) [1.73% of initial]
+2024-12-06 15:21:23,432 - INFO: [Iter 1280/20000] Loss: 0.0043441 (Best: 0.0034718 @iter1279) ([92m↓6.02%[0m) [1.73% of initial]
+[Iter 1290/20000] Loss: 0.0043671 (Best: 0.0034718 @iter1279) ([91m↑0.53%[0m) [1.74% of initial]
+2024-12-06 15:21:23,958 - INFO: [Iter 1290/20000] Loss: 0.0043671 (Best: 0.0034718 @iter1279) ([91m↑0.53%[0m) [1.74% of initial]
+Iter:1299, L1 loss=0.002989, Total loss=0.004144, Time:17
+2024-12-06 15:21:24,245 - INFO: Iter:1299, L1 loss=0.002989, Total loss=0.004144, Time:17
+[Iter 1300/20000] Loss: 0.0042281 (Best: 0.0034718 @iter1279) ([92m↓3.18%[0m) [1.68% of initial]
+2024-12-06 15:21:24,278 - INFO: [Iter 1300/20000] Loss: 0.0042281 (Best: 0.0034718 @iter1279) ([92m↓3.18%[0m) [1.68% of initial]
+[Iter 1310/20000] Loss: 0.0037152 (Best: 0.0033411 @iter1303) ([92m↓12.13%[0m) [1.48% of initial]
+2024-12-06 15:21:24,801 - INFO: [Iter 1310/20000] Loss: 0.0037152 (Best: 0.0033411 @iter1303) ([92m↓12.13%[0m) [1.48% of initial]
+[Iter 1320/20000] Loss: 0.0037790 (Best: 0.0032283 @iter1312) ([91m↑1.72%[0m) [1.50% of initial]
+2024-12-06 15:21:25,367 - INFO: [Iter 1320/20000] Loss: 0.0037790 (Best: 0.0032283 @iter1312) ([91m↑1.72%[0m) [1.50% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:25,379 - INFO: pseudo_stack_co length: 60
+[Iter 1330/20000] Loss: 0.0036174 (Best: 0.0032148 @iter1330) ([92m↓4.28%[0m) [1.44% of initial]
+2024-12-06 15:21:25,702 - INFO: [Iter 1330/20000] Loss: 0.0036174 (Best: 0.0032148 @iter1330) ([92m↓4.28%[0m) [1.44% of initial]
+[Iter 1340/20000] Loss: 0.0038675 (Best: 0.0032148 @iter1330) ([91m↑6.92%[0m) [1.54% of initial]
+2024-12-06 15:21:26,202 - INFO: [Iter 1340/20000] Loss: 0.0038675 (Best: 0.0032148 @iter1330) ([91m↑6.92%[0m) [1.54% of initial]
+[Iter 1350/20000] Loss: 0.0035925 (Best: 0.0030648 @iter1346) ([92m↓7.11%[0m) [1.43% of initial]
+2024-12-06 15:21:26,616 - INFO: [Iter 1350/20000] Loss: 0.0035925 (Best: 0.0030648 @iter1346) ([92m↓7.11%[0m) [1.43% of initial]
+[Iter 1360/20000] Loss: 0.0037808 (Best: 0.0030248 @iter1351) ([91m↑5.24%[0m) [1.50% of initial]
+2024-12-06 15:21:27,036 - INFO: [Iter 1360/20000] Loss: 0.0037808 (Best: 0.0030248 @iter1351) ([91m↑5.24%[0m) [1.50% of initial]
+[Iter 1370/20000] Loss: 0.0039117 (Best: 0.0030248 @iter1351) ([91m↑3.46%[0m) [1.55% of initial]
+2024-12-06 15:21:27,559 - INFO: [Iter 1370/20000] Loss: 0.0039117 (Best: 0.0030248 @iter1351) ([91m↑3.46%[0m) [1.55% of initial]
+[Iter 1380/20000] Loss: 0.0036553 (Best: 0.0030248 @iter1351) ([92m↓6.56%[0m) [1.45% of initial]
+2024-12-06 15:21:28,117 - INFO: [Iter 1380/20000] Loss: 0.0036553 (Best: 0.0030248 @iter1351) ([92m↓6.56%[0m) [1.45% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:28,130 - INFO: pseudo_stack_co length: 60
+[Iter 1390/20000] Loss: 0.0038208 (Best: 0.0030248 @iter1351) ([91m↑4.53%[0m) [1.52% of initial]
+2024-12-06 15:21:28,420 - INFO: [Iter 1390/20000] Loss: 0.0038208 (Best: 0.0030248 @iter1351) ([91m↑4.53%[0m) [1.52% of initial]
+Iter:1399, L1 loss=0.002725, Total loss=0.003609, Time:22
+2024-12-06 15:21:28,844 - INFO: Iter:1399, L1 loss=0.002725, Total loss=0.003609, Time:22
+[Iter 1400/20000] Loss: 0.0033673 (Best: 0.0029700 @iter1394) ([92m↓11.87%[0m) [1.34% of initial]
+2024-12-06 15:21:28,895 - INFO: [Iter 1400/20000] Loss: 0.0033673 (Best: 0.0029700 @iter1394) ([92m↓11.87%[0m) [1.34% of initial]
+[Iter 1410/20000] Loss: 0.0090468 (Best: 0.0029700 @iter1394) ([91m↑168.67%[0m) [3.59% of initial]
+2024-12-06 15:21:29,615 - INFO: [Iter 1410/20000] Loss: 0.0090468 (Best: 0.0029700 @iter1394) ([91m↑168.67%[0m) [3.59% of initial]
+[Iter 1420/20000] Loss: 0.0058386 (Best: 0.0029700 @iter1394) ([92m↓35.46%[0m) [2.32% of initial]
+2024-12-06 15:21:29,987 - INFO: [Iter 1420/20000] Loss: 0.0058386 (Best: 0.0029700 @iter1394) ([92m↓35.46%[0m) [2.32% of initial]
+[Iter 1430/20000] Loss: 0.0045914 (Best: 0.0029700 @iter1394) ([92m↓21.36%[0m) [1.82% of initial]
+2024-12-06 15:21:30,534 - INFO: [Iter 1430/20000] Loss: 0.0045914 (Best: 0.0029700 @iter1394) ([92m↓21.36%[0m) [1.82% of initial]
+[Iter 1440/20000] Loss: 0.0041888 (Best: 0.0029700 @iter1394) ([92m↓8.77%[0m) [1.66% of initial]
+2024-12-06 15:21:30,820 - INFO: [Iter 1440/20000] Loss: 0.0041888 (Best: 0.0029700 @iter1394) ([92m↓8.77%[0m) [1.66% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:30,843 - INFO: pseudo_stack_co length: 60
+[Iter 1450/20000] Loss: 0.0037312 (Best: 0.0029700 @iter1394) ([92m↓10.92%[0m) [1.48% of initial]
+2024-12-06 15:21:31,242 - INFO: [Iter 1450/20000] Loss: 0.0037312 (Best: 0.0029700 @iter1394) ([92m↓10.92%[0m) [1.48% of initial]
+[Iter 1460/20000] Loss: 0.0037531 (Best: 0.0029700 @iter1394) ([91m↑0.59%[0m) [1.49% of initial]
+2024-12-06 15:21:31,825 - INFO: [Iter 1460/20000] Loss: 0.0037531 (Best: 0.0029700 @iter1394) ([91m↑0.59%[0m) [1.49% of initial]
+[Iter 1470/20000] Loss: 0.0033388 (Best: 0.0029700 @iter1394) ([92m↓11.04%[0m) [1.33% of initial]
+2024-12-06 15:21:32,143 - INFO: [Iter 1470/20000] Loss: 0.0033388 (Best: 0.0029700 @iter1394) ([92m↓11.04%[0m) [1.33% of initial]
+[Iter 1480/20000] Loss: 0.0031714 (Best: 0.0028829 @iter1472) ([92m↓5.02%[0m) [1.26% of initial]
+2024-12-06 15:21:32,592 - INFO: [Iter 1480/20000] Loss: 0.0031714 (Best: 0.0028829 @iter1472) ([92m↓5.02%[0m) [1.26% of initial]
+[Iter 1490/20000] Loss: 0.0032339 (Best: 0.0027026 @iter1483) ([91m↑1.97%[0m) [1.28% of initial]
+2024-12-06 15:21:33,250 - INFO: [Iter 1490/20000] Loss: 0.0032339 (Best: 0.0027026 @iter1483) ([91m↑1.97%[0m) [1.28% of initial]
+Iter:1499, L1 loss=0.002345, Total loss=0.00295, Time:12
+2024-12-06 15:21:33,453 - INFO: Iter:1499, L1 loss=0.002345, Total loss=0.00295, Time:12
+[Iter 1500/20000] Loss: 0.0033835 (Best: 0.0027026 @iter1483) ([91m↑4.63%[0m) [1.34% of initial]
+2024-12-06 15:21:33,470 - INFO: [Iter 1500/20000] Loss: 0.0033835 (Best: 0.0027026 @iter1483) ([91m↑4.63%[0m) [1.34% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:33,481 - INFO: pseudo_stack_co length: 60
+[Iter 1510/20000] Loss: 0.0034318 (Best: 0.0026543 @iter1504) ([91m↑1.43%[0m) [1.36% of initial]
+2024-12-06 15:21:33,842 - INFO: [Iter 1510/20000] Loss: 0.0034318 (Best: 0.0026543 @iter1504) ([91m↑1.43%[0m) [1.36% of initial]
+[Iter 1520/20000] Loss: 0.0030983 (Best: 0.0024941 @iter1519) ([92m↓9.72%[0m) [1.23% of initial]
+2024-12-06 15:21:34,355 - INFO: [Iter 1520/20000] Loss: 0.0030983 (Best: 0.0024941 @iter1519) ([92m↓9.72%[0m) [1.23% of initial]
+[Iter 1530/20000] Loss: 0.0031174 (Best: 0.0024941 @iter1519) ([91m↑0.62%[0m) [1.24% of initial]
+2024-12-06 15:21:34,998 - INFO: [Iter 1530/20000] Loss: 0.0031174 (Best: 0.0024941 @iter1519) ([91m↑0.62%[0m) [1.24% of initial]
+[Iter 1540/20000] Loss: 0.0028270 (Best: 0.0024740 @iter1534) ([92m↓9.32%[0m) [1.12% of initial]
+2024-12-06 15:21:35,296 - INFO: [Iter 1540/20000] Loss: 0.0028270 (Best: 0.0024740 @iter1534) ([92m↓9.32%[0m) [1.12% of initial]
+[Iter 1550/20000] Loss: 0.0029194 (Best: 0.0024740 @iter1534) ([91m↑3.27%[0m) [1.16% of initial]
+2024-12-06 15:21:35,756 - INFO: [Iter 1550/20000] Loss: 0.0029194 (Best: 0.0024740 @iter1534) ([91m↑3.27%[0m) [1.16% of initial]
+[Iter 1560/20000] Loss: 0.0030778 (Best: 0.0024539 @iter1555) ([91m↑5.43%[0m) [1.22% of initial]
+2024-12-06 15:21:36,290 - INFO: [Iter 1560/20000] Loss: 0.0030778 (Best: 0.0024539 @iter1555) ([91m↑5.43%[0m) [1.22% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:36,302 - INFO: pseudo_stack_co length: 60
+[Iter 1570/20000] Loss: 0.0031211 (Best: 0.0024539 @iter1555) ([91m↑1.41%[0m) [1.24% of initial]
+2024-12-06 15:21:36,681 - INFO: [Iter 1570/20000] Loss: 0.0031211 (Best: 0.0024539 @iter1555) ([91m↑1.41%[0m) [1.24% of initial]
+[Iter 1580/20000] Loss: 0.0028177 (Best: 0.0024539 @iter1555) ([92m↓9.72%[0m) [1.12% of initial]
+2024-12-06 15:21:37,199 - INFO: [Iter 1580/20000] Loss: 0.0028177 (Best: 0.0024539 @iter1555) ([92m↓9.72%[0m) [1.12% of initial]
+[Iter 1590/20000] Loss: 0.0028286 (Best: 0.0024160 @iter1582) ([91m↑0.39%[0m) [1.12% of initial]
+2024-12-06 15:21:37,590 - INFO: [Iter 1590/20000] Loss: 0.0028286 (Best: 0.0024160 @iter1582) ([91m↑0.39%[0m) [1.12% of initial]
+Iter:1599, L1 loss=0.002347, Total loss=0.002912, Time:14
+2024-12-06 15:21:38,043 - INFO: Iter:1599, L1 loss=0.002347, Total loss=0.002912, Time:14
+[Iter 1600/20000] Loss: 0.0027642 (Best: 0.0023040 @iter1591) ([92m↓2.28%[0m) [1.10% of initial]
+2024-12-06 15:21:38,064 - INFO: [Iter 1600/20000] Loss: 0.0027642 (Best: 0.0023040 @iter1591) ([92m↓2.28%[0m) [1.10% of initial]
+[Iter 1610/20000] Loss: 0.0084844 (Best: 0.0023040 @iter1591) ([91m↑206.94%[0m) [3.37% of initial]
+2024-12-06 15:21:38,833 - INFO: [Iter 1610/20000] Loss: 0.0084844 (Best: 0.0023040 @iter1591) ([91m↑206.94%[0m) [3.37% of initial]
+[Iter 1620/20000] Loss: 0.0055205 (Best: 0.0023040 @iter1591) ([92m↓34.93%[0m) [2.19% of initial]
+2024-12-06 15:21:39,216 - INFO: [Iter 1620/20000] Loss: 0.0055205 (Best: 0.0023040 @iter1591) ([92m↓34.93%[0m) [2.19% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:39,262 - INFO: pseudo_stack_co length: 60
+[Iter 1630/20000] Loss: 0.0042690 (Best: 0.0023040 @iter1591) ([92m↓22.67%[0m) [1.70% of initial]
+2024-12-06 15:21:39,691 - INFO: [Iter 1630/20000] Loss: 0.0042690 (Best: 0.0023040 @iter1591) ([92m↓22.67%[0m) [1.70% of initial]
+[Iter 1640/20000] Loss: 0.0034482 (Best: 0.0023040 @iter1591) ([92m↓19.23%[0m) [1.37% of initial]
+2024-12-06 15:21:40,227 - INFO: [Iter 1640/20000] Loss: 0.0034482 (Best: 0.0023040 @iter1591) ([92m↓19.23%[0m) [1.37% of initial]
+[Iter 1650/20000] Loss: 0.0031470 (Best: 0.0023040 @iter1591) ([92m↓8.73%[0m) [1.25% of initial]
+2024-12-06 15:21:40,694 - INFO: [Iter 1650/20000] Loss: 0.0031470 (Best: 0.0023040 @iter1591) ([92m↓8.73%[0m) [1.25% of initial]
+[Iter 1660/20000] Loss: 0.0030058 (Best: 0.0023040 @iter1591) ([92m↓4.49%[0m) [1.19% of initial]
+2024-12-06 15:21:41,271 - INFO: [Iter 1660/20000] Loss: 0.0030058 (Best: 0.0023040 @iter1591) ([92m↓4.49%[0m) [1.19% of initial]
+[Iter 1670/20000] Loss: 0.0028100 (Best: 0.0022674 @iter1663) ([92m↓6.51%[0m) [1.12% of initial]
+2024-12-06 15:21:41,676 - INFO: [Iter 1670/20000] Loss: 0.0028100 (Best: 0.0022674 @iter1663) ([92m↓6.51%[0m) [1.12% of initial]
+[Iter 1680/20000] Loss: 0.0027678 (Best: 0.0021782 @iter1675) ([92m↓1.50%[0m) [1.10% of initial]
+2024-12-06 15:21:42,167 - INFO: [Iter 1680/20000] Loss: 0.0027678 (Best: 0.0021782 @iter1675) ([92m↓1.50%[0m) [1.10% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:42,190 - INFO: pseudo_stack_co length: 60
+[Iter 1690/20000] Loss: 0.0028199 (Best: 0.0021782 @iter1675) ([91m↑1.88%[0m) [1.12% of initial]
+2024-12-06 15:21:42,807 - INFO: [Iter 1690/20000] Loss: 0.0028199 (Best: 0.0021782 @iter1675) ([91m↑1.88%[0m) [1.12% of initial]
+Iter:1699, L1 loss=0.001904, Total loss=0.002282, Time:25
+2024-12-06 15:21:43,120 - INFO: Iter:1699, L1 loss=0.001904, Total loss=0.002282, Time:25
+[Iter 1700/20000] Loss: 0.0025996 (Best: 0.0021170 @iter1696) ([92m↓7.81%[0m) [1.03% of initial]
+2024-12-06 15:21:43,177 - INFO: [Iter 1700/20000] Loss: 0.0025996 (Best: 0.0021170 @iter1696) ([92m↓7.81%[0m) [1.03% of initial]
+[Iter 1710/20000] Loss: 0.0025080 (Best: 0.0021170 @iter1696) ([92m↓3.52%[0m) [1.00% of initial]
+2024-12-06 15:21:43,649 - INFO: [Iter 1710/20000] Loss: 0.0025080 (Best: 0.0021170 @iter1696) ([92m↓3.52%[0m) [1.00% of initial]
+[Iter 1720/20000] Loss: 0.0026729 (Best: 0.0020335 @iter1714) ([91m↑6.57%[0m) [1.06% of initial]
+2024-12-06 15:21:44,303 - INFO: [Iter 1720/20000] Loss: 0.0026729 (Best: 0.0020335 @iter1714) ([91m↑6.57%[0m) [1.06% of initial]
+[Iter 1730/20000] Loss: 0.0025873 (Best: 0.0019776 @iter1726) ([92m↓3.20%[0m) [1.03% of initial]
+2024-12-06 15:21:44,652 - INFO: [Iter 1730/20000] Loss: 0.0025873 (Best: 0.0019776 @iter1726) ([92m↓3.20%[0m) [1.03% of initial]
+[Iter 1740/20000] Loss: 0.0024686 (Best: 0.0019573 @iter1738) ([92m↓4.59%[0m) [0.98% of initial]
+2024-12-06 15:21:45,140 - INFO: [Iter 1740/20000] Loss: 0.0024686 (Best: 0.0019573 @iter1738) ([92m↓4.59%[0m) [0.98% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:45,165 - INFO: pseudo_stack_co length: 60
+[Iter 1750/20000] Loss: 0.0025579 (Best: 0.0019573 @iter1738) ([91m↑3.62%[0m) [1.02% of initial]
+2024-12-06 15:21:45,751 - INFO: [Iter 1750/20000] Loss: 0.0025579 (Best: 0.0019573 @iter1738) ([91m↑3.62%[0m) [1.02% of initial]
+[Iter 1760/20000] Loss: 0.0022068 (Best: 0.0018702 @iter1760) ([92m↓13.73%[0m) [0.88% of initial]
+2024-12-06 15:21:46,148 - INFO: [Iter 1760/20000] Loss: 0.0022068 (Best: 0.0018702 @iter1760) ([92m↓13.73%[0m) [0.88% of initial]
+[Iter 1770/20000] Loss: 0.0024748 (Best: 0.0018702 @iter1760) ([91m↑12.14%[0m) [0.98% of initial]
+2024-12-06 15:21:46,627 - INFO: [Iter 1770/20000] Loss: 0.0024748 (Best: 0.0018702 @iter1760) ([91m↑12.14%[0m) [0.98% of initial]
+[Iter 1780/20000] Loss: 0.0022225 (Best: 0.0018702 @iter1760) ([92m↓10.19%[0m) [0.88% of initial]
+2024-12-06 15:21:47,228 - INFO: [Iter 1780/20000] Loss: 0.0022225 (Best: 0.0018702 @iter1760) ([92m↓10.19%[0m) [0.88% of initial]
+[Iter 1790/20000] Loss: 0.0019824 (Best: 0.0018395 @iter1789) ([92m↓10.80%[0m) [0.79% of initial]
+2024-12-06 15:21:47,598 - INFO: [Iter 1790/20000] Loss: 0.0019824 (Best: 0.0018395 @iter1789) ([92m↓10.80%[0m) [0.79% of initial]
+Iter:1799, L1 loss=0.002248, Total loss=0.002653, Time:24
+2024-12-06 15:21:48,031 - INFO: Iter:1799, L1 loss=0.002248, Total loss=0.002653, Time:24
+[Iter 1800/20000] Loss: 0.0022455 (Best: 0.0018395 @iter1789) ([91m↑13.27%[0m) [0.89% of initial]
+2024-12-06 15:21:48,097 - INFO: [Iter 1800/20000] Loss: 0.0022455 (Best: 0.0018395 @iter1789) ([91m↑13.27%[0m) [0.89% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:48,428 - INFO: pseudo_stack_co length: 60
+[Iter 1810/20000] Loss: 0.0073702 (Best: 0.0018395 @iter1789) ([91m↑228.22%[0m) [2.93% of initial]
+2024-12-06 15:21:48,884 - INFO: [Iter 1810/20000] Loss: 0.0073702 (Best: 0.0018395 @iter1789) ([91m↑228.22%[0m) [2.93% of initial]
+[Iter 1820/20000] Loss: 0.0044309 (Best: 0.0018395 @iter1789) ([92m↓39.88%[0m) [1.76% of initial]
+2024-12-06 15:21:49,353 - INFO: [Iter 1820/20000] Loss: 0.0044309 (Best: 0.0018395 @iter1789) ([92m↓39.88%[0m) [1.76% of initial]
+[Iter 1830/20000] Loss: 0.0034930 (Best: 0.0018395 @iter1789) ([92m↓21.17%[0m) [1.39% of initial]
+2024-12-06 15:21:49,895 - INFO: [Iter 1830/20000] Loss: 0.0034930 (Best: 0.0018395 @iter1789) ([92m↓21.17%[0m) [1.39% of initial]
+[Iter 1840/20000] Loss: 0.0029527 (Best: 0.0018395 @iter1789) ([92m↓15.47%[0m) [1.17% of initial]
+2024-12-06 15:21:50,355 - INFO: [Iter 1840/20000] Loss: 0.0029527 (Best: 0.0018395 @iter1789) ([92m↓15.47%[0m) [1.17% of initial]
+[Iter 1850/20000] Loss: 0.0023452 (Best: 0.0018395 @iter1789) ([92m↓20.57%[0m) [0.93% of initial]
+2024-12-06 15:21:50,802 - INFO: [Iter 1850/20000] Loss: 0.0023452 (Best: 0.0018395 @iter1789) ([92m↓20.57%[0m) [0.93% of initial]
+[Iter 1860/20000] Loss: 0.0024609 (Best: 0.0018395 @iter1789) ([91m↑4.93%[0m) [0.98% of initial]
+2024-12-06 15:21:51,402 - INFO: [Iter 1860/20000] Loss: 0.0024609 (Best: 0.0018395 @iter1789) ([91m↑4.93%[0m) [0.98% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:51,413 - INFO: pseudo_stack_co length: 60
+[Iter 1870/20000] Loss: 0.0021878 (Best: 0.0018395 @iter1789) ([92m↓11.10%[0m) [0.87% of initial]
+2024-12-06 15:21:51,772 - INFO: [Iter 1870/20000] Loss: 0.0021878 (Best: 0.0018395 @iter1789) ([92m↓11.10%[0m) [0.87% of initial]
+[Iter 1880/20000] Loss: 0.0022370 (Best: 0.0018395 @iter1789) ([91m↑2.25%[0m) [0.89% of initial]
+2024-12-06 15:21:52,319 - INFO: [Iter 1880/20000] Loss: 0.0022370 (Best: 0.0018395 @iter1789) ([91m↑2.25%[0m) [0.89% of initial]
+[Iter 1890/20000] Loss: 0.0022483 (Best: 0.0018053 @iter1888) ([91m↑0.51%[0m) [0.89% of initial]
+2024-12-06 15:21:52,807 - INFO: [Iter 1890/20000] Loss: 0.0022483 (Best: 0.0018053 @iter1888) ([91m↑0.51%[0m) [0.89% of initial]
+Iter:1899, L1 loss=0.001707, Total loss=0.001975, Time:26
+2024-12-06 15:21:53,249 - INFO: Iter:1899, L1 loss=0.001707, Total loss=0.001975, Time:26
+[Iter 1900/20000] Loss: 0.0018907 (Best: 0.0017279 @iter1900) ([92m↓15.91%[0m) [0.75% of initial]
+2024-12-06 15:21:53,316 - INFO: [Iter 1900/20000] Loss: 0.0018907 (Best: 0.0017279 @iter1900) ([92m↓15.91%[0m) [0.75% of initial]
+[Iter 1910/20000] Loss: 0.0020245 (Best: 0.0017279 @iter1900) ([91m↑7.08%[0m) [0.80% of initial]
+2024-12-06 15:21:53,869 - INFO: [Iter 1910/20000] Loss: 0.0020245 (Best: 0.0017279 @iter1900) ([91m↑7.08%[0m) [0.80% of initial]
+[Iter 1920/20000] Loss: 0.0021262 (Best: 0.0016338 @iter1913) ([91m↑5.02%[0m) [0.84% of initial]
+2024-12-06 15:21:54,396 - INFO: [Iter 1920/20000] Loss: 0.0021262 (Best: 0.0016338 @iter1913) ([91m↑5.02%[0m) [0.84% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:54,411 - INFO: pseudo_stack_co length: 60
+[Iter 1930/20000] Loss: 0.0018459 (Best: 0.0016338 @iter1913) ([92m↓13.19%[0m) [0.73% of initial]
+2024-12-06 15:21:54,826 - INFO: [Iter 1930/20000] Loss: 0.0018459 (Best: 0.0016338 @iter1913) ([92m↓13.19%[0m) [0.73% of initial]
+[Iter 1940/20000] Loss: 0.0020178 (Best: 0.0015932 @iter1939) ([91m↑9.32%[0m) [0.80% of initial]
+2024-12-06 15:21:55,407 - INFO: [Iter 1940/20000] Loss: 0.0020178 (Best: 0.0015932 @iter1939) ([91m↑9.32%[0m) [0.80% of initial]
+[Iter 1950/20000] Loss: 0.0021314 (Best: 0.0015932 @iter1939) ([91m↑5.63%[0m) [0.85% of initial]
+2024-12-06 15:21:55,792 - INFO: [Iter 1950/20000] Loss: 0.0021314 (Best: 0.0015932 @iter1939) ([91m↑5.63%[0m) [0.85% of initial]
+[Iter 1960/20000] Loss: 0.0020301 (Best: 0.0015932 @iter1939) ([92m↓4.75%[0m) [0.81% of initial]
+2024-12-06 15:21:56,356 - INFO: [Iter 1960/20000] Loss: 0.0020301 (Best: 0.0015932 @iter1939) ([92m↓4.75%[0m) [0.81% of initial]
+[Iter 1970/20000] Loss: 0.0018950 (Best: 0.0015165 @iter1966) ([92m↓6.66%[0m) [0.75% of initial]
+2024-12-06 15:21:56,913 - INFO: [Iter 1970/20000] Loss: 0.0018950 (Best: 0.0015165 @iter1966) ([92m↓6.66%[0m) [0.75% of initial]
+[Iter 1980/20000] Loss: 0.0018413 (Best: 0.0014105 @iter1978) ([92m↓2.83%[0m) [0.73% of initial]
+2024-12-06 15:21:57,361 - INFO: [Iter 1980/20000] Loss: 0.0018413 (Best: 0.0014105 @iter1978) ([92m↓2.83%[0m) [0.73% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:21:57,380 - INFO: pseudo_stack_co length: 60
+[Iter 1990/20000] Loss: 0.0020395 (Best: 0.0014105 @iter1978) ([91m↑10.76%[0m) [0.81% of initial]
+2024-12-06 15:21:57,962 - INFO: [Iter 1990/20000] Loss: 0.0020395 (Best: 0.0014105 @iter1978) ([91m↑10.76%[0m) [0.81% of initial]
+Iter:1999, L1 loss=0.001399, Total loss=0.001519, Time:24
+2024-12-06 15:21:58,306 - INFO: Iter:1999, L1 loss=0.001399, Total loss=0.001519, Time:24
+[Iter 2000/20000] Loss: 0.0019096 (Best: 0.0014105 @iter1978) ([92m↓6.37%[0m) [0.76% of initial]
+2024-12-06 15:21:58,354 - INFO: [Iter 2000/20000] Loss: 0.0019096 (Best: 0.0014105 @iter1978) ([92m↓6.37%[0m) [0.76% of initial]
+Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+2024-12-06 15:21:58,356 - INFO: Number of Gaussian fields: 2, Gaussian fields: ['gs0', 'gs1']
+
+[ITER 2000] Evaluating test Gaussian0: SSIM = 0.8480162489414216, PSNR = 17.839341545104983, Points = 43198
+2024-12-06 15:21:58,704 - INFO: 
+[ITER 2000] Evaluating test Gaussian0: SSIM = 0.8480162489414216, PSNR = 17.839341545104983, Points = 43198
+
+[ITER 2000] Evaluating test Gaussian1: SSIM = 0.840130854845047, PSNR = 17.59325752258301, Points = 42746
+2024-12-06 15:21:59,127 - INFO: 
+[ITER 2000] Evaluating test Gaussian1: SSIM = 0.840130854845047, PSNR = 17.59325752258301, Points = 42746
+Testing Speed: 64.84768238132374 fps
+2024-12-06 15:21:59,127 - INFO: Testing Speed: 64.84768238132374 fps
+Testing Time: 0.7710375785827637 s
+2024-12-06 15:21:59,127 - INFO: Testing Time: 0.7710375785827637 s
+reset opacity of gaussians-0 at iteration 2001
+2024-12-06 15:21:59,189 - INFO: reset opacity of gaussians-0 at iteration 2001
+reset opacity of gaussians-1 at iteration 2001
+2024-12-06 15:21:59,190 - INFO: reset opacity of gaussians-1 at iteration 2001
+[Iter 2010/20000] Loss: 0.1437844 (Best: 0.0014105 @iter1978) ([91m↑7429.68%[0m) [57.12% of initial]
+2024-12-06 15:21:59,552 - INFO: [Iter 2010/20000] Loss: 0.1437844 (Best: 0.0014105 @iter1978) ([91m↑7429.68%[0m) [57.12% of initial]
+[Iter 2020/20000] Loss: 0.0323469 (Best: 0.0014105 @iter1978) ([92m↓77.50%[0m) [12.85% of initial]
+2024-12-06 15:22:00,094 - INFO: [Iter 2020/20000] Loss: 0.0323469 (Best: 0.0014105 @iter1978) ([92m↓77.50%[0m) [12.85% of initial]
+[Iter 2030/20000] Loss: 0.0130748 (Best: 0.0014105 @iter1978) ([92m↓59.58%[0m) [5.19% of initial]
+2024-12-06 15:22:00,621 - INFO: [Iter 2030/20000] Loss: 0.0130748 (Best: 0.0014105 @iter1978) ([92m↓59.58%[0m) [5.19% of initial]
+[Iter 2040/20000] Loss: 0.0077175 (Best: 0.0014105 @iter1978) ([92m↓40.97%[0m) [3.07% of initial]
+2024-12-06 15:22:01,136 - INFO: [Iter 2040/20000] Loss: 0.0077175 (Best: 0.0014105 @iter1978) ([92m↓40.97%[0m) [3.07% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:01,148 - INFO: pseudo_stack_co length: 60
+[Iter 2050/20000] Loss: 0.0058792 (Best: 0.0014105 @iter1978) ([92m↓23.82%[0m) [2.34% of initial]
+2024-12-06 15:22:01,769 - INFO: [Iter 2050/20000] Loss: 0.0058792 (Best: 0.0014105 @iter1978) ([92m↓23.82%[0m) [2.34% of initial]
+[Iter 2060/20000] Loss: 0.0042638 (Best: 0.0014105 @iter1978) ([92m↓27.48%[0m) [1.69% of initial]
+2024-12-06 15:22:02,232 - INFO: [Iter 2060/20000] Loss: 0.0042638 (Best: 0.0014105 @iter1978) ([92m↓27.48%[0m) [1.69% of initial]
+[Iter 2070/20000] Loss: 0.0038283 (Best: 0.0014105 @iter1978) ([92m↓10.21%[0m) [1.52% of initial]
+2024-12-06 15:22:02,737 - INFO: [Iter 2070/20000] Loss: 0.0038283 (Best: 0.0014105 @iter1978) ([92m↓10.21%[0m) [1.52% of initial]
+[Iter 2080/20000] Loss: 0.0036724 (Best: 0.0014105 @iter1978) ([92m↓4.07%[0m) [1.46% of initial]
+2024-12-06 15:22:03,361 - INFO: [Iter 2080/20000] Loss: 0.0036724 (Best: 0.0014105 @iter1978) ([92m↓4.07%[0m) [1.46% of initial]
+[Iter 2090/20000] Loss: 0.0029365 (Best: 0.0014105 @iter1978) ([92m↓20.04%[0m) [1.17% of initial]
+2024-12-06 15:22:03,824 - INFO: [Iter 2090/20000] Loss: 0.0029365 (Best: 0.0014105 @iter1978) ([92m↓20.04%[0m) [1.17% of initial]
+Iter:2099, L1 loss=0.001853, Total loss=0.002137, Time:36
+2024-12-06 15:22:04,406 - INFO: Iter:2099, L1 loss=0.001853, Total loss=0.002137, Time:36
+[Iter 2100/20000] Loss: 0.0026024 (Best: 0.0014105 @iter1978) ([92m↓11.38%[0m) [1.03% of initial]
+2024-12-06 15:22:04,482 - INFO: [Iter 2100/20000] Loss: 0.0026024 (Best: 0.0014105 @iter1978) ([92m↓11.38%[0m) [1.03% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:04,532 - INFO: pseudo_stack_co length: 60
+[Iter 2110/20000] Loss: 0.0021379 (Best: 0.0014105 @iter1978) ([92m↓17.85%[0m) [0.85% of initial]
+2024-12-06 15:22:04,897 - INFO: [Iter 2110/20000] Loss: 0.0021379 (Best: 0.0014105 @iter1978) ([92m↓17.85%[0m) [0.85% of initial]
+[Iter 2120/20000] Loss: 0.0020431 (Best: 0.0014105 @iter1978) ([92m↓4.44%[0m) [0.81% of initial]
+2024-12-06 15:22:05,440 - INFO: [Iter 2120/20000] Loss: 0.0020431 (Best: 0.0014105 @iter1978) ([92m↓4.44%[0m) [0.81% of initial]
+[Iter 2130/20000] Loss: 0.0023458 (Best: 0.0014105 @iter1978) ([91m↑14.81%[0m) [0.93% of initial]
+2024-12-06 15:22:05,969 - INFO: [Iter 2130/20000] Loss: 0.0023458 (Best: 0.0014105 @iter1978) ([91m↑14.81%[0m) [0.93% of initial]
+[Iter 2140/20000] Loss: 0.0024339 (Best: 0.0014105 @iter1978) ([91m↑3.76%[0m) [0.97% of initial]
+2024-12-06 15:22:06,421 - INFO: [Iter 2140/20000] Loss: 0.0024339 (Best: 0.0014105 @iter1978) ([91m↑3.76%[0m) [0.97% of initial]
+[Iter 2150/20000] Loss: 0.0019723 (Best: 0.0014105 @iter1978) ([92m↓18.96%[0m) [0.78% of initial]
+2024-12-06 15:22:07,116 - INFO: [Iter 2150/20000] Loss: 0.0019723 (Best: 0.0014105 @iter1978) ([92m↓18.96%[0m) [0.78% of initial]
+[Iter 2160/20000] Loss: 0.0019409 (Best: 0.0014105 @iter1978) ([92m↓1.59%[0m) [0.77% of initial]
+2024-12-06 15:22:07,515 - INFO: [Iter 2160/20000] Loss: 0.0019409 (Best: 0.0014105 @iter1978) ([92m↓1.59%[0m) [0.77% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:07,534 - INFO: pseudo_stack_co length: 60
+[Iter 2170/20000] Loss: 0.0022367 (Best: 0.0014105 @iter1978) ([91m↑15.24%[0m) [0.89% of initial]
+2024-12-06 15:22:08,041 - INFO: [Iter 2170/20000] Loss: 0.0022367 (Best: 0.0014105 @iter1978) ([91m↑15.24%[0m) [0.89% of initial]
+[Iter 2180/20000] Loss: 0.0020434 (Best: 0.0014105 @iter1978) ([92m↓8.65%[0m) [0.81% of initial]
+2024-12-06 15:22:08,593 - INFO: [Iter 2180/20000] Loss: 0.0020434 (Best: 0.0014105 @iter1978) ([92m↓8.65%[0m) [0.81% of initial]
+[Iter 2190/20000] Loss: 0.0018560 (Best: 0.0014105 @iter1978) ([92m↓9.17%[0m) [0.74% of initial]
+2024-12-06 15:22:09,064 - INFO: [Iter 2190/20000] Loss: 0.0018560 (Best: 0.0014105 @iter1978) ([92m↓9.17%[0m) [0.74% of initial]
+Iter:2199, L1 loss=0.002127, Total loss=0.002445, Time:36
+2024-12-06 15:22:09,689 - INFO: Iter:2199, L1 loss=0.002127, Total loss=0.002445, Time:36
+[Iter 2200/20000] Loss: 0.0021897 (Best: 0.0014105 @iter1978) ([91m↑17.98%[0m) [0.87% of initial]
+2024-12-06 15:22:09,751 - INFO: [Iter 2200/20000] Loss: 0.0021897 (Best: 0.0014105 @iter1978) ([91m↑17.98%[0m) [0.87% of initial]
+[Iter 2210/20000] Loss: 0.0067389 (Best: 0.0014105 @iter1978) ([91m↑207.76%[0m) [2.68% of initial]
+2024-12-06 15:22:10,274 - INFO: [Iter 2210/20000] Loss: 0.0067389 (Best: 0.0014105 @iter1978) ([91m↑207.76%[0m) [2.68% of initial]
+[Iter 2220/20000] Loss: 0.0041088 (Best: 0.0014105 @iter1978) ([92m↓39.03%[0m) [1.63% of initial]
+2024-12-06 15:22:10,903 - INFO: [Iter 2220/20000] Loss: 0.0041088 (Best: 0.0014105 @iter1978) ([92m↓39.03%[0m) [1.63% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:10,953 - INFO: pseudo_stack_co length: 60
+[Iter 2230/20000] Loss: 0.0030103 (Best: 0.0014105 @iter1978) ([92m↓26.73%[0m) [1.20% of initial]
+2024-12-06 15:22:11,347 - INFO: [Iter 2230/20000] Loss: 0.0030103 (Best: 0.0014105 @iter1978) ([92m↓26.73%[0m) [1.20% of initial]
+[Iter 2240/20000] Loss: 0.0025114 (Best: 0.0014105 @iter1978) ([92m↓16.57%[0m) [1.00% of initial]
+2024-12-06 15:22:11,859 - INFO: [Iter 2240/20000] Loss: 0.0025114 (Best: 0.0014105 @iter1978) ([92m↓16.57%[0m) [1.00% of initial]
+[Iter 2250/20000] Loss: 0.0020940 (Best: 0.0014105 @iter1978) ([92m↓16.62%[0m) [0.83% of initial]
+2024-12-06 15:22:12,437 - INFO: [Iter 2250/20000] Loss: 0.0020940 (Best: 0.0014105 @iter1978) ([92m↓16.62%[0m) [0.83% of initial]
+[Iter 2260/20000] Loss: 0.0016776 (Best: 0.0014105 @iter1978) ([92m↓19.88%[0m) [0.67% of initial]
+2024-12-06 15:22:12,991 - INFO: [Iter 2260/20000] Loss: 0.0016776 (Best: 0.0014105 @iter1978) ([92m↓19.88%[0m) [0.67% of initial]
+[Iter 2270/20000] Loss: 0.0017566 (Best: 0.0014105 @iter1978) ([91m↑4.71%[0m) [0.70% of initial]
+2024-12-06 15:22:13,719 - INFO: [Iter 2270/20000] Loss: 0.0017566 (Best: 0.0014105 @iter1978) ([91m↑4.71%[0m) [0.70% of initial]
+[Iter 2280/20000] Loss: 0.0018417 (Best: 0.0014105 @iter1978) ([91m↑4.85%[0m) [0.73% of initial]
+2024-12-06 15:22:14,179 - INFO: [Iter 2280/20000] Loss: 0.0018417 (Best: 0.0014105 @iter1978) ([91m↑4.85%[0m) [0.73% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:14,216 - INFO: pseudo_stack_co length: 60
+[Iter 2290/20000] Loss: 0.0018649 (Best: 0.0014105 @iter1978) ([91m↑1.26%[0m) [0.74% of initial]
+2024-12-06 15:22:14,692 - INFO: [Iter 2290/20000] Loss: 0.0018649 (Best: 0.0014105 @iter1978) ([91m↑1.26%[0m) [0.74% of initial]
+Iter:2299, L1 loss=0.001183, Total loss=0.001294, Time:38
+2024-12-06 15:22:15,375 - INFO: Iter:2299, L1 loss=0.001183, Total loss=0.001294, Time:38
+[Iter 2300/20000] Loss: 0.0015255 (Best: 0.0012941 @iter2299) ([92m↓18.20%[0m) [0.61% of initial]
+2024-12-06 15:22:15,410 - INFO: [Iter 2300/20000] Loss: 0.0015255 (Best: 0.0012941 @iter2299) ([92m↓18.20%[0m) [0.61% of initial]
+[Iter 2310/20000] Loss: 0.0016229 (Best: 0.0012941 @iter2299) ([91m↑6.39%[0m) [0.64% of initial]
+2024-12-06 15:22:15,779 - INFO: [Iter 2310/20000] Loss: 0.0016229 (Best: 0.0012941 @iter2299) ([91m↑6.39%[0m) [0.64% of initial]
+[Iter 2320/20000] Loss: 0.0015121 (Best: 0.0012347 @iter2317) ([92m↓6.83%[0m) [0.60% of initial]
+2024-12-06 15:22:16,405 - INFO: [Iter 2320/20000] Loss: 0.0015121 (Best: 0.0012347 @iter2317) ([92m↓6.83%[0m) [0.60% of initial]
+[Iter 2330/20000] Loss: 0.0014014 (Best: 0.0012166 @iter2330) ([92m↓7.32%[0m) [0.56% of initial]
+2024-12-06 15:22:16,813 - INFO: [Iter 2330/20000] Loss: 0.0014014 (Best: 0.0012166 @iter2330) ([92m↓7.32%[0m) [0.56% of initial]
+[Iter 2340/20000] Loss: 0.0014221 (Best: 0.0012166 @iter2330) ([91m↑1.47%[0m) [0.56% of initial]
+2024-12-06 15:22:17,357 - INFO: [Iter 2340/20000] Loss: 0.0014221 (Best: 0.0012166 @iter2330) ([91m↑1.47%[0m) [0.56% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:17,409 - INFO: pseudo_stack_co length: 60
+[Iter 2350/20000] Loss: 0.0014966 (Best: 0.0011687 @iter2344) ([91m↑5.24%[0m) [0.59% of initial]
+2024-12-06 15:22:17,797 - INFO: [Iter 2350/20000] Loss: 0.0014966 (Best: 0.0011687 @iter2344) ([91m↑5.24%[0m) [0.59% of initial]
+[Iter 2360/20000] Loss: 0.0014281 (Best: 0.0011687 @iter2344) ([92m↓4.58%[0m) [0.57% of initial]
+2024-12-06 15:22:18,327 - INFO: [Iter 2360/20000] Loss: 0.0014281 (Best: 0.0011687 @iter2344) ([92m↓4.58%[0m) [0.57% of initial]
+[Iter 2370/20000] Loss: 0.0015599 (Best: 0.0011242 @iter2365) ([91m↑9.23%[0m) [0.62% of initial]
+2024-12-06 15:22:19,025 - INFO: [Iter 2370/20000] Loss: 0.0015599 (Best: 0.0011242 @iter2365) ([91m↑9.23%[0m) [0.62% of initial]
+[Iter 2380/20000] Loss: 0.0016655 (Best: 0.0011242 @iter2365) ([91m↑6.77%[0m) [0.66% of initial]
+2024-12-06 15:22:19,435 - INFO: [Iter 2380/20000] Loss: 0.0016655 (Best: 0.0011242 @iter2365) ([91m↑6.77%[0m) [0.66% of initial]
+[Iter 2390/20000] Loss: 0.0017286 (Best: 0.0011242 @iter2365) ([91m↑3.79%[0m) [0.69% of initial]
+2024-12-06 15:22:20,067 - INFO: [Iter 2390/20000] Loss: 0.0017286 (Best: 0.0011242 @iter2365) ([91m↑3.79%[0m) [0.69% of initial]
+Iter:2399, L1 loss=0.001694, Total loss=0.00183, Time:20
+2024-12-06 15:22:20,442 - INFO: Iter:2399, L1 loss=0.001694, Total loss=0.00183, Time:20
+[Iter 2400/20000] Loss: 0.0015147 (Best: 0.0011242 @iter2365) ([92m↓12.37%[0m) [0.60% of initial]
+2024-12-06 15:22:20,508 - INFO: [Iter 2400/20000] Loss: 0.0015147 (Best: 0.0011242 @iter2365) ([92m↓12.37%[0m) [0.60% of initial]
+pseudo_stack_co length: 60
+2024-12-06 15:22:20,610 - INFO: pseudo_stack_co length: 60
