@@ -524,8 +524,8 @@ if __name__ == "__main__":
     
     # 多高斯场相关参数
     parser.add_argument('--gaussiansN', type=int, default=2)
-    parser.add_argument("--coreg", action='store_true', default=False) # 伪视角
-    parser.add_argument("--coprune", action='store_true', default=False) # 多高斯
+    parser.add_argument("--coreg", action='store_true', default=True) # 伪视角
+    parser.add_argument("--coprune", action='store_true', default=True) # 多高斯
     parser.add_argument('--coprune_threshold', type=int, default=5)
     parser.add_argument("--perturbation", action='store_true', default=False) # 多一个扰动损失
     parser.add_argument("--pseudo_strategy", type=str, default="single") # 伪视角策略 # 360 single
